@@ -1,0 +1,19 @@
+#form-titre{
+  text-align: center;
+}
+
+
+body {
+    background:#EFEFEF;
+}
+p{
+  color:#4d4d4d;
+}
+
+.discu{
+  border: 2px black;
+  background-color: white;
+}
+.goDiscu{
+margin-left: 30px ;
+}

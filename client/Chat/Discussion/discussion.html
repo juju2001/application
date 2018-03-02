@@ -1,0 +1,41 @@
+<template name="discussion">
+<div class="container">
+  <div class="form-group">
+    <h1 id="form-titre">Actualité de vos discussions</h1>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href='/accueil'>Accueil</a></li>
+          <li class="active"><a href='/discussion'>Discussion</a></li>
+          <li><a href='/connexion'>Connexion</a></li>
+          <li><a href='/inscription'>Insciption</a></li>
+          <li><a href='/contact'>Contact</a></li>
+          <li><a href='/profil'>Profil</a></li>
+          <li><a href='/deconnexion'>Déconnexion</a></li>
+          <form class="navbar-form navbar-left">
+            <div class="input-group">
+               <input type="text"  id="recherche" class="form-control" placeholder="Search">
+               <div class="input-group-btn">
+                 <button class="btn btn-default" type="submit">
+                   <i class="glyphicon glyphicon-search"></i>
+                 </button>
+               </div>
+             </div>
+        </form>
+      </ul>
+    </div>
+    </nav>
+    {{#each discussion}}
+    <div class="discu">
+      <p id="infos">{{nom}} {{prenom}}
+      <button class="goDiscu" id="{{contact}}" value={{prenom}}>Discussion</button>
+    </p>
+    </div>
+    <br>
+    {{/each}}
+  </div>
+</div>
+</template>

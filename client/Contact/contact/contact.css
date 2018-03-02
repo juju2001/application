@@ -1,0 +1,18 @@
+#form-titre{
+  text-align: center;
+}
+
+
+body {
+    background:#EFEFEF;
+}
+p{
+  color:#4d4d4d;
+}
+.col-sm-3{
+  margin-right: 95px;
+  margin-top: 20px;
+  border-radius: 3px;
+  background-color: #F5F5F5;
+  border: 2px solid #A9A9A9;
+}

@@ -1,0 +1,17 @@
+#form-titre{
+  text-align: center;
+}
+
+
+body {
+    background:#EFEFEF;
+}
+p{
+  color:#4d4d4d;
+}
+.chat{
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  margin-top: 5px;
+  width:600px
+}

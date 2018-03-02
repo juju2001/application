@@ -1,0 +1,39 @@
+<template name="contact">
+<div class="container">
+  <form>
+    <div class="form-group">
+      <h1 id="form-titre">Contact</h1>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href='/accueil'>Accueil</a></li>
+            <li><a href='/discussion'>Discussion</a></li>
+            <li><a href='/connexion'>Connexion</a></li>
+            <li><a href='/inscription'>Insciption</a></li>
+            <li class="active"><a href="/contact">Contact</a></li>
+            <li><a href='/profil'>Profil</a></li>
+            <li><a href='/deconnexion'>Déconnexion</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </form>
+  <form>
+    {{#each contacter}}
+    <div class="col-sm-3">
+      Nom : {{nom}}
+      <br> Prénom : {{prenom}}
+      <br> Surnom : {{surnom}}
+      <br> Age : {{age}}
+      <br> E-mail : {{email}}
+      <br> Pseudo : {{pseudo}}
+      <br>
+      <button class="modifier" id="{{contact}}">Modifier</button>
+    </div>
+    {{/each}}
+  </form>
+</div>
+</template>

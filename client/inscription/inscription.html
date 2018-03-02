@@ -1,0 +1,46 @@
+<template name="inscription">
+
+  <div class="container">
+    <form>
+      <div class="form-group">
+        <h1 id="form-titre">Formulaire d'inscription</h1>
+          <div class="form-group">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                  <li><a href='/accueil'>Accueil</a></li>
+                  <li><a href='/discussion'>Discussion</a></li>
+                  <li><a href='/connexion'>Connexion</a></li>
+                  <li  class="active"><a href='/inscription'>Insciption</a></li>
+                  <li><a href="/contact">Contact</a></li>
+                  <li><a href='/profil'>Profil</a></li>
+                  <li><a href='/deconnexion'>Déconnexion</a></li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+        <label for="name">Nom :</label>
+        <input class="form-control" type="text" id="name" name="name">
+        <label for="prenom">Prénom </label>
+        <input class="form-control" type="text" id="prenom" name="prenom">
+        <label for="age">Age :</label>
+        <input class="form-control" type="number" id="age" name="age" min="10" max="110">
+        <label for="email">E-mail :</label>
+        <input class="form-control" type="email" id="email" name="email">
+        <label for="prenom">Pseudo </label>
+        <input class="form-control" type="text" id="pseudo" name="pseudo">
+        <label for="password">password : </label>
+        <input class="form-control" type="password" id="mdp1" name="password1">
+        <label for="password">password :</label>
+        <input class="form-control" type="password" id="mdp2" name="password2">
+        <br>
+        <input type="submit" name="envoyer" value="Envoyer">
+      </div>
+    </form>
+    <a href="/connexion">Connexion</a>
+  </div>
+
+</template>

@@ -1,0 +1,51 @@
+Template.accueil.rendered = function() {
+  document.title = "Accueil";
+};
+
+
+Template.accueil.helpers({
+  prenomAccueil: function() {
+    var sessionID = LocalStore.get("userID");
+    var find = Inscription.findOne({
+      _id: sessionID,
+    });
+
+    if (find) {
+      return find.prenom;
+    }
+  },
+
+  contacter: function() {
+    var sessionID = LocalStore.get("userID");
+
+    var contacts = Contact.find({
+      userIdNow : sessionID,
+    }).fetch();
+
+    var ids = _.pluck(contacts, 'contact');
+
+    ids.push(sessionID);
+
+    return Inscription.find({
+      _id: {
+        $nin: ids,
+      },
+    }).fetch();
+  },
+});
+
+
+Template.accueil.events({
+  'click .goAjouter': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var identifiant = Inscription.findOne({
+      _id: this._id,
+    });
+    var id = identifiant._id;
+    if (id) {
+      LocalStore.set("newContactID", id);
+      Router.go('/newContact');
+    }
+  },
+})
