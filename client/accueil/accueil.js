@@ -19,21 +19,32 @@ Template.accueil.helpers({
     var sessionID = LocalStore.get("userID");
 
     var contacts = Contact.find({
-      userIdNow : sessionID,
+      userIdNow: sessionID,
     }).fetch();
-
     var ids = _.pluck(contacts, 'contact');
-
     ids.push(sessionID);
-
     return Inscription.find({
       _id: {
         $nin: ids,
       },
     }).fetch();
   },
-});
 
+  connecté: function() {
+    var sessionID = LocalStore.get("userID");
+    var contacts = Inscription.find({
+      etat:  "true",
+    }).fetch();
+    var ids = _.pluck(contacts, '_id');
+    ids.push(sessionID);
+    return Contact.find({
+      contact: {
+        $in: ids,
+      },
+      userIdNow: sessionID,
+    }).fetch();
+  },
+});
 
 Template.accueil.events({
   'click .goAjouter': function(event) {

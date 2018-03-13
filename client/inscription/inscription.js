@@ -23,11 +23,11 @@ Template.inscription.events({
             email     :  event.target.email.value,
             pseudo    :  event.target.pseudo.value,
             password  :  event.target.mdp1.value,
+            etat      :  "false",
+            statut    :  ""
           };
           Meteor.call('insertInscription', hash, function(error, result) {
             if (result) {
-              console.log(result);
-
               Router.go('/connexion');
             }
             if (error) {

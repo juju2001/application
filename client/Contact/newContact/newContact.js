@@ -81,6 +81,7 @@ Template.newContact.events({
           surnom: surnom,
           contact: LocalStore.get("newContactID"),
           hours: now.getTime(),
+          lastMessage : 0,
         };
         Meteor.call('newContact', hash5)
         Router.go('/contact');

@@ -23,6 +23,17 @@
     </div>
     <p>Avec cette application tu pourras chatter avec tes amis à tous moments, partager ta journée et les moments les plus importants de ta vie.</p>
   </form>
+
+  <h1>Amis actuellement connectés !</h1>
+  {{#each connecté}}
+  <div class="col-sm-3" id="connecté" >
+  Nom : {{nom}}
+  <br>
+  Prénom : {{prenom}}
+  </div>
+  {{/each}}
+<br><br><br><br><br>
+  <h1>Ajouter de nouveaux amis !</h1>
     {{#each contacter}}
     <div class="col-sm-3" >
     Nom : {{nom}}

@@ -17,20 +17,27 @@ Meteor.methods({
 
 Meteor.methods({
   connexion: function(data) {
-      return Connexion.insert(data);
-    },
+    return Connexion.insert(data);
+  },
 });
+
 
 Meteor.methods({
   message: function(data3) {
-      return Message.insert(data3);
-    },
+    return Message.insert(data3);
+  },
 });
 
 Meteor.methods({
   newContact: function(data5) {
-      return Contact.insert(data5);
-    },
+    return Contact.insert(data5);
+  },
+});
+
+Meteor.methods({
+  recherche: function(data) {
+    return Recherche.insert(data);
+  },
 });
 
 Meteor.methods({
@@ -47,14 +54,99 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  notification: function(lu, sessionID, contactID) {
-    return Contact.update({
-      userIdNow: sessionID,
-      contact: conatctID,
+  notification: function(sessionID, contactID) {
+    return Message.update({
+      idClient1: contactID,
+      idClient2: sessionID,
+      lu: "false",
     }, {
       $set: {
-        lu: lu
+        lu: "true"
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+Meteor.methods({
+  lastMessage: function(time, sessionID, contactID) {
+    return Contact.update({
+      contact: sessionID,
+      userIdNow: contactID,
+    }, {
+      $set: {
+        lastMessage: time,
       }
     });
   },
 });
+
+Meteor.methods({
+  deco: function(sessionID) {
+    return Inscription.update({
+      _id: sessionID,
+    }, {
+      $set: {
+        etat: "false",
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+Meteor.methods({
+  heureDeco: function(sessionID, heureDeco) {
+    return Connexion.update({
+      userIdNow: sessionID,
+    }, {
+      $set: {
+        deconnexion: heureDeco,
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+Meteor.methods({
+  etat: function(userIdNow) {
+    return Inscription.update({
+      _id: userIdNow,
+    }, {
+      $set: {
+        etat: "true",
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+
+Meteor.methods({
+  dec0 : function(userIdNow){
+    return Connexion.update({
+      userIdNow : userIdNow,
+    }, {
+      $set : {
+        deconnexion : 0,
+      }
+    }, {
+      multi : true,
+    });
+    },
+});
+
+Meteor.methods({
+  statut : function(statut, sessionID){
+    return Inscription.update({
+      _id : sessionID,
+    }, {
+      $set : {
+        statut : statut,
+      }
+    });
+    },
+})

@@ -19,17 +19,35 @@ Template.connexion.events({
       if (controle_user.password != password_connexion) {
         alert("Le mot de passe n'est pas juste !")
       } else {
-        LocalStore.set("userID", userIdNow);
-        var prenom = controle_user.prenom;
-        var hash2 = {
-          userIdNow: controle_user._id,
-          hours: now.getTime(),
-        };
-        Meteor.call('connexion', hash2, function(data) {
-          if (LocalStore.get("userID")) {
-            event.preventDefault();
-          }
+        var pseudoInscription = Inscription.findOne({
+          pseudo: pseudo_connexion,
         });
+        if (pseudoInscription) {
+          var alreadyConnexion = Connexion.findOne({
+            userIdNow: pseudoInscription._id,
+          });
+          if (!alreadyConnexion) {
+            LocalStore.set("userID", userIdNow);
+            var hash = {
+              userIdNow: controle_user._id,
+              hours: now.getTime(),
+              deconnexion: 0,
+            };
+            Meteor.call('connexion', hash, function(data) {
+              if (LocalStore.get("userID")) {
+                event.preventDefault();
+              }
+            });
+          } else {
+            LocalStore.set("userID", userIdNow);
+            Meteor.call('dec0', userIdNow);
+            Meteor.call('etat', userIdNow,function(data) {
+              if (LocalStore.get("userID")) {
+                event.preventDefault();
+              }
+            });
+          }
+        }
         Router.go('/accueil');
       }
     } else {

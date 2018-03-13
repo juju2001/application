@@ -17,9 +17,9 @@
           <li><a href='/deconnexion'>Déconnexion</a></li>
           <form class="navbar-form navbar-left">
             <div class="input-group">
-               <input type="text"  id="recherche" class="form-control" placeholder="Search">
+               <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
                <div class="input-group-btn">
-                 <button class="btn btn-default" type="submit">
+                 <button class="btn btn-default" id="goRecherche" type="submit">
                    <i class="glyphicon glyphicon-search"></i>
                  </button>
                </div>
@@ -32,10 +32,30 @@
     <div class="discu">
       <p id="infos">{{nom}} {{prenom}}
       <button class="goDiscu" id="{{contact}}" value={{prenom}}>Discussion</button>
+      {{#if notification}}<div class="rond"></div>{{/if}}
     </p>
     </div>
-    <br>
     {{/each}}
   </div>
-</div>
+  <h1  style="text-align : center">Recherche</h1>
+  {{#each recherche}}
+  <div style="background-color : green;">
+    {{prenom}} {{nom}} {{age}} {{email}}
+  </div>
+  {{/each}}
+
+  {{#each inscriptionFind}}
+  <div style="background-color : green;">
+    {{prenom}} {{nom}} {{age}} {{email}}
+  </div>
+  <br>
+  {{/each}}
+
+  {{#each messageFind}}
+  <div style="background-color : yellow">
+     {{message}}
+  </div>
+  <br>
+  {{/each}}
+  </div>
 </template>
