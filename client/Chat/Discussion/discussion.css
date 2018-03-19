@@ -11,8 +11,14 @@ p{
 }
 
 .discu{
-  border: 2px black;
   background-color: white;
+  text-align: center;
+  width:100%;
+}
+
+
+td{
+  text-align: center;
   margin:0 auto;
 }
 
@@ -21,4 +27,8 @@ p{
   width:15px;
   height: 15px;
   background-color: orange;
+}
+
+.recherche{
+  background-color : white;
 }

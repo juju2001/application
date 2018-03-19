@@ -68,6 +68,7 @@ Template.newContact.events({
         var prenom = trouver.prenom;
         var pseudo = trouver.pseudo;
         var age = trouver.age;
+        var date = trouver.date;
         var email = trouver.email;
         var surnom = event.target.surnom.value;
         var now = new Date();
@@ -76,6 +77,7 @@ Template.newContact.events({
           nom: nom,
           prenom: prenom,
           age: age,
+          date : date,
           email: email,
           pseudo: pseudo,
           surnom: surnom,

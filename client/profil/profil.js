@@ -1,5 +1,12 @@
 Template.profil.rendered = function() {
   document.title = "Profil";
+  var sessionID = LocalStore.get("userID");
+  var find = Connexion.findOne({
+    userIdNow: sessionID,
+  });
+  if (!sessionID || find && sessionID != find.userIdNow) {
+    Router.go('/connexion');
+  }
 };
 
 
@@ -55,5 +62,6 @@ Template.profil.events({
     var sessionID = LocalStore.get("userID");
     var statut = $("#statut").val();
     Meteor.call('statut', statut, sessionID);
+    $("#statut").val('');
   }
 });
