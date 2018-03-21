@@ -1,0 +1,113 @@
+{
+  "format": "web-program-pre1",
+  "manifest": [
+    {
+      "path": "app/client/Chat/Discussion/discussion.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/Chat/Discussion/discussion.js?hash=da24088757dd03eb4546f9594cf937bad9f84017",
+      "size": 878,
+      "hash": "da24088757dd03eb4546f9594cf937bad9f84017"
+    },
+    {
+      "path": "app/client/Chat/message/message.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/Chat/message/message.js?hash=43d83a74b4230d095c7633d49ffe5753d2f09118",
+      "size": 1728,
+      "hash": "43d83a74b4230d095c7633d49ffe5753d2f09118"
+    },
+    {
+      "path": "app/client/Contact/contact/contact.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/Contact/contact/contact.js?hash=ff193603e29f6386187d05c586b40c6054ad3289",
+      "size": 859,
+      "hash": "ff193603e29f6386187d05c586b40c6054ad3289"
+    },
+    {
+      "path": "app/client/Contact/newContact/newContact.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/Contact/newContact/newContact.js?hash=5fa546990d8ee6e8fef9db9a99c0432291005825",
+      "size": 2101,
+      "hash": "5fa546990d8ee6e8fef9db9a99c0432291005825"
+    },
+    {
+      "path": "app/client/accueil/accueil.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/accueil/accueil.js?hash=e49bb6303278e9b6cef46e538024f460710e5e0a",
+      "size": 979,
+      "hash": "e49bb6303278e9b6cef46e538024f460710e5e0a"
+    },
+    {
+      "path": "app/client/connexion/connexion.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/connexion/connexion.js?hash=c3dffbb003c40f14c42b0b62189198298ce68de1",
+      "size": 1124,
+      "hash": "c3dffbb003c40f14c42b0b62189198298ce68de1"
+    },
+    {
+      "path": "app/client/deconnexion/deconnexion.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/deconnexion/deconnexion.js?hash=7a88076698f05448bb9fc2881161fc04a5380ef1",
+      "size": 350,
+      "hash": "7a88076698f05448bb9fc2881161fc04a5380ef1"
+    },
+    {
+      "path": "app/client/inscription/inscription.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/inscription/inscription.js?hash=2f90377f3028c14edf5d3958a04b92c7ae7485f1",
+      "size": 1460,
+      "hash": "2f90377f3028c14edf5d3958a04b92c7ae7485f1"
+    },
+    {
+      "path": "app/client/modifier/modifier.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/modifier/modifier.js?hash=b6ab739c1c78424b1017754b1bd45581a0f7b39a",
+      "size": 1756,
+      "hash": "b6ab739c1c78424b1017754b1bd45581a0f7b39a"
+    },
+    {
+      "path": "app/client/profil/profil.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/profil/profil.js?hash=aa076284d074551129696af1f1b0ebf4883fb1ca",
+      "size": 322,
+      "hash": "aa076284d074551129696af1f1b0ebf4883fb1ca"
+    },
+    {
+      "path": "app/Router/router.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/Router/router.js?hash=00159207fda790287d631c8ed17547d47b38a783",
+      "size": 647,
+      "hash": "00159207fda790287d631c8ed17547d47b38a783"
+    },
+    {
+      "path": "app/collection/collection.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/collection/collection.js?hash=02e27136898ec7398886e142e25f790c33879e3b",
+      "size": 212,
+      "hash": "02e27136898ec7398886e142e25f790c33879e3b"
+    }
+  ]
+}
