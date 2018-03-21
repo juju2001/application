@@ -126,27 +126,66 @@ Meteor.methods({
 
 
 Meteor.methods({
-  dec0 : function(userIdNow){
+  dec0: function(userIdNow) {
     return Connexion.update({
-      userIdNow : userIdNow,
+      userIdNow: userIdNow,
     }, {
-      $set : {
-        deconnexion : 0,
+      $set: {
+        deconnexion: 0,
       }
     }, {
-      multi : true,
+      multi: true,
     });
-    },
+  },
 });
 
 Meteor.methods({
-  statut : function(statut, sessionID){
+  statut: function(statut, sessionID) {
     return Inscription.update({
-      _id : sessionID,
+      _id: sessionID,
     }, {
-      $set : {
-        statut : statut,
+      $set: {
+        statut: statut,
       }
     });
-    },
-})
+  },
+});
+
+Meteor.methods({
+  supprimerContact: function(sessionID, contactID) {
+    return Contact.remove({
+      userIdNow: sessionID,
+      contact: contactID,
+    });
+  },
+});
+
+Meteor.methods({
+  supprimerMessage1: function(sessionID, contactID) {
+    return Message.update({
+        idClient1: sessionID,
+        idClient2: contactID,
+}, {
+  $set : {
+    luClient1 : "false",
+  }
+},{
+        multi : true,
+      });
+  },
+});
+
+Meteor.methods({
+  supprimerMessage2: function(sessionID, contactID) {
+    return Message.update({
+        idClient1: contactID,
+        idClient2: sessionID,
+}, {
+  $set : {
+    luClient2 : "false",
+  }
+},{
+        multi : true,
+      });
+  },
+});

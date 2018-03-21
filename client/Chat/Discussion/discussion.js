@@ -45,6 +45,99 @@ Template.discussion.helpers({
     return Session.get("messageFind");
   },
 
+  lastConnexion: function() {
+    var sessionID = LocalStore.get("sessionID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var ids = id.contact;
+    var deco = Connexion.findOne({
+      userIdNow: ids,
+    });
+    if (deco.deconnexion != 0) {
+      var deconnexion = deco.deconnexion;
+      var date = new Date(deconnexion);
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      if (month < 10) {
+        month = "0" + month;
+      }
+      var year = date.getFullYear();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      if (minutes < 10) {
+        minutes = minutes + "0";
+      }
+      var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+      return final;
+    } else {
+      return "En ligne";
+    }
+  },
+
+  couleur: function() {
+    var sessionID = LocalStore.get("sessionID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var ids = id.contact;
+    var deco = Connexion.findOne({
+      userIdNow: ids,
+    });
+    if (deco.deconnexion == 0) {
+      return 'text-success'
+    } else {
+      return 'text-danger'
+    }
+  },
+
+  infoNom: function() {
+    var sessionID = LocalStore.get("userID");
+    var id = Message.findOne({
+      _id: this._id,
+    });
+    if (id) {
+      var info = Inscription.findOne({
+        _id: id.idClient1,
+      });
+      if (sessionID == id.idClient2) {
+        return info.nom;
+      }
+    }
+  },
+
+  infoPrenom: function() {
+    var sessionID = LocalStore.get("userID");
+    var id = Message.findOne({
+      _id: this._id,
+    });
+    if (id) {
+      var info = Inscription.findOne({
+        _id: id.idClient1,
+      });
+      if (sessionID != id.idClient1) {
+        return info.prenom;
+      } else {
+        info = Inscription.findOne({
+          _id: id.idClient2,
+        });
+        return "Moi"
+      }
+    }
+  },
+
+  infoHeure: function() {
+    var sessionID = LocalStore.get("userID");
+    var id = Message.findOne({
+      _id: this._id,
+    });
+    if (id) {
+      var time = id.hours;
+      var date = new Date(time);
+      return +date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    }
+  },
+
 });
 
 Template.discussion.events({
@@ -99,7 +192,25 @@ Template.discussion.events({
 
     Session.set('inscriptionFind', inscriptionFind);
     Session.set('messageFind', messageFind);
+    Session.set();
     $("#recherche").val('');
   },
+
+  'click #supp': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var sessionID = LocalStore.get("userID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
+      var contactID = id.contact;
+        Meteor.call('supprimerMessage1', sessionID, contactID, function() {
+          Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+            alert("Discussio supprimée !");
+        });
+      });
+    }
+  }
 
 });

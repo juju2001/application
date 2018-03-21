@@ -28,6 +28,7 @@ Template.connexion.events({
           });
           if (!alreadyConnexion) {
             LocalStore.set("userID", userIdNow);
+            Session.setPersistent("connectID", userIdNow);
             var hash = {
               userIdNow: controle_user._id,
               hours: now.getTime(),
@@ -50,7 +51,7 @@ Template.connexion.events({
         }
         Router.go('/accueil');
       }
-    } else {
+    }else{
       alert("Le pseudo n'est pas juste !");
     }
   },

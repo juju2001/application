@@ -19,9 +19,11 @@ Template.message.helpers({
       $or: [{
         idClient1: sessionID,
         idClient2: contactID,
+        luClient1: "true",
       }, {
         idClient1: contactID,
         idClient2: sessionID,
+        luClient2: "true",
       }],
     }, {
       sort: {
@@ -112,6 +114,8 @@ Template.message.events({
         message: message,
         lu: "false",
         hours: now.getTime(),
+        luClient1 : "true",
+        luClient2 : "true",
       };
       var time = now.getTime();
       Meteor.call('message', hash3, function(data3) {});
