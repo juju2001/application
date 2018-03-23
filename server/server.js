@@ -8,7 +8,6 @@ Meteor.startup(() => {
 
 Meteor.methods({
   insertInscription: function(data) {
-    console.log(data);
     //retourne l'ID
     return Inscription.insert(data);
   },
@@ -58,10 +57,10 @@ Meteor.methods({
     return Message.update({
       idClient1: contactID,
       idClient2: sessionID,
-      lu: "false",
+      lu: false,
     }, {
       $set: {
-        lu: "true"
+        lu: true
       }
     }, {
       multi: true
@@ -88,7 +87,7 @@ Meteor.methods({
       _id: sessionID,
     }, {
       $set: {
-        etat: "false",
+        etat: false,
       }
     }, {
       multi: true
@@ -116,7 +115,7 @@ Meteor.methods({
       _id: userIdNow,
     }, {
       $set: {
-        etat: "true",
+        etat: true,
       }
     }, {
       multi: true
@@ -167,7 +166,7 @@ Meteor.methods({
         idClient2: contactID,
 }, {
   $set : {
-    luClient1 : "false",
+    luClient1 : false,
   }
 },{
         multi : true,
@@ -182,7 +181,7 @@ Meteor.methods({
         idClient2: sessionID,
 }, {
   $set : {
-    luClient2 : "false",
+    luClient2 : false,
   }
 },{
         multi : true,

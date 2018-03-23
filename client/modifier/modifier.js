@@ -1,19 +1,31 @@
 Template.modifier.rendered = function() {
   document.title = "Modifier";
-  var sessionID = LocalStore.get("userID");
+  var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID && find != find.userIdNow) {
+  if (!sessionID && sessionID != find.userIdNow) {
     Router.go('/connexion');
   }
+
+  Tracker.autorun(function () {
+    var sessionID = Session.get("userID");
+
+    var user = Inscription.findOne({
+      _id: sessionID,
+      etat: false,
+    });
+    if (user) {
+      Router.go('/connexion');
+    }
+  });
 };
 
 
 Template.modifier.helpers({
   nom : function(){
     var newContact = Inscription.findOne({
-      _id : LocalStore.get("contactID"),
+      _id : Session.get("contactID"),
     });
     if(newContact){
       return newContact.nom;
@@ -22,7 +34,7 @@ Template.modifier.helpers({
 
 prenom : function(){
   var newContact = Inscription.findOne({
-    _id : LocalStore.get("contactID"),
+    _id : Session.get("contactID"),
   });
   if(newContact){
     return newContact.prenom;
@@ -31,7 +43,7 @@ prenom : function(){
 
 age : function(){
   var newContact = Inscription.findOne({
-    _id : LocalStore.get("contactID"),
+    _id : Session.get("contactID"),
   });
   if(newContact){
     return newContact.age;
@@ -40,7 +52,7 @@ age : function(){
 
 pseudo : function(){
   var newContact = Inscription.findOne({
-    _id : LocalStore.get("contactID"),
+    _id : Session.get("contactID"),
   });
   if(newContact){
     return newContact.pseudo;
@@ -48,7 +60,7 @@ pseudo : function(){
 },
 email : function(){
   var newContact = Inscription.findOne({
-    _id : LocalStore.get("contactID"),
+    _id : Session.get("contactID"),
   });
   if(newContact){
     return newContact.email;
@@ -61,25 +73,25 @@ Template.modifier.events({
     event.preventDefault();
     event.stopPropagation();
     var trouver = Inscription.findOne({
-      _id: LocalStore.get("contactID"),
+      _id: Session.get("contactID"),
     });
     if (trouver) {
         var newSurnom = event.target.surnom.value;
-        var userIdNow = LocalStore.get("userID");
-        var contact = LocalStore.get("contactID");
+        var userIdNow = Session.get("userID");
+        var contact = Session.get("contactID");
 
 
         if(newSurnom){
           Meteor.call('modifierSurnom', userIdNow, contact, newSurnom, function() {});
           Router.go('/contact');
-          LocalStore.set("contactID", null);
+          Session.set("contactID", null);
       }
     }
   },
 
   'click #supprimer' : function() {
-    var sessionID = LocalStore.get("userID");
-    var contactID = LocalStore.get("contactID");
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
     if(confirm("Etes-vous sûr de vouloir supprimer ce contact")){
       Meteor.call('supprimerContact', sessionID, contactID, function() {
         Meteor.call('supprimerMessage1', sessionID, contactID, function() {

@@ -8,51 +8,44 @@ Template.connexion.events({
     event.preventDefault();
     event.stopPropagation();
 
-    var pseudo_connexion = event.target.pseudo_connexion.value;
-    var password_connexion = event.target.password_connexion.value;
-    var controle_user = Inscription.findOne({
-      pseudo: pseudo_connexion,
+    var pseudoConnexion = $('#pseudoConnexion').val();
+    var passwordConnexion =$('#passwordConnexion').val();
+    var controleUser = Inscription.findOne({
+      pseudo: pseudoConnexion,
     });
-    var userIdNow = controle_user._id;
+    var userIdNow = controleUser._id;
     var now = new Date();
-    if (controle_user) {
-      if (controle_user.password != password_connexion) {
-        alert("Le mot de passe n'est pas juste !")
+    if (controleUser) {
+      if (controleUser.password != passwordConnexion) {
+        alert("Le pseudo ou le mot de passe n'est pas juste !")
       } else {
         var pseudoInscription = Inscription.findOne({
-          pseudo: pseudo_connexion,
+          pseudo: pseudoConnexion,
         });
         if (pseudoInscription) {
           var alreadyConnexion = Connexion.findOne({
             userIdNow: pseudoInscription._id,
           });
           if (!alreadyConnexion) {
-            LocalStore.set("userID", userIdNow);
-            Session.setPersistent("connectID", userIdNow);
+            Session.setPersistent("userID", userIdNow);
             var hash = {
-              userIdNow: controle_user._id,
+              userIdNow: controleUser._id,
               hours: now.getTime(),
               deconnexion: 0,
             };
-            Meteor.call('connexion', hash, function(data) {
-              if (LocalStore.get("userID")) {
-                event.preventDefault();
-              }
-            });
+            Meteor.call('connexion', hash);
+            Meteor.call('etat', userIdNow);
+            Router.go('/accueil');
           } else {
-            LocalStore.set("userID", userIdNow);
+            Session.setPersistent("userID", userIdNow);
             Meteor.call('dec0', userIdNow);
-            Meteor.call('etat', userIdNow,function(data) {
-              if (LocalStore.get("userID")) {
-                event.preventDefault();
-              }
-            });
+            Meteor.call('etat', userIdNow);
+            Router.go('/accueil');
           }
         }
-        Router.go('/accueil');
       }
     }else{
-      alert("Le pseudo n'est pas juste !");
+      alert("Le psueudo ou le mot de passe n'est pas juste !");
     }
   },
 });

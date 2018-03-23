@@ -1,52 +1,77 @@
 Template.discussion.rendered = function() {
   document.title = "Actualité de vos discussions";
-  var sessionID = LocalStore.get("userID");
+  var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID || find && sessionID != find.userIdNow) {
+  if (!sessionID && sessionID != find.userIdNow) {
     Router.go('/connexion');
   }
+
+
+  Tracker.autorun(function() {
+    var sessionID = Session.get("userID");
+
+    var user = Inscription.findOne({
+      _id: sessionID,
+      etat: false,
+    });
+    if (user) {
+      Router.go('/connexion');
+    }
+  });
 };
 
 Template.discussion.helpers({
   discussion: function() {
-    var sessionID = LocalStore.get("userID");
-    return Contact.find({
+    var sessionID = Session.get("userID");
+    var contact = Contact.find({
       userIdNow: sessionID,
-    }, {
-      sort: {
-        lastMessage: -1,
-      },
+    });
+    return contact;
+  },
+
+  noFriend: function() {
+    var sessionID = Session.get("userID");
+    var messages = Message.find({
+      idClient2: sessionID,
+      lu: false,
+      luClient2 : true,
     }).fetch();
+    var ids = _.pluck(messages, 'idClient1');
+    var alreadyFriend = Contact.findOne({
+      userIdNow: sessionID,
+      contact: {
+        $in: ids,
+      },
+    });
+    if (!alreadyFriend) {
+      return Inscription.find({
+        _id: {
+          $in: ids,
+        },
+      });
+    }
   },
 
   notification: function() {
-    var sessionID = LocalStore.get("userID");
-    var contactID = LocalStore.get("contactID");
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
     var id = Contact.findOne({
       _id: this._id,
     });
     var notification = Message.findOne({
       idClient1: id.contact,
       idClient2: sessionID,
-      lu: "false",
+      lu: false,
     });
     if (notification) {
       return notification;
     }
   },
 
-  inscriptionFind: function() {
-    return Session.get("inscriptionFind");
-  },
-
-  messageFind: function() {
-    return Session.get("messageFind");
-  },
-
   lastConnexion: function() {
-    var sessionID = LocalStore.get("sessionID");
+    var sessionID = Session.get("sessionID");
     var id = Contact.findOne({
       _id: this._id,
     });
@@ -76,7 +101,7 @@ Template.discussion.helpers({
   },
 
   couleur: function() {
-    var sessionID = LocalStore.get("sessionID");
+    var sessionID = Session.get("sessionID");
     var id = Contact.findOne({
       _id: this._id,
     });
@@ -91,53 +116,6 @@ Template.discussion.helpers({
     }
   },
 
-  infoNom: function() {
-    var sessionID = LocalStore.get("userID");
-    var id = Message.findOne({
-      _id: this._id,
-    });
-    if (id) {
-      var info = Inscription.findOne({
-        _id: id.idClient1,
-      });
-      if (sessionID == id.idClient2) {
-        return info.nom;
-      }
-    }
-  },
-
-  infoPrenom: function() {
-    var sessionID = LocalStore.get("userID");
-    var id = Message.findOne({
-      _id: this._id,
-    });
-    if (id) {
-      var info = Inscription.findOne({
-        _id: id.idClient1,
-      });
-      if (sessionID != id.idClient1) {
-        return info.prenom;
-      } else {
-        info = Inscription.findOne({
-          _id: id.idClient2,
-        });
-        return "Moi"
-      }
-    }
-  },
-
-  infoHeure: function() {
-    var sessionID = LocalStore.get("userID");
-    var id = Message.findOne({
-      _id: this._id,
-    });
-    if (id) {
-      var time = id.hours;
-      var date = new Date(time);
-      return +date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-    }
-  },
-
 });
 
 Template.discussion.events({
@@ -149,65 +127,64 @@ Template.discussion.events({
     });
     var contactId = id.contact;
     if (contactId) {
-      LocalStore.set("contactID", contactId);
+      Session.set("contactID", contactId);
       Router.go('/message');
     };
+    var noFriendId = Inscription.findOne({
+      _id: this._id,
+    });
+    if (noFriendId) {
+      Session.set("contactID", noFriendId._id)
+    }
   },
 
-  'click #goRecherche': function(event) {
+
+  'click .goNewDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
-    var sessionID = LocalStore.get("userID");
-    var hash = ({
-      userIdNow: sessionID,
-      recherche: infoRecherche,
+    var id = Inscription.findOne({
+      _id: this._id,
     });
-    var inscriptionFind = Inscription.find({
-      $or: [{
-        prenom: infoRecherche,
-      }, {
-        nom: infoRecherche,
-      }, {
-        age: infoRecherche,
-      }, {
-        email: {
-          $regex: infoRecherche,
-        },
-      }, {
-        pseudo: infoRecherche,
-      }],
-    }).fetch();
+    if (id) {
+      var idContact = id._id;
+      if (idContact) {
+        Session.set("newContactID", idContact);
+        Router.go('newContact');
+      };
 
-    var messageFind = Message.find({
-      $or: [{
-        idClient1: sessionID,
-      }, {
-        idClient2: sessionID,
-      }],
-      message: {
-        $regex: infoRecherche,
-      },
-    }).fetch();
-
-    Session.set('inscriptionFind', inscriptionFind);
-    Session.set('messageFind', messageFind);
-    Session.set();
-    $("#recherche").val('');
+    }
   },
+
 
   'click #supp': function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var sessionID = LocalStore.get("userID");
+    var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });
     if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
       var contactID = id.contact;
-        Meteor.call('supprimerMessage1', sessionID, contactID, function() {
-          Meteor.call('supprimerMessage2', sessionID, contactID, function() {
-            alert("Discussio supprimée !");
+      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+          alert("Discussio supprimée !");
+        });
+      });
+    }
+  },
+
+  'click #suppNoFriend': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var sessionID = Session.get("userID");
+    var id = Inscription.findOne({
+      _id: this._id,
+    });
+    if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
+      var contactID = id._id;
+      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+          alert("Discussio supprimée !");
         });
       });
     }

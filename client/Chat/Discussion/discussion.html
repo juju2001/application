@@ -15,62 +15,47 @@
           <li><a href='/contact'>Contact</a></li>
           <li><a href='/profil'>Profil</a></li>
           <li><a href='/deconnexion'>Déconnexion</a></li>
-          <form class="navbar-form navbar-left">
-            <div class="input-group">
-               <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
-               <div class="input-group-btn">
-                 <button class="btn btn-default" id="goRecherche" type="submit">
-                   <i class="glyphicon glyphicon-search"></i>
-                 </button>
-               </div>
-             </div>
-        </form>
       </ul>
     </div>
     </nav>
       <table class="discu">
-            {{#each discussion}}
-        <tr>
-        <td><a href='message' style="color : #4d4d4d " class="goDiscu" id="{{contact}}" value={{prenom}}>{{nom}} {{prenom}} {{surnom}}</a></td>
-        <td>       {{#if notification}}
-                      <div class="rond"></div>
-                   {{/if}}
-       </td>
-          <td id="infos" class="{{couleur}}" style="text-align : center">
-                {{lastConnexion}}
-        </td>
-        <td style="text-align:right"><a style="color : red" id="supp" href="">Supprimer</a></td>
-    </tr>
-    <tr style="background-color : #EFEFEF">
-      <td></td>
-      <td style="color : #EFEFEF">.</td>
-      <td></td>
-      <td></td>
-    </tr>
-        {{/each}}
-    </table>
-    <br>
-  </div>
-  <h1  style="text-align:center">Recherche</h1>
-  {{#each recherche}}
-  <div style="background-color : green;">
-    {{prenom}} {{nom}} {{age}} {{email}}
-  </div>
-  {{/each}}
 
-  {{#each inscriptionFind}}
-  <div class="recherche">
-    <a href=''>{{prenom}} {{nom}} {{email}}</a>
-  </div>
-  <br>
-  {{/each}}
+        {{#each noFriend}}
+              <tr style="background-color : green">
+                <td><a href='message' style="color : #4d4d4d " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+                <td>Nouvelle discussion</td>
+                <td></td>
+                <td style="text-align:right"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
+            </tr>
+            <tr style="background-color : #EFEFEF">
+                <td></td>
+                <td style="color : #EFEFEF">.</td>
+                <td></td>
+                <td></td>
+             </tr>
+      {{/each}}
 
-  {{#each messageFind}}
-  <div class="recherche">
-     {{message}}
-    <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}}  {{infoHeure}}</p>
-  </div>
-  <br>
-  {{/each}}
+      {{#each discussion}}
+              <tr>
+              <td><a href='message' style="color : #4d4d4d " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}} {{surnom}}</a></td>
+              <td>       {{#if notification}}
+                            <div class="rond"></div>
+                         {{/if}}
+             </td>
+                <td id="infos" class="{{couleur}}" style="text-align : center">
+                      {{lastConnexion}}
+              </td>
+              <td style="text-align:right"><a style="color : red" id="supp" href="">Supprimer</a></td>
+          </tr>
+          <tr style="background-color : #EFEFEF">
+            <td></td>
+            <td style="color : #EFEFEF">.</td>
+            <td></td>
+            <td></td>
+          </tr>
+              {{/each}}
+          </table>
+          <br>
+        </div>
   </div>
 </template>

@@ -1,18 +1,30 @@
 Template.contact.rendered = function() {
   document.title = "Contact";
-  var sessionID = LocalStore.get("userID");
+  var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID || find && sessionID != find.userIdNow) {
+  if (!sessionID && sessionID != find.userIdNow) {
     Router.go('/connexion');
   }
+
+  Tracker.autorun(function () {
+    var sessionID = Session.get("userID");
+
+    var user = Inscription.findOne({
+      _id: sessionID,
+      etat: false,
+    });
+    if (user) {
+      Router.go('/connexion');
+    }
+  });
 };
 
 
 Template.contact.helpers({
   contacter: function() {
-    var sessionID = LocalStore.get("userID");
+    var sessionID = Session.get("userID");
     var last = Contact.find({
       userIdNow: sessionID,
     }).fetch();
@@ -22,7 +34,7 @@ Template.contact.helpers({
   },
 
   anni: function() {
-    var sessionID = LocalStore.get("userID");
+    var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id : this._id,
     });
@@ -51,7 +63,7 @@ Template.contact.events({
     });
     var contactId = id.contact;
     if (contactId) {
-      LocalStore.set("contactID", contactId);
+      Session.set("contactID", contactId);
       Router.go('/modifier');
     }
   }
