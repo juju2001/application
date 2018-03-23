@@ -16,6 +16,16 @@
             <li><a href='/contact'>Contact</a></li>
             <li><a href='/profil'>Profil</a></li>
             <li><a href='/deconnexion'>Déconnexion</a></li>
+            <form class="navbar-form navbar-left">
+              <div class="input-group">
+                 <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
+                 <div class="input-group-btn">
+                   <button class="btn btn-default" id="goRecherche" type="submit">
+                     <i class="glyphicon glyphicon-search"></i>
+                   </button>
+                 </div>
+               </div>
+          </form>
           </ul>
         </div>
       </nav>
@@ -23,16 +33,63 @@
     </div>
     <p>Avec cette application tu pourras chatter avec tes amis à tous moments, partager ta journée et les moments les plus importants de ta vie.</p>
   </form>
-    {{#each contacter}}
-    <div class="col-sm-3" >
-    Nom : {{nom}}
-    <br>
-    Prénom : {{prenom}}
-    <br>
-    Pseudo : {{pseudo}}
-    <br>
-    <button id="{{_id}}" class="goAjouter">Ajouter</button>
-    </div>
+  {{#if amiConnecté}}
+        <h1>{{amiConnecté}}</h1>
+        {{#each connecté}}
+            <div class="col-sm-3" id="connecté" >
+            Nom : {{nom}}
+            <br>
+            Prénom : {{prenom}}
+            </div>
+        {{/each}}
+        <br><br><br><br><br>
+        <h1>{{ajouterAmi}}</h1>
+        {{#each contacter}}
+            <div class="col-sm-3" >
+            Nom : {{nom}}
+            <br>
+            Prénom : {{prenom}}
+            <br>
+            Pseudo : {{pseudo}}
+            <br>
+            <button id="{{_id}}" class="goAjouter">Ajouter</button>
+            </div>
+        {{/each}}
+  {{else}}
+        <h1>{{ajouterAmi}}</h1>
+       {{#each contacter}}
+            <div class="col-sm-3" >
+            Nom : {{nom}}
+            <br>
+            Prénom : {{prenom}}
+            <br>
+            Pseudo : {{pseudo}}
+            <br>
+            <button id="{{_id}}" class="goAjouter">Ajouter</button>
+            </div>
+      {{/each}}
+  {{/if}}
+
+      <h1 style="text-align:center; margin-top: 150px">{{Motrecherche}}</h1>
+      {{#each recherche}}
+            <div style="background-color : green;">
+              {{prenom}} {{nom}} {{age}} {{email}}
+            </div>
+          {{/each}}
+
+          {{#each inscriptionFind}}
+          <div class="recherche">
+            <a href=''>{{prenom}} {{nom}} {{email}}</a>
+          </div>
+          <br>
+          {{/each}}
+
+          {{#each messageFind}}
+          <div class="recherche">
+             {{message}}
+            <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+          </div>
+          <br>
     {{/each}}
-</div>
+  </div>
 </template>

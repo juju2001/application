@@ -12,39 +12,44 @@ Template.inscription.events({
     var pseudoDb = Inscription.findOne({
       pseudo: pseudo,
     });
+    var age= $("#age").val();
+    var nouveau = new Date(age);
+    var auj = new Date();
     if (mdp1 == mdp2) {
       if (mdp1.length > 3) {
         if (!pseudoDb) {
-          alert("Merci de l'inscription !");
-          var hash = {
-            nom       :  event.target.name.value,
-            prenom    :  event.target.prenom.value,
-            age       :  event.target.age.value,
-            email     :  event.target.email.value,
-            pseudo    :  event.target.pseudo.value,
-            password  :  event.target.mdp1.value,
-          };
-          Meteor.call('insertInscription', hash, function(error, result) {
-            if (result) {
-              console.log(result);
-
-              Router.go('/connexion');
-            }
-            if (error) {
-              console.log(error);
-            }
-          });
-           }
-         else {
+          if (nouveau.getFullYear() < auj.getFullYear()  && nouveau.getFullYear() < auj.getFullYear()-14 ) {
+            alert("Merci de l'inscription !");
+            var hash = {
+              nom: event.target.name.value,
+              prenom: event.target.prenom.value,
+              date: event.target.age.value,
+              age : auj.getFullYear() - nouveau.getFullYear(),
+              email: event.target.email.value,
+              pseudo: event.target.pseudo.value,
+              password: event.target.mdp1.value,
+              etat: false,
+              statut: ""
+            };
+            Meteor.call('insertInscription', hash, function(error, result) {
+              if (result) {
+                Router.go('/connexion');
+              }
+              if (error) {
+                console.log(error);
+              }
+            });
+          }else{
+            alert("Date invalide !");
+          }
+        } else {
           alert("Le pseudo que vous avez choisi est déjà utilisé !");
-         }
         }
-       else {
+      } else {
         alert("Votre mot de passe est trop court !");
       };
 
-    }
-     else {
+    } else {
       alert("Vos mots de passe ne sont pas identiques ! ");
     }
   }

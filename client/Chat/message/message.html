@@ -19,6 +19,13 @@
           </ul>
         </div>
       </nav>
+      {{#each infoPerso}}
+          <div class="info">
+          <p class='text-center' style="font-size:18px">{{nom}} {{prenom}}</p>
+          <p class='text-center {{couleur}}'>{{lastConnexion}}</p>
+          <p style="text-align : center">{{statut}}</p>
+        </div>
+      {{/each}}
       {{#each messages}}
         <div class=" chat col-sm-12 {{color}} ">
           {{message}}

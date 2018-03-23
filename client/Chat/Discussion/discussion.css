@@ -11,9 +11,24 @@ p{
 }
 
 .discu{
-  border: 2px black;
   background-color: white;
+  text-align: center;
+  width:100%;
 }
-.goDiscu{
-margin-left: 30px ;
+
+
+td{
+  text-align: center;
+  margin:0 auto;
+}
+
+.rond{
+  border-radius: 60px;
+  width:15px;
+  height: 15px;
+  background-color: orange;
+}
+
+.recherche{
+  background-color : white;
 }
