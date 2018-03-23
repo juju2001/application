@@ -1,1 +1,0 @@
-{"head":"","body":"","js":"\nTemplate.__checkName(\"notFound\");\nTemplate[\"notFound\"] = new Template(\"Template.notFound\", (function() {\n  var view = this;\n  return HTML.Raw('<h1>Test not found</h1>\\n  <a href=\"/inscription\">S\\'inscrire</a>\\n  <br>\\n  <a href=\"/connexion\">Se connecter</a>');\n}));\n","bodyAttrs":{}}
