@@ -21,23 +21,23 @@
       <table class="discu">
 
         {{#each noFriend}}
-              <tr style="background-color : green">
-                <td><a href='message' style="color : #4d4d4d " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+              <tr style="background-color: green">
+                <td><a href='message' style="color : #0D1A26 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
                 <td>Nouvelle discussion</td>
                 <td></td>
                 <td style="text-align:right"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
             </tr>
-            <tr style="background-color : #EFEFEF">
+            <tr style="background-color : #fcfcfc">
                 <td></td>
-                <td style="color : #EFEFEF">.</td>
+                <td style="color : #fcfcfc">.</td>
                 <td></td>
                 <td></td>
              </tr>
       {{/each}}
 
       {{#each discussion}}
-              <tr>
-              <td><a href='message' style="color : #4d4d4d " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}} {{surnom}}</a></td>
+              <tr class="disc" style="background-color : #F5F5F5">
+              <td><a href='message' style="color : #0D1A26; " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}} {{surnom}}</a></td>
               <td>       {{#if notification}}
                             <div class="rond"></div>
                          {{/if}}
@@ -47,9 +47,9 @@
               </td>
               <td style="text-align:right"><a style="color : red" id="supp" href="">Supprimer</a></td>
           </tr>
-          <tr style="background-color : #EFEFEF">
+          <tr style="background-color : #fcfcfc">
             <td></td>
-            <td style="color : #EFEFEF">.</td>
+            <td style="color : #fcfcfc">.</td>
             <td></td>
             <td></td>
           </tr>

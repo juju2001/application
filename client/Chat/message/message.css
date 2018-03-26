@@ -4,13 +4,13 @@
 
 
 body {
-    background:#EFEFEF;
+    background:#fcfcfc;
 }
 p{
-  color:#4d4d4d;
+  color:#0D1A26;
 }
 .chat{
-  background-color: #FFFFFF;
+  background-color: #fcfcfc;
   border-radius: 3px;
   margin-top: 5px;
   width:600px
