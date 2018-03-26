@@ -79,14 +79,14 @@
 
           {{#each inscriptionFind}}
           <div class="recherche">
-            <a href=''>{{prenom}} {{nom}} {{email}}</a>
+            <a  class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
           </div>
           <br>
           {{/each}}
 
           {{#each messageFind}}
           <div class="recherche">
-             {{message}}
+             <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
             <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
           </div>
           <br>
