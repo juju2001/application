@@ -18,10 +18,8 @@ Meteor.startup(function() {
     // periodically send a heartbeat if activity has been detected within the interval
     //
     Meteor.setInterval(function() {
-      var contacts = Contact.find({
-        userIdNow: sessionID,
-      }).fetch();
-      var ids = _.pluck(contacts, 'contact');
+      var inscription = Inscription.find({}).fetch();
+      var ids = _.pluck(inscription, '_id');
 
 
       var sessionID = Session.get("userID");

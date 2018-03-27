@@ -26,12 +26,15 @@
           <p style="text-align : center">{{statut}}</p>
         </div>
       {{/each}}
+
+      <div>
       {{#each messages}}
-        <div style="border : black ; background-color :#F5F5F5" class=" chat col-sm-12 {{color}} ">
-          {{message}}
-        </div>
-        <br>
-      {{/each}}
+          <div  style=" max-width : 550px ; background-color :#F5F5F5" class="chat {{color}}">
+            {{message}}
+          </div>
+            <br>
+            {{/each}}
+      </div>
       <br>
       <br>
      <br>

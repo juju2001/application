@@ -46,9 +46,9 @@ Template.message.helpers({
 
   color: function() {
     if (this.idClient1 === Session.get("userID")) {
-      return 'text-success text-right';
+      return 'text-success float-right';
     }
-    return 'text-danger text-left ';
+    return 'text-danger float-left ';
   },
 
   infoPerso: function() {
