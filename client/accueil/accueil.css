@@ -2,11 +2,12 @@
   text-align: center;
 }
 
-body {
-    background:#fcfcfc;
+body{
+  background-color : #EDEDED,
 }
+
 p {
-  color:#0D1A26;
+  color:#233B69;
 }
 
 .col-sm-3{
