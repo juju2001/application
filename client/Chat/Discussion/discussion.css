@@ -26,12 +26,5 @@ td{
   border-radius: 60px;
   width:15px;
   height: 15px;
-  background-color: orange;
+  background-color: #2E54F3;
 }
-
-.recherche{
-  background-color : white;
-}
- .disc{
-   border: black 4px;
- }

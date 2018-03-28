@@ -69,6 +69,21 @@ Meteor.methods({
 });
 
 Meteor.methods({
+  notNoti: function(sessionID) {
+    return Message.update({
+      idClient2: sessionID,
+      notification: true,
+    }, {
+      $set: {
+        notification: false,
+      }
+    }, {
+      multi: true,
+    });
+  },
+});
+
+Meteor.methods({
   lastMessage: function(time, sessionID, contactID) {
     return Contact.update({
       contact: sessionID,
@@ -162,29 +177,29 @@ Meteor.methods({
 Meteor.methods({
   supprimerMessage1: function(sessionID, contactID) {
     return Message.update({
-        idClient1: sessionID,
-        idClient2: contactID,
-}, {
-  $set : {
-    luClient1 : false,
-  }
-},{
-        multi : true,
-      });
+      idClient1: sessionID,
+      idClient2: contactID,
+    }, {
+      $set: {
+        luClient1: false,
+      }
+    }, {
+      multi: true,
+    });
   },
 });
 
 Meteor.methods({
   supprimerMessage2: function(sessionID, contactID) {
     return Message.update({
-        idClient1: contactID,
-        idClient2: sessionID,
-}, {
-  $set : {
-    luClient2 : false,
-  }
-},{
-        multi : true,
-      });
+      idClient1: contactID,
+      idClient2: sessionID,
+    }, {
+      $set: {
+        luClient2: false,
+      }
+    }, {
+      multi: true,
+    });
   },
 });

@@ -1,0 +1,9 @@
+.rondInscr{
+  border-radius: 60px;
+  width:15px;
+  height: 15px;
+  background-color: #50E846;
+  z-index : 1;
+  position : absolute;
+  right : 3px;
+}

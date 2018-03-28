@@ -1,0 +1,25 @@
+<template name="default">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href='/accueil'>Accueil</a></li>
+          <li class="active">
+            {{#if notif}}
+            <div class="rondInscr"></div>
+            <a href='/discussion'>Discussion</a>
+            {{else}}
+            <a href='/discussion'>Discussion</a>
+            {{/if}}
+          </li>
+          <li><a href='/connexion'>Connexion</a></li>
+          <li><a href='/inscription'>Insciption</a></li>
+          <li><a href='/contact'>Contact</a></li>
+          <li><a href='/profil'>Profil</a></li>
+          <li><a href='/deconnexion'>Déconnexion</a></li>
+        </ul>
+      </div>
+    </nav>
+</template>

@@ -125,6 +125,7 @@ Template.message.events({
         idClient2: contactID,
         message: message,
         lu: false,
+        notification:true,
         hours: now.getTime(),
         luClient1 : true,
         luClient2 : true,

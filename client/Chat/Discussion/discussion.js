@@ -8,6 +8,13 @@ Template.discussion.rendered = function() {
     Router.go('/connexion');
   }
 
+  var notification = Message.find({
+    idClient2 : sessionID,
+    notification : true,
+  }).fetch();
+
+  Meteor.call('notNoti', sessionID);
+
 
   Tracker.autorun(function() {
     var sessionID = Session.get("userID");
@@ -36,7 +43,7 @@ Template.discussion.helpers({
     var messages = Message.find({
       idClient2: sessionID,
       lu: false,
-      luClient2 : true,
+      luClient2: true,
     }).fetch();
     var ids = _.pluck(messages, 'idClient1');
     var alreadyFriend = Contact.findOne({
@@ -56,7 +63,6 @@ Template.discussion.helpers({
 
   notification: function() {
     var sessionID = Session.get("userID");
-    var contactID = Session.get("contactID");
     var id = Contact.findOne({
       _id: this._id,
     });
@@ -69,6 +75,19 @@ Template.discussion.helpers({
       return notification;
     }
   },
+
+
+  notif : function(){
+    var sessionID = Session.get("userID");
+    var session = Message.findOne({
+      idClient2 : sessionID,
+      notification : true,
+    });
+    if(session){
+      return session;
+    }
+  },
+
 
   lastConnexion: function() {
     var sessionID = Session.get("sessionID");

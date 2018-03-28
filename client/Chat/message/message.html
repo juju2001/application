@@ -3,22 +3,7 @@
   <form>
     <div class="form-group">
       <h1 id="form-titre">Message</h1>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li><a href='/accueil'>Accueil</a></li>
-            <li class="active"><a href='/discussion'>Discussion</a></li>
-            <li><a href='/connexion'>Connexion</a></li>
-            <li><a href='/inscription'>Insciption</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href='/profil'>Profil</a></li>
-            <li><a href='/deconnexion'>Déconnexion</a></li>
-          </ul>
-        </div>
-      </nav>
+      {{> default}}
       {{#each infoPerso}}
           <div class="info">
           <p class='text-center' style="font-size:18px">{{nom}} {{prenom}}</p>
@@ -29,7 +14,7 @@
 
       <div>
       {{#each messages}}
-          <div  style=" max-width : 550px ; background-color :#F5F5F5" class="chat {{color}}">
+          <div  style=" max-width : 550px ; background-color :#FFFFFF" class="chat {{color}}">
             {{message}}
           </div>
             <br>

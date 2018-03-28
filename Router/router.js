@@ -3,6 +3,10 @@ Router.configure({
   notFoundTemplate: 'notFound',
 });
 
+Router.route('/', {
+  name : 'LayoutDefault'
+});
+
 
 Router.route('/inscription', {
   name: 'inscription'

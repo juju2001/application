@@ -3,22 +3,7 @@
     <form>
       <div class="form-group">
         <h1 id="form-titre">Nouveau contact</h1>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">WebSiteName</a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li><a href='/accueil'>Accueil</a></li>
-              <li><a href='/message'>Message</a></li>
-              <li><a href='/connexion'>Connexion</a></li>
-              <li><a href='/inscription'>Insciption</a></li>
-              <li  class="active"><a href="/contact">Contact</a></li>
-              <li><a href='/profil'>Profil</a></li>
-              <li><a href='/deconnexion'>Déconnexion</a></li>
-            </ul>
-          </div>
-        </nav>
+          {{> default}}
         <label for="name">Nom : {{nom}}</label>
         <br>
         <label for="prenom">Prénom : {{prenom}}</label>
