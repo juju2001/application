@@ -14,12 +14,15 @@ var forceLogout = Meteor.settings && Meteor.settings.public && Meteor.settings.p
 // provide a user activity heartbeat method which stamps the user record with a timestamp of the last
 // received activity heartbeat.
 //
+
+
 Meteor.methods({
     heartbeat: function(sessionID) {
         if (!sessionID) { return; }
         var user = Inscription.findOne({_id : sessionID});
         if (user) {
             Inscription.update({_id : sessionID}, {$set: {heartbeat: new Date()}});
+            Connexion.update({userIdNow : sessionID}, {$set: {heartbeat: new Date()}});
         }
     }
 });
@@ -28,6 +31,7 @@ Meteor.methods({
 //
 // periodically purge any stale sessions, removing their login tokens and clearing out the stale heartbeat.
 //
+
 if (forceLogout !== false) {
     Meteor.setInterval(function() {
         var now = new Date(), overdueTimestamp = new Date(now-inactivityTimeout);
@@ -35,5 +39,10 @@ if (forceLogout !== false) {
                             {$set: {etat : false},
                              $unset: {heartbeat:1}},
                             {multi: true});
+
+        Connexion.update({heartbeat: {$lt: overdueTimestamp}},
+              {$set: {
+                deconnexion : new Date().getTime()
+              }})
     }, staleSessionPurgeInterval);
 }

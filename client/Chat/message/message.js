@@ -8,7 +8,7 @@ Template.message.rendered = function() {
     Router.go('/connexion');
   }
 
-  Tracker.autorun(function () {
+  Tracker.autorun(function() {
     var sessionID = Session.get("userID");
 
     var user = Inscription.findOne({
@@ -61,49 +61,105 @@ Template.message.helpers({
     return infoPersonne;
   },
 
+  heure: function() {
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var message = Message.findOne({
+      _id: this._id
+    });
+    var hour = message.hours;
+    var hours = new Date(hour);
+    var heure = hours.getHours();
+    var minute = hours.getMinutes();
+    if (heure < 10) {
+      heure = "0" + heure;
+    }
+    if (minute < 10) {
+      minute = "0" + minute;
+    }
+    var time = heure + ":" + minute;
+    return time;
+  },
+
+/*  jour: function() {
+    var message = Message.findOne({
+      _id: this._id
+    });
+    var hour = message.hours;
+    var date = new Date(hour);
+    var heure = hours.getHours();
+    var minute = hours.getMinutes();
+    if(heure <)
+  }*/
+
   lastConnexion: function() {
     var contactID = Session.get("contactID");
     var sessionID = Session.get("sessionID");
     var deco = Connexion.findOne({
       userIdNow: contactID,
     });
-    if(deco.deconnexion != 0){
+    if (deco.deconnexion != 0) {
       var deconnexion = deco.deconnexion;
       var date = new Date(deconnexion);
       var day = date.getDate();
-      var month = date.getMonth()+1;
+      var month = date.getMonth() + 1;
       var year = date.getFullYear();
       var hours = date.getHours();
-      var minutes =  date.getMinutes();
-      var final = "Hors ligne depuis "+day+"/"+month+"/"+year+"  "+hours +":"+minutes;
-      return final ;
-    }else{
+      var minutes = date.getMinutes();
+      var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+      return final;
+    } else {
       return "En ligne";
     }
   },
 
-  couleur: function(){
+  couleur: function() {
     var contactID = Session.get("contactID");
     var sessionID = Session.get("sessionID");
     var deco = Connexion.findOne({
       userIdNow: contactID,
     });
-    if(deco.deconnexion == 0){
+    if (deco.deconnexion == 0) {
       return 'text-success'
-    }else{
+    } else {
       return 'text-danger'
     }
   },
 
-  statut : function(){
+  statut: function() {
     var contactID = Session.get("contactID");
     var statut = Inscription.findOne({
-      _id : contactID,
+      _id: contactID,
     });
-    if(statut){
+    if (statut) {
       return statut.statut;
     }
-  }
+  },
+
+
+
+  notification: function() {
+    var sessionID = Session.get("userID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var notification = Message.findOne({
+      idClient1: id.contact,
+      idClient2: sessionID,
+      lu: false,
+    });
+    if (notification) {
+      return notification;
+    }
+  },
+
+  discussion: function() {
+    var sessionID = Session.get("userID");
+    var contact = Contact.find({
+      userIdNow: sessionID,
+    });
+    return contact;
+  },
 
 });
 
@@ -125,15 +181,34 @@ Template.message.events({
         idClient2: contactID,
         message: message,
         lu: false,
-        notification:true,
+        notification: true,
         hours: now.getTime(),
-        luClient1 : true,
-        luClient2 : true,
+        luClient1: true,
+        luClient2: true,
       };
       var time = now.getTime();
       Meteor.call('message', hash3, function(data3) {});
       Meteor.call('lastMessage', time, sessionID, contactID);
       $('#messages').val('');
+    }
+  },
+
+  'click .goDiscu': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var contactId = id.contact;
+    if (contactId) {
+      Session.set("contactID", contactId);
+      Router.go('/message');
+    };
+    var noFriendId = Inscription.findOne({
+      _id: this._id,
+    });
+    if (noFriendId) {
+      Session.set("contactID", noFriendId._id)
     }
   },
 });

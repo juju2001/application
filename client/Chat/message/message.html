@@ -4,29 +4,77 @@
     <div class="form-group">
       <h1 id="form-titre">Message</h1>
       {{> default}}
-      {{#each infoPerso}}
-          <div class="info">
-          <p class='text-center' style="font-size:18px">{{nom}} {{prenom}}</p>
-          <p class='text-center {{couleur}}'>{{lastConnexion}}</p>
-          <p style="text-align : center">{{statut}}</p>
+
+<table>
+  <tr  style=" max-height:390.443px; min-height:390.443px;height : 390.443px;">
+    <!-- colone de gauche -->
+    <td  class="gauche">
+  <!-- barre de recherche -->
+      <tr>
+        <div class="input-group">
+          <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
+          <div class="input-group-btn">
+            <button class="btn btn-default" id="goRecherche" type="submit">
+                          <i class="glyphicon glyphicon-search"></i>
+                        </button>
+          </div>
         </div>
-      {{/each}}
-      <div class="d-flex">
-        {{#each messages}}
-            <div class="chat {{color}}">
-              {{message}}
-            </div>
+      </tr>
+      <br>
+      <!-- autres discussions -->
+      <div class="ami">
+        {{#each discussion}}
+        <tr style="height:30px ;  border-bottom: solid black 1px;">
+          <td class="contact"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}} {{surnom}}</a></td>
+          <td style="width: 30px;"> {{#if notification}}
+            <div class="rond"></div>
+            {{/if}}
+          </td>
+        </tr>
         {{/each}}
       </div>
-      <br>
-     <br>
-    <div class="form-groupe">
-      <input type="text" class="form-control" name="message" id="messages">
-      <br>
-      <input type="submit" name="envoyer" value="Envoyer">
-    </div>
+    </td>
+
+
+    <!-- colone de droite -->
+    <td class="droite">
+      <!-- colone de droite / information du contact-->
+
+        {{#each infoPerso}}
+        <tr class="perso">
+          <td class='text-center' style="font-size:14px ;width:570px" >{{nom}} {{prenom}}</td>
+          <td class='text-center {{couleur}}' style="width:570px">{{lastConnexion}}</td>
+        </tr>
+        {{/each}}
+
+        <!-- colone de droite / messages -->
+
+        <div class="dis">
+          {{#each messages}}
+          <p class="chat {{color}}">
+            {{message}}
+            <p class="heure">{{heure}}</p>
+          </p>
+          {{/each}}
+        </div>
+
+        <!-- colone de droite / envoyer et écrire message-->
+        <tr class="form-groupe" style=" background-color:white; height:34px; ">
+          <tr>
+            <td><input style="margin-top:auto ; margin-bottom: auto; width : 750px" type="text" class="form-control" name="message" id="messages"></td>
+            <td style="width : 240px"><input style="margin-bottom : auto ; margin-top: auto ; margin-left:10px" type="submit" name="envoyer" value="Envoyer"></td>
+          </tr>
+        </tr>
+
+
+      <!-- fin colone de droite -->
+    </td>
+
+    <!-- fin tableau -->
+  </tr>
+</table>
+
   </div>
-  <a href='/discussion'>Retour</a>
   </form>
 </div>
 </template>
