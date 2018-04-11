@@ -11,7 +11,7 @@ p{
 }
 
 .perso{
-  background-color : #CDCDCD;
+  background-color : #dedbdb;
   height: 30px;
 }
 
@@ -42,10 +42,26 @@ width: 240px;
   min-height:390.443px;
   height : 390.443px;
   background-color : white ;
+  margin-top : 100px;
+  vertical-align: top;
 }
 
 .ami{
   overflow : auto;
+  background-color: white;
+  vertical-align: middle;
+  max-height: 341.443px;
+}
+
+.lastMessage{
+  color: silver;
+  font-size: 15px;
+  margin-right: 10px;
+  max-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 239.283px;
 }
 
 
@@ -53,8 +69,11 @@ width: 240px;
   margin-left: auto;
   margin-right: auto;
   width: 900px;
-  background-color:AppWorkspace;
+  background-color: #f8f9f9 ;
   height: 325px;
+}
+
+#enbas{
   overflow: auto;
 }
 
@@ -62,7 +81,7 @@ width: 240px;
   border-radius: 3px;
   min-width: 50px;
   max-width : 600px;
-  background-color :#FFFFFF ;
+  background-color :white ;
   margin-top : 10px; ;
   overflow: hidden;
   display:  table;

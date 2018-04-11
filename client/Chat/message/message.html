@@ -9,31 +9,36 @@
   <tr  style=" max-height:390.443px; min-height:390.443px;height : 390.443px;">
     <!-- colone de gauche -->
     <td  class="gauche">
+
   <!-- barre de recherche -->
-      <tr>
-        <div class="input-group">
+        <div style="margin-top:5px" class="input-group">
           <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
           <div class="input-group-btn">
             <button class="btn btn-default" id="goRecherche" type="submit">
                           <i class="glyphicon glyphicon-search"></i>
-                        </button>
+            </button>
           </div>
         </div>
-      </tr>
+
       <br>
+
       <!-- autres discussions -->
       <div class="ami">
         {{#each discussion}}
-        <tr style="height:30px ;  border-bottom: solid black 1px;">
-          <td class="contact"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}} {{surnom}}</a></td>
-          <td style="width: 30px;"> {{#if notification}}
+        <tr style="height:40px ;">
+          <td class="contact"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
+          <td style="width: 30px;">
+            {{#if notification}}
             <div class="rond"></div>
             {{/if}}
           </td>
         </tr>
+        <tr style=" border-bottom: solid black 1px;">
+          <div class="lastMessage">{{auteur}} {{lastMessage}}</div>
+        </tr>
         {{/each}}
       </div>
-    </td>
+      </td>
 
 
     <!-- colone de droite -->
@@ -49,15 +54,17 @@
 
         <!-- colone de droite / messages -->
 
-        <div class="dis">
+        <div class="dis" id="enbas">
           {{#each messages}}
-          <p class="chat {{color}}">
-            {{message}}
-            <p class="heure">{{heure}}</p>
-          </p>
+            <div class="chat {{color}}">
+              {{message}}
+              <div class="heure">{{heure}}</div>
+            </div>
           {{/each}}
         </div>
 
+
+<br style="background-color: #f8f9f9 ">
         <!-- colone de droite / envoyer et écrire message-->
         <tr class="form-groupe" style=" background-color:white; height:34px; ">
           <tr>

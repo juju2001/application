@@ -8,7 +8,30 @@ Template.message.rendered = function() {
     Router.go('/connexion');
   }
 
+
+  Message.find().observeChanges({
+    changed: function(){
+      setTimeout(function(){
+              var x = document.getElementById("enbas");
+              x.scrollTop = x.scrollHeight;
+      }, 300);
+    },
+    added: function() {
+      setTimeout(function(){
+              var x = document.getElementById("enbas");
+              x.scrollTop = x.scrollHeight;
+      }, 300);
+    }
+  });
+
+
+
   Tracker.autorun(function() {
+    setTimeout(function(){
+            var x = document.getElementById("enbas");
+            x.scrollTop = x.scrollHeight;
+    }, 300);
+
     var sessionID = Session.get("userID");
 
     var user = Inscription.findOne({
@@ -42,6 +65,62 @@ Template.message.helpers({
         hours: 1,
       },
     }).fetch();
+  },
+
+  lastMessage : function(){
+    var sessionID = Session.get("userID");
+    var contact = Contact.findOne({
+      _id : this._id,
+    });
+    var contactID = contact.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+        luClient1: true,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+        luClient2: true,
+      }],
+    }, {
+      sort: {
+        hours: -1,
+      },
+    });
+    return lastMessage.message;
+  },
+
+  auteur : function(){
+    var sessionID = Session.get("userID");
+    var contact = Contact.findOne({
+      _id : this._id,
+    });
+    var contactID = contact.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+        luClient1: true,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+        luClient2: true,
+      }],
+    }, {
+      sort: {
+        hours: -1,
+      },
+    });
+    var id = lastMessage.idClient1;
+    if(id == sessionID){
+      return "Moi :"
+    }else{
+      var name = Inscription.findOne({
+        _id : id,
+      });
+      return name.nom +" "+ name.prenom + " :";
+    }
   },
 
   color: function() {
@@ -210,5 +289,9 @@ Template.message.events({
     if (noFriendId) {
       Session.set("contactID", noFriendId._id)
     }
+    setTimeout(function(){
+            var x = document.getElementById("enbas");
+            x.scrollTop = x.scrollHeight;
+    }, 300);
   },
 });
