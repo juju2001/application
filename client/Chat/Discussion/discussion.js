@@ -90,7 +90,7 @@ Template.discussion.helpers({
 
 
   lastConnexion: function() {
-    var sessionID = Session.get("sessionID");
+    var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });
@@ -120,7 +120,7 @@ Template.discussion.helpers({
   },
 
   couleur: function() {
-    var sessionID = Session.get("sessionID");
+    var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });

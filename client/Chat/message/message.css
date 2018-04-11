@@ -3,7 +3,7 @@
 }
 
 body {
-    background:#EDEDED;
+    background:AppWorkspace;
 }
 
 p{
@@ -11,6 +11,14 @@ p{
 }
 
 .chat{
-  background-color: #EDEDED;
   border-radius: 3px;
+  min-width: 10px;
+  max-width : 550px ;
+  background-color :#FFFFFF ;
+  margin-top : 10px; ;
+  overflow: hidden;
+}
+
+.text-success{
+  margin-left : auto;
 }

@@ -11,16 +11,13 @@
           <p style="text-align : center">{{statut}}</p>
         </div>
       {{/each}}
-
-      <div>
-      {{#each messages}}
-          <div  style=" max-width : 550px ; background-color :#FFFFFF" class="chat {{color}}">
-            {{message}}
-          </div>
-            <br>
-            {{/each}}
+      <div class="d-flex">
+        {{#each messages}}
+            <div class="chat {{color}}">
+              {{message}}
+            </div>
+        {{/each}}
       </div>
-      <br>
       <br>
      <br>
     <div class="form-groupe">
