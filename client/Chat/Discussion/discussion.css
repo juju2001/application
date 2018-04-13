@@ -11,11 +11,23 @@ p{
 }
 
 .discu{
-  background-color: white;
   text-align: center;
-  width:100%;
+  width:1140px;
 }
 
+.scroo{
+    text-align: center;
+    width:1140px;
+    overflow: auto;
+    max-height: 391.167px;
+    height: 391.167px;
+    background-color : white;
+}
+
+td, tr{
+  width: 1140px;
+  vertical-align: middle;
+}
 
 td{
   text-align: center;

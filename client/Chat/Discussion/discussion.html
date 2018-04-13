@@ -1,46 +1,38 @@
 <template name="discussion">
-<div class="container">
-  <div class="form-group">
-    <h1 id="form-titre">Actualité de vos discussions</h1>
-     {{> default}}
+  <div class="container">
+    <div class="form-group">
+      <h1 id="form-titre">Actualité de vos discussions</h1>
+       {{> default}}
       <table class="discu">
-
-        {{#each noFriend}}
-              <tr style="background-color: green">
-                <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
-                <td>Nouvelle discussion</td>
-                <td></td>
-                <td style="text-align:right"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
+        <div  class="scroo">
+          <div>
+            {{#each noFriend}}
+            <tr style="background-color: #77e1ee; height:50px ; ">
+              <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+              <td>Nouvelle discussion</td>
+              <td></td>
+              <td style="text-align:center; border-bottom: black 1px solid"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
             </tr>
-            <tr style="background-color : AppWorkspace">
-                <td></td>
-                <td style="color : AppWorkspace">.</td>
-                <td></td>
-                <td></td>
-             </tr>
-      {{/each}}
-
-      {{#each discussion}}
-              <tr class="disc" style="background-color : #FFFFFF; border-radius : 10px">
-              <td><a href='message' style="color : #223966; " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}} {{surnom}}</a></td>
-              <td>       {{#if notification}}
-                            <div class="rond"></div>
-                         {{/if}}
-             </td>
+            {{/each}}
+          </div>
+            <div>
+              {{#each discussion}}
+              <tr class="disc" style="height:50px  ; width : 1140px ; border-bottom: black 1px solid;">
+                <td><a href='message' style="color : #223966; " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}} {{surnom}}</a></td>
+                <td> {{#if notification}}
+                  <div class="rond"></div>
+                  {{/if}}
+                </td>
                 <td id="infos" class="{{couleur}}" style="text-align : center">
-                      {{lastConnexion}}
-              </td>
-              <td style="text-align:right"><a style="color : red" id="supp" href="">Supprimer</a></td>
-          </tr>
-          <tr style="background-color : AppWorkspace">
-            <td></td>
-            <td style="color : AppWorkspace">.</td>
-            <td></td>
-            <td></td>
-          </tr>
+                  {{lastConnexion}}
+                </td>
+                <td style="text-align:center"><a style="color : red" id="supp" href="">Supprimer</a></td>
+              </tr>
               {{/each}}
-          </table>
-          <br>
+            </div>
         </div>
+      </table>
+     <br>
+    </div>
   </div>
 </template>
