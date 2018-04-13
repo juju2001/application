@@ -6,44 +6,49 @@
       {{> default}}
       <h1>Bonjour {{prenomAccueil}}, </h1>
     </div>
-    <p>Avec cette application tu pourras chatter avec tes amis à tous moments, partager ta journée et les moments les plus importants de ta vie.</p>
+
   </form>
-  {{#if amiConnecté}}
-        <h2>{{amiConnecté}}</h2>
-        {{#each connecté}}
-            <div class="col-sm-3" id="connecté" >
-            Nom : {{nom}}
-            <br>
-            Prénom : {{prenom}}
-            </div>
+    {{#if amiConnecté}}
+          <h2>{{amiConnecté}}</h2>
+           <div class="overflow">
+          {{#each connecté}}
+              <div class="col-sm-3" id="connecté" >
+              Nom : {{nom}}
+              <br>
+              Prénom : {{prenom}}
+              </div>
+          {{/each}}
+        </div>
+          <h1>{{ajouterAmi}}</h1>
+         <div class="overflow">
+          {{#each contacter}}
+              <div class="col-sm-3" >
+              Nom : {{nom}}
+              <br>
+              Prénom : {{prenom}}
+              <br>
+              Pseudo : {{pseudo}}
+              <br>
+              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+              </div>
+          {{/each}}
+    </div>
+    {{else}}
+          <h2>{{ajouterAmi}}</h2>
+          <div class="overflow">
+         {{#each contacter}}
+              <div class="col-sm-3" >
+              Nom : {{nom}}
+              <br>
+              Prénom : {{prenom}}
+              <br>
+              Pseudo : {{pseudo}}
+              <br>
+              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+              </div>
         {{/each}}
-        <br><br><br><br><br>
-        <h1>{{ajouterAmi}}</h1>
-        {{#each contacter}}
-            <div class="col-sm-3" >
-            Nom : {{nom}}
-            <br>
-            Prénom : {{prenom}}
-            <br>
-            Pseudo : {{pseudo}}
-            <br>
-            <button id="{{_id}}" class="goAjouter">Ajouter</button>
-            </div>
-        {{/each}}
-  {{else}}
-        <h2>{{ajouterAmi}}</h2>
-       {{#each contacter}}
-            <div class="col-sm-3" >
-            Nom : {{nom}}
-            <br>
-            Prénom : {{prenom}}
-            <br>
-            Pseudo : {{pseudo}}
-            <br>
-            <button id="{{_id}}" class="goAjouter">Ajouter</button>
-            </div>
-      {{/each}}
-  {{/if}}
+        </div>
+    {{/if}}
 
       <h2 style="text-align:center; margin-top: 150px">{{Motrecherche}}</h2>
       {{#each recherche}}

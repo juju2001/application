@@ -31,3 +31,10 @@ p {
 .container{
   background-color : AppWorkspace;
 }
+
+.overflow{
+  overflow:auto;
+  background-color : AppWorkspace;
+  width: 1148px;
+  max-height: 180px;
+}

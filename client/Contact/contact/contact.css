@@ -16,3 +16,10 @@ p{
   background-color: #F5F5F5;
   border: 2px solid #239CE0;
 }
+
+.contact{
+  overflow: auto;
+  width: 1148px;
+  height: 391.167px;
+  background-color: AppWorkspace;
+}
