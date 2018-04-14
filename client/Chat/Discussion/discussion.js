@@ -112,6 +112,9 @@ Template.discussion.helpers({
       if (minutes < 10) {
         minutes = minutes + "0";
       }
+      if(hours == 0){
+        hours = "0"+hours;
+      }
       var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
       return final;
     } else {

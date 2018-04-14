@@ -11,7 +11,7 @@
     <td  class="gauche">
 
   <!-- barre de recherche -->
-        <div style="margin-top:5px" class="input-group">
+        <div class="bar input-group">
           <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
           <div class="input-group-btn">
             <button class="btn btn-default" id="goRecherche" type="submit">
@@ -20,13 +20,11 @@
           </div>
         </div>
 
-      <br>
-
       <!-- autres discussions -->
       <div class="ami">
         {{#each discussion}}
-        <tr style="height:40px ;">
-          <td class="contact"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
+        <tr>
+          <td class="contactDiscu"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
           <td style="width: 30px;">
             {{#if notification}}
             <div class="rond"></div>

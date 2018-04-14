@@ -1,12 +1,12 @@
 Template.default.helpers({
-  notif : function(){
+  notif: function() {
     var sessionID = Session.get("userID");
     var session = Message.findOne({
-      idClient2 : sessionID,
-      notification : true,
+      idClient2: sessionID,
+      notification: true,
     });
-    if(session){
+    if (session) {
       return session;
     }
   },
-})
+});

@@ -51,25 +51,27 @@
     {{/if}}
 
       <h2 style="text-align:center; margin-top: 150px">{{Motrecherche}}</h2>
-      {{#each recherche}}
-            <div style="background-color : green;">
-              {{prenom}} {{nom}} {{age}} {{email}}
-            </div>
-          {{/each}}
 
-          {{#each inscriptionFind}}
-          <div class="recherche">
-            <a  class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
-          </div>
-          <br>
-          {{/each}}
+   {{#each recherche}}
+         <div style="background-color : green;">
+           {{prenom}} {{nom}} {{age}} {{email}}
+         </div>
+       {{/each}}
 
-          {{#each messageFind}}
-          <div class="recherche">
-             <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
-            <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
-          </div>
-          <br>
-    {{/each}}
+       {{#each inscriptionFind}}
+       <div class="recherche">
+         <a  class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
+       </div>
+       <br>
+       {{/each}}
+
+       {{#each messageFind}}
+       <div class="recherche">
+          <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
+         <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+       </div>
+       <br>
+{{/each}}
+
   </div>
 </template>

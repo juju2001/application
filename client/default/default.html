@@ -5,20 +5,30 @@
           <a class="navbar-brand" href="#">WebSiteName</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href='/accueil'>Accueil</a></li>
-          <li class="active">
+          <li class="{{isActiveRoute 'accueil'}}"><a href='/accueil'>Accueil</a></li>
+          <li class="{{isActiveRoute 'discussion'}}  {{isActiveRoute 'message'}}">
             {{#if notif}}
             <div class="rondInscr"></div>
             <a href='/discussion'>Discussion</a>
-            {{else}}
+             {{else}}
             <a href='/discussion'>Discussion</a>
             {{/if}}
           </li>
-          <li><a href='/connexion'>Connexion</a></li>
-          <li><a href='/inscription'>Insciption</a></li>
-          <li><a href='/contact'>Contact</a></li>
-          <li><a href='/profil'>Profil</a></li>
-          <li><a href='/deconnexion'>Déconnexion</a></li>
+          <li class="{{isActiveRoute 'connexion'}}"><a href='/connexion'>Connexion</a></li>
+          <li class="{{isActiveRoute 'inscription'}}"><a href='/inscription'>Insciption</a></li>
+          <li class="{{isActiveRoute 'contact'}}  {{isActiveRoute 'modifier'}}"><a href='/contact'>Contact</a></li>
+          <li class="{{isActiveRoute 'profil'}}"><a href='/profil'>Profil</a></li>
+          <li class="{{isActiveRoute 'deconnexion'}}"><a href='/deconnexion'>Déconnexion</a></li>
+          <form class="navbar-form navbar-left">
+            <div class="input-group">
+              <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
+              <div class="input-group-btn">
+                <button class="btn btn-default" id="goRecherche" type="submit">
+             <i class="glyphicon glyphicon-search"></i>
+           </button>
+              </div>
+            </div>
+          </form>
         </ul>
       </div>
     </nav>

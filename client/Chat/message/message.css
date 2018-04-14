@@ -10,20 +10,50 @@ p{
   color:#223966;
 }
 
-.perso{
-  background-color : #dedbdb;
-  height: 30px;
+.gauche{
+  max-height:390.443px;
+  min-height:390.443px;
+  height : 390.443px;
+  background-color : white ;
+  margin-top : 100px;
+  vertical-align: top;
 }
 
-.contact{
+.bar{
+  width: 230px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ami{
+  overflow : auto;
+  background-color: white;
+  vertical-align: middle;
+  max-height: 341.443px;
+}
+
+.contactDiscu{
 background-color: white;
 width: 240px;
+height: 40px;
 }
 
 .notfi{
    background-color: white;
    width: 5px;
    height:10px;
+}
+
+.lastMessage{
+  color: silver;
+  font-size: 15px;
+  max-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 239.283px;
 }
 
 .droite{
@@ -34,36 +64,13 @@ width: 240px;
    min-height:390.443px;
    height : 390.443px;
    border: 1px solid black;
-   border-radius: 5px;
+   background-color: #dedbdb;
 }
 
-.gauche{
-  max-height:390.443px;
-  min-height:390.443px;
-  height : 390.443px;
-  background-color : white ;
-  margin-top : 100px;
-  vertical-align: top;
+.perso{
+  background-color : #dedbdb;
+  height: 30px;
 }
-
-.ami{
-  overflow : auto;
-  background-color: white;
-  vertical-align: middle;
-  max-height: 341.443px;
-}
-
-.lastMessage{
-  color: silver;
-  font-size: 15px;
-  margin-right: 10px;
-  max-height: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 239.283px;
-}
-
 
 .dis{
   margin-left: auto;

@@ -34,7 +34,10 @@ p {
 
 .overflow{
   overflow:auto;
-  background-color : AppWorkspace;
   width: 1148px;
   max-height: 180px;
+}
+
+.recherche{
+  background-color: white;
 }

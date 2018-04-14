@@ -116,7 +116,7 @@ Template.accueil.helpers({
         _id: id.idClient1,
       });
       if (sessionID == id.idClient2) {
-        return info.nom;
+        return info.nom ;
       }
     }
   },
@@ -145,7 +145,7 @@ Template.accueil.helpers({
         info = Inscription.findOne({
           _id: id.idClient2,
         });
-        return "Moi à " + inscription.nom + inscription.prenom;
+        return "Moi à " + inscription.nom +" "+ inscription.prenom;
       }
     }
   },
