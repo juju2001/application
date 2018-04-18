@@ -1,7 +1,6 @@
 <template name="discussion">
   <div class="container">
     <div class="form-group">
-      <h1 id="form-titre">Actualité de vos discussions</h1>
        {{> default}}
       <table class="discu">
         <div  class="scroo">
@@ -11,13 +10,13 @@
               <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
               <td>Nouvelle discussion</td>
               <td></td>
-              <td style="text-align:center; border-bottom: black 1px solid"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
+              <td style="text-align:center; border-bottom: #dedede 1px solid"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
             </tr>
             {{/each}}
           </div>
             <div>
               {{#each discussion}}
-              <tr class="disc" style="height:50px  ; width : 1140px ; border-bottom: black 1px solid;">
+              <tr class="disc" style="height:50px  ; width : 1140px ; border-bottom: #dedede 1px solid;">
                 <td><a href='message' style="color : #223966; " class="goDiscu" id="{{contact}}">{{nom}} {{prenom}}</a></td>
                 <td> {{#if notification}}
                   <div class="rond"></div>

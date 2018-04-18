@@ -14,6 +14,7 @@ p{
   background-color : white ;
   margin-top : 100px;
   vertical-align: top;
+  border : #acacac solid 1px;
 }
 
 .bar{
@@ -35,6 +36,13 @@ p{
 background-color: white;
 width: 240px;
 height: 40px;
+}
+
+.recherche{
+background-color: white;
+width: 240px;
+height: 60px;
+border-bottom: 1px solid #acacac;
 }
 
 .notfi{
@@ -60,7 +68,7 @@ height: 40px;
    max-height:390.443px;
    min-height:390.443px;
    height : 390.443px;
-   border: 1px solid black;
+   border: 1px solid #acacac;
    background-color: #f8f9f9;
 }
 

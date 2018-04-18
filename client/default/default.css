@@ -9,14 +9,21 @@
 }
 
 body{
-  height: 750px;
+  height: 100%;
   width: 1200px;
-  max-height: 750px;
-  margin-right: auto;
-  margin-left: auto;
-  background: #dfdedb;
+  max-height: 620px;
+  margin: 0 auto;
+  background: #f6f6f6;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 html{
-  background: radial-gradient(white, #1729b9);
+  background: linear-gradient(to bottom , #0000c6 150px, #dfdfdf 150px);
+  height: 100%;
+  width: 100%;
+}
+
+.form-group{
+  margin-top: 30px;
 }

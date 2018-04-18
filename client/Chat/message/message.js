@@ -1,5 +1,6 @@
 Template.message.rendered = function() {
   document.title = "Message";
+  Session.set("recherche", '');
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
@@ -8,32 +9,35 @@ Template.message.rendered = function() {
     Router.go('/connexion');
   }
 
-
   Message.find().observeChanges({
-    changed: function(){
-      setTimeout(function(){
-              var x = document.getElementById("enbas");
-              x.scrollTop = x.scrollHeight;
+    changed: function() {
+      setTimeout(function() {
+        var x = document.getElementById("enbas");
+        x.scrollTop = x.scrollHeight;
       }, 300);
     },
     added: function() {
-      setTimeout(function(){
-              var x = document.getElementById("enbas");
-              x.scrollTop = x.scrollHeight;
+      setTimeout(function() {
+        var x = document.getElementById("enbas");
+        x.scrollTop = x.scrollHeight;
+        console.log(document.getElementById("rechercheContact").value);
       }, 300);
     }
   });
 
-
-
   Tracker.autorun(function() {
-    setTimeout(function(){
-            var x = document.getElementById("enbas");
-            x.scrollTop = x.scrollHeight;
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
     }, 300);
 
-    var sessionID = Session.get("userID");
+    var recherche = document.getElementById("rechercheContact");
+    recherche.addEventListener("change", function(event){
+      var recherche = $('#rechercheContact').val();
+      Session.set("recherche", recherche);
+    });
 
+    var sessionID = Session.get("userID");
     var user = Inscription.findOne({
       _id: sessionID,
       etat: false,
@@ -46,6 +50,27 @@ Template.message.rendered = function() {
 
 
 Template.message.helpers({
+  recherche: function() {
+      var recherche = Session.get("recherche");
+      var mongo = Contact.find({
+        userIdNow: Session.get("userID"),
+      }).fetch();
+      var ids = _.pluck(mongo, 'contact');
+      var connecter = Inscription.find({
+        _id: {
+          $in: ids,
+        },
+        $or: [{
+          prenom: recherche,
+        }, {
+          nom: recherche,
+        }],
+      }).fetch();
+      if (connecter) {
+        return connecter;
+      }
+  },
+
   messages: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
@@ -67,10 +92,10 @@ Template.message.helpers({
     }).fetch();
   },
 
-  date : function(index) {
+  date: function(index) {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
-    var messages =  Message.find({
+    var messages = Message.find({
       $or: [{
         idClient1: sessionID,
         idClient2: contactID,
@@ -89,34 +114,34 @@ Template.message.helpers({
     var day = new Date(this.hours);
     var jour = day.getDate();
 
-    if(jour <10){
-      jour = "0"+jour;
+    if (jour < 10) {
+      jour = "0" + jour;
     }
 
-    var mois = day.getMonth()+1;
+    var mois = day.getMonth() + 1;
 
-    if(mois <10){
-      mois = "0"+mois;
+    if (mois < 10) {
+      mois = "0" + mois;
     }
 
     if (index === 0) {
-    return '<div class="date">'+jour+"/"+mois+"/"+day.getFullYear()+'</div>'
+      return '<div class="date">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>'
     }
 
     var dayBefore = new Date(messages[index - 1].hours);
 
-    day.setHours(0,0,0,0);
-    dayBefore.setHours(0,0,0,0);
+    day.setHours(0, 0, 0, 0);
+    dayBefore.setHours(0, 0, 0, 0);
 
     if (dayBefore < day) {
-      return '<div class="date">'+jour+"/"+mois+"/"+day.getFullYear()+'</div>';
+      return '<div class="date">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>';
     }
   },
 
-  lastMessage : function(){
+  lastMessage: function() {
     var sessionID = Session.get("userID");
     var contact = Contact.findOne({
-      _id : this._id,
+      _id: this._id,
     });
     var contactID = contact.contact;
     var lastMessage = Message.findOne({
@@ -134,13 +159,15 @@ Template.message.helpers({
         hours: -1,
       },
     });
-    return lastMessage.message;
+    if (lastMessage) {
+      return lastMessage.message;
+    }
   },
 
-  auteur : function(){
+  auteur: function() {
     var sessionID = Session.get("userID");
     var contact = Contact.findOne({
-      _id : this._id,
+      _id: this._id,
     });
     var contactID = contact.contact;
     var lastMessage = Message.findOne({
@@ -158,14 +185,16 @@ Template.message.helpers({
         hours: -1,
       },
     });
-    var id = lastMessage.idClient1;
-    if(id == sessionID){
-      return "Moi :"
-    }else{
-      var name = Inscription.findOne({
-        _id : id,
-      });
-      return name.nom +" "+ name.prenom + " :";
+    if (lastMessage) {
+      var id = lastMessage.idClient1;
+      if (id == sessionID) {
+        return "Moi :"
+      } else {
+        var name = Inscription.findOne({
+          _id: id,
+        });
+        return name.nom + " " + name.prenom + " :";
+      }
     }
   },
 
@@ -206,35 +235,26 @@ Template.message.helpers({
     return time;
   },
 
-/*  jour: function() {
-    var message = Message.findOne({
-      _id: this._id
-    });
-    var hour = message.hours;
-    var date = new Date(hour);
-    var heure = hours.getHours();
-    var minute = hours.getMinutes();
-    if(heure <)
-  }*/
-
   lastConnexion: function() {
     var contactID = Session.get("contactID");
     var sessionID = Session.get("sessionID");
     var deco = Connexion.findOne({
       userIdNow: contactID,
     });
-    if (deco.deconnexion != 0) {
-      var deconnexion = deco.deconnexion;
-      var date = new Date(deconnexion);
-      var day = date.getDate();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-      return final;
-    } else {
-      return "En ligne";
+    if (deco) {
+      if (deco.deconnexion != 0) {
+        var deconnexion = deco.deconnexion;
+        var date = new Date(deconnexion);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        return final;
+      } else {
+        return "En ligne";
+      }
     }
   },
 
@@ -244,10 +264,12 @@ Template.message.helpers({
     var deco = Connexion.findOne({
       userIdNow: contactID,
     });
-    if (deco.deconnexion == 0) {
-      return 'text-success'
-    } else {
-      return 'text-danger'
+    if (deco) {
+      if (deco.deconnexion == 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }
     }
   },
 
@@ -335,9 +357,24 @@ Template.message.events({
     if (noFriendId) {
       Session.set("contactID", noFriendId._id)
     }
-    setTimeout(function(){
-            var x = document.getElementById("enbas");
-            x.scrollTop = x.scrollHeight;
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
     }, 300);
   },
+
+  'click .goDiscution': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var contactId = this._id;
+    if (contactId) {
+      Session.set("contactID", contactId);
+      Router.go('/message');
+    };
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
+    }, 300);
+  },
+
 });

@@ -1,3 +1,7 @@
+Template.default.rendered = function (){
+  Session.set("recherche", '');
+};
+
 Template.default.helpers({
   notif: function() {
     var sessionID = Session.get("userID");

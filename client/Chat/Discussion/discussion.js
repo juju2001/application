@@ -9,8 +9,8 @@ Template.discussion.rendered = function() {
   }
 
   var notification = Message.find({
-    idClient2 : sessionID,
-    notification : true,
+    idClient2: sessionID,
+    notification: true,
   }).fetch();
 
   Meteor.call('notNoti', sessionID);
@@ -77,13 +77,13 @@ Template.discussion.helpers({
   },
 
 
-  notif : function(){
+  notif: function() {
     var sessionID = Session.get("userID");
     var session = Message.findOne({
-      idClient2 : sessionID,
-      notification : true,
+      idClient2: sessionID,
+      notification: true,
     });
-    if(session){
+    if (session) {
       return session;
     }
   },
@@ -98,27 +98,29 @@ Template.discussion.helpers({
     var deco = Connexion.findOne({
       userIdNow: ids,
     });
-    if (deco.deconnexion != 0) {
-      var deconnexion = deco.deconnexion;
-      var date = new Date(deconnexion);
-      var day = date.getDate();
-      var month = date.getMonth() + 1;
-      if (month < 10) {
-        month = "0" + month;
+    if (deco) {
+      if (deco.deconnexion != 0) {
+        var deconnexion = deco.deconnexion;
+        var date = new Date(deconnexion);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        if (month < 10) {
+          month = "0" + month;
+        }
+        var year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        if (minutes < 10) {
+          minutes = minutes + "0";
+        }
+        if (hours == 0) {
+          hours = "0" + hours;
+        }
+        var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        return final;
+      } else {
+        return "En ligne";
       }
-      var year = date.getFullYear();
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      if (minutes < 10) {
-        minutes = minutes + "0";
-      }
-      if(hours == 0){
-        hours = "0"+hours;
-      }
-      var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-      return final;
-    } else {
-      return "En ligne";
     }
   },
 
@@ -131,10 +133,12 @@ Template.discussion.helpers({
     var deco = Connexion.findOne({
       userIdNow: ids,
     });
-    if (deco.deconnexion == 0) {
-      return 'text-success'
-    } else {
-      return 'text-danger'
+    if (deco) {
+      if (deco.deconnexion == 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }
     }
   },
 
