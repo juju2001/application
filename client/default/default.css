@@ -7,3 +7,16 @@
   position : absolute;
   right : 3px;
 }
+
+body{
+  height: 750px;
+  width: 1200px;
+  max-height: 750px;
+  margin-right: auto;
+  margin-left: auto;
+  background: #dfdedb;
+}
+
+html{
+  background: radial-gradient(white, #1729b9);
+}

@@ -3,10 +3,6 @@
   font-size : 45px;
 }
 
-body{
-  background-color : #239CE0,
-}
-
 p {
   color:#233B69;
 }
@@ -29,7 +25,7 @@ p {
 }
 
 .container{
-  background-color : AppWorkspace;
+  background-color : #dfdedb;
 }
 
 .overflow{

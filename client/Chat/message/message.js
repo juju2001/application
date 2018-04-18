@@ -67,6 +67,52 @@ Template.message.helpers({
     }).fetch();
   },
 
+  date : function(index) {
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var messages =  Message.find({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+        luClient1: true,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+        luClient2: true,
+      }],
+    }, {
+      sort: {
+        hours: 1,
+      },
+    }).fetch();
+
+    var day = new Date(this.hours);
+    var jour = day.getDate();
+
+    if(jour <10){
+      jour = "0"+jour;
+    }
+
+    var mois = day.getMonth()+1;
+
+    if(mois <10){
+      mois = "0"+mois;
+    }
+
+    if (index === 0) {
+    return '<div class="date">'+jour+"/"+mois+"/"+day.getFullYear()+'</div>'
+    }
+
+    var dayBefore = new Date(messages[index - 1].hours);
+
+    day.setHours(0,0,0,0);
+    dayBefore.setHours(0,0,0,0);
+
+    if (dayBefore < day) {
+      return '<div class="date">'+jour+"/"+mois+"/"+day.getFullYear()+'</div>';
+    }
+  },
+
   lastMessage : function(){
     var sessionID = Session.get("userID");
     var contact = Contact.findOne({

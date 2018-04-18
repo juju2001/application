@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-body {
-    background:AppWorkspace;
-}
 
 p{
   color:#223966;
@@ -57,14 +54,14 @@ height: 40px;
 }
 
 .droite{
-   background-color: AppWorkspace;
+   background-color: #fbfbfc;
    margin-left: auto;
    width: 900px;
    max-height:390.443px;
    min-height:390.443px;
    height : 390.443px;
    border: 1px solid black;
-   background-color: #dedbdb;
+   background-color: #f8f9f9;
 }
 
 .perso{
@@ -82,6 +79,16 @@ height: 40px;
 
 #enbas{
   overflow: auto;
+}
+
+.date{
+  background-color: #a6d1f6;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width : 150px;
+  border-radius: 5px;
 }
 
 .chat{
