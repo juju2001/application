@@ -1,5 +1,9 @@
 Template.discussion.rendered = function() {
   document.title = "Actualité de vos discussions";
+  if (Session.get("userID") == null) {
+    Router.go('/connexion');
+  }
+  
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,

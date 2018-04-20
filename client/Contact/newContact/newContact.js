@@ -1,5 +1,9 @@
 Template.newContact.rendered = function() {
   document.title = "Nouveau contact";
+  if (Session.get("userID") == null) {
+    Router.go('/connexion');
+  }
+  
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,

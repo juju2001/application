@@ -1,5 +1,8 @@
 Template.LayoutDefault.rendered = function() {
   document.title = "Connexion";
+  if (Session.get("userID") == null) {
+    Router.go('/connexion');
+  }
 };
 
 

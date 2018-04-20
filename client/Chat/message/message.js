@@ -1,5 +1,9 @@
 Template.message.rendered = function() {
   document.title = "Message";
+  if (Session.get("userID") == null) {
+    Router.go('/connexion');
+  }
+  
   Session.set("recherche", '');
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
