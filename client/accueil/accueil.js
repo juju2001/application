@@ -8,9 +8,6 @@ Template.accueil.rendered = function() {
   if (!sessionID && sessionID != find.userIdNow) {
     Router.go('/connexion');
   }
-  Session.set("inscriptionFind", null);
-  Session.set("messageFind", null);
-  Session.set("rech", null);
 };
 
 
@@ -92,11 +89,49 @@ Template.accueil.helpers({
   },
 
   inscriptionFind: function() {
+    var infoRecherche = Session.get("infoRecherche");
+    var sessionID = Session.get("userID");
+    var inscriptionFind = Inscription.find({
+      $or: [{
+        prenom: infoRecherche,
+      }, {
+        nom: infoRecherche,
+      }, {
+        age: infoRecherche,
+      }, {
+        email: {
+          $regex: infoRecherche,
+        },
+      }, {
+        pseudo: infoRecherche,
+      }],
+    }).fetch();
+
+    if (inscriptionFind) {
+      return inscriptionFind;
+    }
     return Session.get("inscriptionFind");
   },
 
   messageFind: function() {
-    return Session.get("messageFind");
+    var infoRecherche = Session.get("infoRecherche");
+    var sessionID = Session.get("userID");
+    var messageFind = Message.find({
+      $or: [{
+        idClient1: sessionID,
+      }, {
+        idClient2: sessionID,
+      }],
+      message: {
+        $regex: infoRecherche,
+      },
+    }).fetch();
+
+    if (messageFind) {
+      return messageFind;
+    } else {
+      return Session.get("messageFind");
+    }
   },
 
   Motrecherche: function() {
@@ -116,7 +151,7 @@ Template.accueil.helpers({
         _id: id.idClient1,
       });
       if (sessionID == id.idClient2) {
-        return info.nom ;
+        return info.nom;
       }
     }
   },
@@ -145,7 +180,7 @@ Template.accueil.helpers({
         info = Inscription.findOne({
           _id: id.idClient2,
         });
-        return "Moi à " + inscription.nom +" "+ inscription.prenom;
+        return "Moi à " + inscription.nom + " " + inscription.prenom;
       }
     }
   },
@@ -183,51 +218,6 @@ Template.accueil.events({
     }
   },
 
-  'click #goRecherche': function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
-    var sessionID = Session.get("userID");
-    var hash = ({
-      userIdNow: sessionID,
-      recherche: infoRecherche,
-    });
-    var inscriptionFind = Inscription.find({
-      $or: [{
-        prenom: infoRecherche,
-      }, {
-        nom: infoRecherche,
-      }, {
-        age: infoRecherche,
-      }, {
-        email: {
-          $regex: infoRecherche,
-        },
-      }, {
-        pseudo: infoRecherche,
-      }],
-    }).fetch();
-
-    var messageFind = Message.find({
-      $or: [{
-        idClient1: sessionID,
-      }, {
-        idClient2: sessionID,
-      }],
-      message: {
-        $regex: infoRecherche,
-      },
-    }).fetch();
-
-    if (messageFind || inscriptionFind) {
-      Session.set('rech', "rech");
-    }
-
-    Session.set('inscriptionFind', inscriptionFind);
-    Session.set('messageFind', messageFind);
-    $("#recherche").val('');
-  },
-
   'click .goInscription': function() {
     var sessionID = Session.get("userID");
     var inscription = Inscription.findOne({
@@ -260,6 +250,54 @@ Template.accueil.events({
     if (id) {
       Session.set("contactID", id.contact);
     };
+  },
+
+  'click #goRecherche': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var infoRecherche = $("#recherche").val();
+    var sessionID = Session.get("userID");
+    var inscriptionFind = Inscription.find({
+      $or: [{
+        prenom: infoRecherche,
+      }, {
+        nom: infoRecherche,
+      }, {
+        age: infoRecherche,
+      }, {
+        email: {
+          $regex: infoRecherche,
+        },
+      }, {
+        pseudo: infoRecherche,
+      }],
+    }).fetch();
+
+    var messageFind = Message.find({
+      $or: [{
+        idClient1: sessionID,
+      }, {
+        idClient2: sessionID,
+      }],
+      message: {
+        $regex: infoRecherche,
+      },
+    }).fetch();
+
+    if (messageFind || inscriptionFind) {
+      Session.set('rech', "rech");
+    }
+
+    Session.setPersistent('inscriptionFind', inscriptionFind);
+    Session.setPersistent('messageFind', messageFind);
+    $("#recherche").val('');
+  },
+
+  'click ul' : function() {
+    Session.set("inscriptionFind", null);
+    Session.set("messageFind", null);
+    Session.set("rech", null);
+    Session.set("infoRecherche", null);
   },
 
 });

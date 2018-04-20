@@ -16,13 +16,13 @@
           </div>
         {{/each}}
         {{#each inscriptionFind}}
-          <div class="recherche">
+          <div class="rechercheAccueil">
             <a class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
           </div>
           <br>
         {{/each}}
         {{#each messageFind}}
-          <div class="recherche">
+          <div class="rechercheAccueil">
             <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
             <p style="text-align : right ; color: #0000aa">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
           </div>
@@ -33,7 +33,7 @@
    {{else}}
   <h1>Bonjour {{prenomAccueil}}, </h1>
       {{#if amiConnecté}}
-          <h2>{{amiConnecté}}</h2>
+          <h2 style="font-size:34px;">{{amiConnecté}}</h2>
           <div class="overflow">
             {{#each connecté}}
             <div class="col-sm-3" id="connecté">
@@ -42,7 +42,7 @@
             </div>
             {{/each}}
           </div>
-          <h1>{{ajouterAmi}}</h1>
+          <h1 style="font-size:34px;">{{ajouterAmi}}</h1>
           <div class="overflow">
             {{#each contacter}}
             <div class="col-sm-3">
@@ -50,12 +50,12 @@
               <br> Prénom : {{prenom}}
               <br> Pseudo : {{pseudo}}
               <br>
-              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+              <a id="{{_id}}" style="color : #009018; float : right" class="goAjouter">Ajouter</a>
             </div>
             {{/each}}
           </div>
       {{else}}
-          <h2>{{ajouterAmi}}</h2>
+          <h2 style="font-size:34px;">{{ajouterAmi}}</h2>
           <div style="overflow:auto ; width:1150px ; max-height:350px ">
             {{#each contacter}}
             <div class="col-sm-3">
@@ -63,7 +63,7 @@
               <br> Prénom : {{prenom}}
               <br> Pseudo : {{pseudo}}
               <br>
-              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+              <a id="{{_id}}" style="color : #009018 ; float : right" class="goAjouter">Ajouter</a>
             </div>
             {{/each}}
           </div>

@@ -61,9 +61,13 @@ Template.message.helpers({
           $in: ids,
         },
         $or: [{
-          prenom: recherche,
+          prenom: {
+            $regex: recherche,
+          },
         }, {
-          nom: recherche,
+          nom: {
+            $regex: recherche,
+          },
         }],
       }).fetch();
       if (connecter) {

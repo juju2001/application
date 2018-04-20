@@ -3,7 +3,7 @@ Template.inscription.rendered = function() {
 };
 
 Template.inscription.events({
-  'submit form': function(event) {
+  'click #inscription': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var mdp1 = event.target.mdp1.value;

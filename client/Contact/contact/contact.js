@@ -8,7 +8,7 @@ Template.contact.rendered = function() {
     Router.go('/connexion');
   }
 
-  Tracker.autorun(function () {
+  Tracker.autorun(function() {
     var sessionID = Session.get("userID");
 
     var user = Inscription.findOne({
@@ -36,9 +36,9 @@ Template.contact.helpers({
   anni: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
-      _id : this._id,
+      _id: this._id,
     });
-    if(id) {
+    if (id) {
       var contactID = id.contact;
       var last = Inscription.findOne({
         _id: contactID,
@@ -47,7 +47,7 @@ Template.contact.helpers({
         var date = last.date;
         var birthday = new Date(date);
         var nouveau = new Date();
-        var age =new Number(nouveau.getTime() - birthday.getTime()) / 31557600000;
+        var age = new Number(nouveau.getTime() - birthday.getTime()) / 31557600000;
         return Math.floor(age);
       };
     }
@@ -55,16 +55,22 @@ Template.contact.helpers({
 });
 
 Template.contact.events({
-  'click .modifier': function(event) {
+  'click .supprimer': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var id = Contact.findOne({
       _id: this._id,
     });
-    var contactId = id.contact;
-    if (contactId) {
-      Session.set("contactID", contactId);
-      Router.go('/modifier');
+    var contactID = id.contact;
+    var sessionID = Session.get("userID");
+    if (confirm("Etes-vous sûr de vouloir supprimer ce contact")) {
+      Meteor.call('supprimerContact', sessionID, contactID, function() {
+        Meteor.call('supprimerMessage1', sessionID, contactID, function() {
+          Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+            Router.go('/contact');
+          });
+        });
+      });
     }
-  }
+  },
 })

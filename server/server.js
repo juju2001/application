@@ -40,19 +40,6 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  modifierSurnom: function(userIdNow, contact, newSurnom) {
-    return Contact.update({
-      userIdNow: userIdNow,
-      contact: contact
-    }, {
-      $set: {
-        surnom: newSurnom
-      }
-    });
-  },
-});
-
-Meteor.methods({
   notification: function(sessionID, contactID) {
     return Message.update({
       idClient1: contactID,

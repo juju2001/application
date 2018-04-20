@@ -14,3 +14,16 @@ Template.default.helpers({
     }
   },
 });
+
+
+Template.default.events({
+  'click #goRecherche' : function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var infoRecherche = $("#recherche").val();
+    Session.set('infoRecherche', infoRecherche);
+    $("#recherche").val('');
+    Session.set('rech', "rech");
+    Router.go('/accueil');
+  },
+});
