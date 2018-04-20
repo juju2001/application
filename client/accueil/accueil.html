@@ -3,74 +3,72 @@
   <form>
     <div class="form-group">
       {{> default}}
-      <h1>Bonjour {{prenomAccueil}}, </h1>
     </div>
 
   </form>
-    {{#if amiConnecté}}
-          <h2>{{amiConnecté}}</h2>
-           <div class="overflow">
-          {{#each connecté}}
-              <div class="col-sm-3" id="connecté" >
-              Nom : {{nom}}
-              <br>
-              Prénom : {{prenom}}
-              </div>
-          {{/each}}
-        </div>
-          <h1>{{ajouterAmi}}</h1>
-         <div class="overflow">
-          {{#each contacter}}
-              <div class="col-sm-3" >
-              Nom : {{nom}}
-              <br>
-              Prénom : {{prenom}}
-              <br>
-              Pseudo : {{pseudo}}
-              <br>
-              <button id="{{_id}}" class="goAjouter">Ajouter</button>
-              </div>
-          {{/each}}
-    </div>
-    {{else}}
-          <h2>{{ajouterAmi}}</h2>
-          <div class="overflow">
-         {{#each contacter}}
-              <div class="col-sm-3" >
-              Nom : {{nom}}
-              <br>
-              Prénom : {{prenom}}
-              <br>
-              Pseudo : {{pseudo}}
-              <br>
-              <button id="{{_id}}" class="goAjouter">Ajouter</button>
-              </div>
+
+  {{#if Motrecherche}}
+      <div style="overflow:auto ; max-height: 450px ; width : 1140px">
+        <h2 style="text-align:center; font-size:40px">{{Motrecherche}}</h2>
+        {{#each recherche}}
+          <div style="background-color : green;">
+            {{prenom}} {{nom}} {{age}} {{email}}
+          </div>
         {{/each}}
-        </div>
-    {{/if}}
-
-      <h2 style="text-align:center; margin-top: 150px">{{Motrecherche}}</h2>
-
-   {{#each recherche}}
-         <div style="background-color : green;">
-           {{prenom}} {{nom}} {{age}} {{email}}
-         </div>
+        {{#each inscriptionFind}}
+          <div class="recherche">
+            <a class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
+          </div>
+          <br>
+        {{/each}}
+        {{#each messageFind}}
+          <div class="recherche">
+            <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
+            <p style="text-align : right ; color: #0000aa">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+          </div>
+          <br>
        {{/each}}
+      </div>
 
-       {{#each inscriptionFind}}
-       <div class="recherche">
-         <a  class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
-       </div>
-       <br>
-       {{/each}}
-
-       {{#each messageFind}}
-       <div class="recherche">
-          <a href='/message' class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
-         <p style="text-align : right ; color: blue">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
-       </div>
-       <br>
-{{/each}}
+   {{else}}
+  <h1>Bonjour {{prenomAccueil}}, </h1>
+      {{#if amiConnecté}}
+          <h2>{{amiConnecté}}</h2>
+          <div class="overflow">
+            {{#each connecté}}
+            <div class="col-sm-3" id="connecté">
+              Nom : {{nom}}
+              <br> Prénom : {{prenom}}
+            </div>
+            {{/each}}
+          </div>
+          <h1>{{ajouterAmi}}</h1>
+          <div class="overflow">
+            {{#each contacter}}
+            <div class="col-sm-3">
+              Nom : {{nom}}
+              <br> Prénom : {{prenom}}
+              <br> Pseudo : {{pseudo}}
+              <br>
+              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+            </div>
+            {{/each}}
+          </div>
+      {{else}}
+          <h2>{{ajouterAmi}}</h2>
+          <div style="overflow:auto ; width:1150px ; max-height:350px ">
+            {{#each contacter}}
+            <div class="col-sm-3">
+              Nom : {{nom}}
+              <br> Prénom : {{prenom}}
+              <br> Pseudo : {{pseudo}}
+              <br>
+              <button id="{{_id}}" class="goAjouter">Ajouter</button>
+            </div>
+            {{/each}}
+          </div>
+      {{/if}}
+  {{/if}}
 
   </div>
 </template>
