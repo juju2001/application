@@ -6,9 +6,9 @@ Template.inscription.events({
   'click #inscription': function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var mdp1 = event.target.mdp1.value;
-    var mdp2 = event.target.mdp2.value;
-    var pseudo = event.target.pseudo.value;
+    var mdp1 = $('#mdp1').val();
+    var mdp2 = $('#mdp2').val();
+    var pseudo = $('#pseudo').val();
     var pseudoDb = Inscription.findOne({
       pseudo: pseudo,
     });
@@ -19,25 +19,20 @@ Template.inscription.events({
       if (mdp1.length > 3) {
         if (!pseudoDb) {
           if (nouveau.getFullYear() < auj.getFullYear()  && nouveau.getFullYear() < auj.getFullYear()-14 ) {
-            alert("Merci de l'inscription !");
             var hash = {
-              nom: event.target.name.value,
-              prenom: event.target.prenom.value,
-              date: event.target.age.value,
+              nom: $('#name').val(),
+              prenom: $('#prenom').val(),
+              date: $('#age').val(),
               age : auj.getFullYear() - nouveau.getFullYear(),
-              email: event.target.email.value,
-              pseudo: event.target.pseudo.value,
-              password: event.target.mdp1.value,
+              email: $('#email').val(),
+              pseudo: $('#pseudo').val(),
+              password:$('#mdp1').val(),
               etat: false,
               statut: ""
             };
             Meteor.call('insertInscription', hash, function(error, result) {
-              if (result) {
+                alert("Merci de l'inscription !");
                 Router.go('/connexion');
-              }
-              if (error) {
-                console.log(error);
-              }
             });
           }else{
             alert("Date invalide !");
@@ -52,5 +47,5 @@ Template.inscription.events({
     } else {
       alert("Vos mots de passe ne sont pas identiques ! ");
     }
-  }
+  },
 });

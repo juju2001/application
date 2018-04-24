@@ -65,6 +65,12 @@
         <!-- colone de droite / messages -->
 
         <div class="dis" id="enbas">
+          {{#if noId}}
+          <tr class="perso">
+            <td class='text-center' style="font-size:14px ;width:570px" >{{nom}} {{prenom}}</td>
+            <td class='text-center {{couleur}}' style="width:570px">{{lastConnexion}}</td>
+          </tr>
+          {{else}}
           {{#each messages}}
           {{{date @index}}}
             <div class="chat {{color}}">
@@ -72,15 +78,16 @@
               <div class="heure">{{heure}}</div>
             </div>
           {{/each}}
+          {{/if}}
         </div>
 
 
 <br style="background-color: #f8f9f9 ">
         <!-- colone de droite / envoyer et écrire message-->
-        <tr class="form-groupe" style=" background-color:white; height:34px; ">
+        <tr class="form-groupe" style=" background-color:#EFEFEF; height:50px; ">
           <tr>
-            <td><input style="margin-top:auto ; margin-bottom: auto; width : 750px" type="text" class="form-control" name="message" id="messages"></td>
-            <td style="width : 240px"><input style="margin-bottom : auto ; margin-top: auto ; margin-left:10px" type="submit" name="envoyer" value="Envoyer"></td>
+            <td><input style="margin-top:8px; width : 750px" type="text" class="form-control" name="message" id="messages"></td>
+            <td style="width : 240px"><input style="margin-top : 8px ; margin-left:10px" type="submit" name="envoyer" value="Envoyer"></td>
           </tr>
         </tr>
 

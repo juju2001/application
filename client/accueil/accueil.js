@@ -248,12 +248,18 @@ Template.accueil.events({
 
   'click .goMessage': function() {
     var sessionID = Session.get("userID");
-    var id = Contact.findOne({
+    var id = Message.findOne({
       _id: this._id,
     });
     if (id) {
-      Session.set("contactID", id.contact);
-    };
+      if (sessionID == id.idClient1) {
+        Session.set("contactID", id.idClient2);
+        Router.go('/message');
+      }else{
+        Session.set("contactID", id.idClient1);
+        Router.go('/message');
+      }
+    }
   },
 
   'click #goRecherche': function(event) {
@@ -297,7 +303,7 @@ Template.accueil.events({
     $("#recherche").val('');
   },
 
-  'click ul' : function() {
+  'click ul': function() {
     Session.set("inscriptionFind", null);
     Session.set("messageFind", null);
     Session.set("rech", null);

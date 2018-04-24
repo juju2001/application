@@ -3,7 +3,7 @@ Template.message.rendered = function() {
   if (Session.get("userID") == null) {
     Router.go('/connexion');
   }
-  
+
   Session.set("recherche", '');
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
@@ -24,7 +24,6 @@ Template.message.rendered = function() {
       setTimeout(function() {
         var x = document.getElementById("enbas");
         x.scrollTop = x.scrollHeight;
-        console.log(document.getElementById("rechercheContact").value);
       }, 300);
     }
   });
@@ -54,8 +53,17 @@ Template.message.rendered = function() {
 
 
 Template.message.helpers({
+
+  noId : function() {
+    var contactID = Session.get("contactID");
+    if(contactID == undefined){
+      return "rien";
+    }
+  },
+
   recherche: function() {
       var recherche = Session.get("recherche");
+      if(recherche){
       var mongo = Contact.find({
         userIdNow: Session.get("userID"),
       }).fetch();
@@ -77,6 +85,7 @@ Template.message.helpers({
       if (connecter) {
         return connecter;
       }
+    }
   },
 
   messages: function() {
