@@ -1,14 +1,14 @@
-.rondInscr{
+.rondInscr {
   border-radius: 60px;
-  width:15px;
+  width: 15px;
   height: 15px;
   background-color: #50E846;
-  z-index : 1;
-  position : absolute;
-  right : 3px;
+  z-index: 1;
+  position: absolute;
+  right: 3px;
 }
 
-body{
+body {
   height: 100%;
   width: 1200px;
   max-height: 620px;
@@ -16,14 +16,31 @@ body{
   background: #f6f6f6;
   margin-top: 20px;
   margin-bottom: 20px;
+  border: solid 1px darkgrey;
 }
 
-html{
-  background: linear-gradient(to bottom , #0000c6 150px, #dfdfdf 150px);
+html {
+  background: linear-gradient(to bottom, #0000c6 150px, #dfdfdf 150px);
   height: 100%;
   width: 100%;
 }
 
-.form-group{
+.form-group {
   margin-top: 30px;
+}
+
+li {
+  min-width: 110px;
+  max-width: 300px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.navbar-header{
+  min-width: 165px;
+}
+
+.web{
+  text-align: center;
+  font-size: 20px;
 }

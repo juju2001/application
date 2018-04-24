@@ -1,5 +1,9 @@
 Template.newContact.rendered = function() {
   document.title = "Nouveau contact";
+  if (Session.get("userID") == null) {
+    Router.go('/connexion');
+  }
+  
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
@@ -46,7 +50,11 @@ age : function(){
     _id : Session.get("newContactID"),
   });
   if(newContact){
-    return newContact.age;
+    var date = newContact.date;
+    var birthday = new Date(date);
+    var nouveau = new Date();
+    var age =new Number(nouveau.getTime() - birthday.getTime()) / 31557600000;
+    return Math.floor(age);
   }
 },
 
@@ -69,7 +77,7 @@ email : function(){
 });
 
 Template.newContact.events({
-  'submit form': function(event) {
+  'click #enregister': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var trouver = Inscription.findOne({
@@ -82,7 +90,6 @@ Template.newContact.events({
         var age = trouver.age;
         var date = trouver.date;
         var email = trouver.email;
-        var surnom = event.target.surnom.value;
         var now = new Date();
         var hash5 = {
           userIdNow: Session.get("userID"),
@@ -92,7 +99,6 @@ Template.newContact.events({
           date : date,
           email: email,
           pseudo: pseudo,
-          surnom: surnom,
           contact: Session.get("newContactID"),
           hours: now.getTime(),
           lastMessage : 0,

@@ -1,7 +1,7 @@
 <template name="contact">
 <div class="container">
   <form>
-    <div class="form-group">  
+    <div class="form-group">
       {{> default}}
     </div>
   </form>
@@ -10,13 +10,12 @@
       <div class="col-sm-3">
         Nom : {{nom}}
         <br> Prénom : {{prenom}}
-        <br> Surnom : {{surnom}}
         <br> Age : {{anni}}
         <br> Date naissance : {{date}}
         <br> E-mail : {{email}}
         <br> Pseudo : {{pseudo}}
         <br>
-        <button class="modifier" id="{{contact}}">Modifier</button>
+        <a href="" class="supprimer" style="color : red ; float : right" id="{{contact}}">Supprimer</a>
       </div>
       {{/each}}
     </div>

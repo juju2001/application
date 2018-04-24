@@ -41,10 +41,6 @@ Router.route('/deconnexion', {
   name: 'deconnexion'
 });
 
-Router.route('/profil', {
-  name: 'profil'
-});
-
 Router.route('/modifier', {
   name: 'modifier'
 });

@@ -36,13 +36,15 @@ p{
 background-color: white;
 width: 240px;
 height: 40px;
+font-size: 17px;
 }
 
-.recherche{
+.rechercheContact{
 background-color: white;
 width: 240px;
 height: 60px;
 border-bottom: 1px solid #acacac;
+font-size : 17px;
 }
 
 .notfi{
@@ -58,7 +60,8 @@ border-bottom: 1px solid #acacac;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 239.283px;
+  max-width: 200px;
+  margin-left: 30px;
 }
 
 .droite{
