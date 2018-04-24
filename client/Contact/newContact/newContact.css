@@ -5,3 +5,13 @@
  p{
    color:#223966;
  }
+
+ #enregister{
+   font-size: 17px;
+   color : green;
+ }
+
+#retour{
+  float: right;
+  color:red;
+}
