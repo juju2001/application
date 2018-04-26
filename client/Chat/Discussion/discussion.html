@@ -6,6 +6,7 @@
         <div  class="scroo">
           <div>
             {{#each noFriend}}
+            <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
             <tr style="background-color: #99e9ff; height:50px ; ">
               <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
               <td>Nouvelle discussion</td>
@@ -16,7 +17,8 @@
           </div>
             <div>
               {{#each discussion}}
-              <tr class="disc" style="height:50px  ; width : 1140px ; border-bottom: #dedede 1px solid; font-size : 16px">
+              <!-- Affiche les discussions -->
+              <tr class="discuss">
                 <td><a href='message' style="color : #223966;" class="goDiscu" id="{{contact}}">{{nom}} {{prenom}}</a></td>
                 <td> {{#if notification}}
                   <div class="rond"></div>

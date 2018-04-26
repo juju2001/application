@@ -7,7 +7,12 @@
 
   </form>
 
+<!-- conetnu de la page -->
+
+
   {{#if Motrecherche}}
+
+  <!-- Recherche -->
       <div style="overflow:auto ; max-height: 450px ; width : 1140px">
         <h2 style="text-align:center; font-size:40px">{{Motrecherche}}</h2>
         {{#each recherche}}
@@ -32,6 +37,7 @@
 
    {{else}}
   <h1>Bonjour {{prenomAccueil}}, </h1>
+  <!-- amis connectés / nouveaux contacts -->
       {{#if amiConnecté}}
           <h2 style="font-size:34px;">{{amiConnecté}}</h2>
           <div class="overflow">

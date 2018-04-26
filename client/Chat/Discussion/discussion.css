@@ -1,4 +1,6 @@
-#form-titre{
+
+
+  #form-titre{
   text-align: center;
 }
 
@@ -8,7 +10,7 @@ p{
 
 .discu{
   text-align: center;
-  width:1140px;
+  width:100%;
 }
 
 .scroo{
@@ -20,8 +22,12 @@ p{
     background-color : white;
 }
 
+tr{
+  width : 100%
+}
+
 td, tr{
-  width: 1140px;
+  width: 25%;
   vertical-align: middle;
 }
 
@@ -35,4 +41,10 @@ td{
   width:15px;
   height: 15px;
   background-color: #2E54F3;
+}
+.discuss{
+  height:50px  ;
+  width : 100% ;
+  border-bottom: #dedede 1px solid;
+  font-size : 16px
 }

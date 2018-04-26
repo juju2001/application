@@ -3,7 +3,7 @@ Template.contact.rendered = function() {
   if (Session.get("userID") == null) {
     Router.go('/connexion');
   }
-  
+
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
@@ -27,6 +27,8 @@ Template.contact.rendered = function() {
 
 
 Template.contact.helpers({
+
+// Retourne la liste de nos contacts
   contacter: function() {
     var sessionID = Session.get("userID");
     var last = Contact.find({
@@ -37,6 +39,7 @@ Template.contact.helpers({
     };
   },
 
+//  Retourne l'âge exacte d'un contact
   anni: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -59,6 +62,8 @@ Template.contact.helpers({
 });
 
 Template.contact.events({
+
+// Supprimer un contact
   'click .supprimer': function(event) {
     event.preventDefault();
     event.stopPropagation();

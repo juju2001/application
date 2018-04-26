@@ -7,6 +7,8 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
+
+// Ajouter l'inscription dans la MongoDB
   insertInscription: function(data) {
     //retourne l'ID
     return Inscription.insert(data);
@@ -15,6 +17,7 @@ Meteor.methods({
 
 
 Meteor.methods({
+
   connexion: function(data) {
     return Connexion.insert(data);
   },
@@ -22,24 +25,21 @@ Meteor.methods({
 
 
 Meteor.methods({
+// Enregistre le message dans la MongoDB
   message: function(data3) {
     return Message.insert(data3);
   },
 });
 
 Meteor.methods({
+// Ajoute le nouveau contact dans la MongoDB
   newContact: function(data5) {
     return Contact.insert(data5);
   },
 });
 
 Meteor.methods({
-  recherche: function(data) {
-    return Recherche.insert(data);
-  },
-});
-
-Meteor.methods({
+// Met à jour pour dire que j'ai lu le message et qu'il n'ait plus le signe de la notification
   notification: function(sessionID, contactID) {
     return Message.update({
       idClient1: contactID,
@@ -56,6 +56,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Met à jour pour j'ai vu la notification navbar
   notNoti: function(sessionID) {
     return Message.update({
       idClient2: sessionID,
@@ -71,6 +72,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Retourne les discussion par ordre du message le plus récent au plus vieux (page discussion)
   lastMessage: function(time, sessionID, contactID) {
     return Contact.update({
       contact: sessionID,
@@ -84,6 +86,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Met à jour ton état à False quand tu te déconnecte
   deco: function(sessionID) {
     return Inscription.update({
       _id: sessionID,
@@ -98,6 +101,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Affiche l'heure à laquelle tu te déconnectes
   heureDeco: function(sessionID, heureDeco) {
     return Connexion.update({
       userIdNow: sessionID,
@@ -112,6 +116,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Met à jour ton état à True quand tu te connectes
   etat: function(userIdNow) {
     return Inscription.update({
       _id: userIdNow,
@@ -127,6 +132,7 @@ Meteor.methods({
 
 
 Meteor.methods({
+// Met à jour ton heure de déconnexion à "0" lorsque tu te connectes
   dec0: function(userIdNow) {
     return Connexion.update({
       userIdNow: userIdNow,
@@ -141,18 +147,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  statut: function(statut, sessionID) {
-    return Inscription.update({
-      _id: sessionID,
-    }, {
-      $set: {
-        statut: statut,
-      }
-    });
-  },
-});
-
-Meteor.methods({
+// Supprime ton ami quand tu le veux
   supprimerContact: function(sessionID, contactID) {
     return Contact.remove({
       userIdNow: sessionID,
@@ -162,6 +157,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Supprime ta discussion mais l'autre utilisateur peut toujours la lire
   supprimerMessage1: function(sessionID, contactID) {
     return Message.update({
       idClient1: sessionID,
@@ -177,6 +173,7 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Supprime ta discussion mais l'autre utilisateur peut toujours la lire
   supprimerMessage2: function(sessionID, contactID) {
     return Message.update({
       idClient1: contactID,

@@ -37,6 +37,8 @@ Template.discussion.rendered = function() {
 };
 
 Template.discussion.helpers({
+
+// Affiche les discussions
   discussion: function() {
     var sessionID = Session.get("userID");
     var contact = Contact.find({
@@ -45,6 +47,7 @@ Template.discussion.helpers({
     return contact;
   },
 
+// Affiche les discussions des personnes avec qui on est pas ami
   noFriend: function() {
     var sessionID = Session.get("userID");
     var messages = Message.find({
@@ -68,6 +71,7 @@ Template.discussion.helpers({
     }
   },
 
+//notification dans le tableau discussion
   notification: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -83,7 +87,7 @@ Template.discussion.helpers({
     }
   },
 
-
+//Enlève la notifcation dans la navbar
   notif: function() {
     var sessionID = Session.get("userID");
     var session = Message.findOne({
@@ -95,7 +99,7 @@ Template.discussion.helpers({
     }
   },
 
-
+// Affiche l'heure de la nouvelle discussion
   lastConnexion: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -131,6 +135,7 @@ Template.discussion.helpers({
     }
   },
 
+// Couleur vert/rouge pour si la personne est connectée ou pas
   couleur: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -152,6 +157,8 @@ Template.discussion.helpers({
 });
 
 Template.discussion.events({
+
+// Rejoind la page message
   'click .goDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -171,7 +178,7 @@ Template.discussion.events({
     }
   },
 
-
+// Ajoute le nouveau contact avant d'aller à la page message
   'click .goNewDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -188,7 +195,7 @@ Template.discussion.events({
     }
   },
 
-
+// Supprime la discussion
   'click #supp': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -206,6 +213,7 @@ Template.discussion.events({
     }
   },
 
+// Supprime la discussion de la personne avec qui on est pas ami
   'click #suppNoFriend': function(event) {
     event.preventDefault();
     event.stopPropagation();

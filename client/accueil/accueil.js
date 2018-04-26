@@ -16,6 +16,8 @@ Template.accueil.rendered = function() {
 
 
 Template.accueil.helpers({
+
+// Prénom de la presnne connecté
   prenomAccueil: function() {
     var sessionID = Session.get("userID");
     var find = Inscription.findOne({
@@ -27,6 +29,7 @@ Template.accueil.helpers({
     }
   },
 
+// Affiche la phrase qui dit quels amis sont en ligne
   amiConnecté: function() {
     var sessionID = Session.get("userID");
     var amis = Contact.find({
@@ -44,7 +47,7 @@ Template.accueil.helpers({
     }
   },
 
-
+// Affiche la phrase pour ajouter des amis
   ajouterAmi: function() {
     sessionID = Session.get("userID");
     var contact = Contact.find({
@@ -62,6 +65,7 @@ Template.accueil.helpers({
     }
   },
 
+// D'autres utilisateurs que l'on pourrait ajouter
   contacter: function() {
     var sessionID = Session.get("userID");
 
@@ -77,6 +81,7 @@ Template.accueil.helpers({
     }).fetch();
   },
 
+// Les amis qui sont en ligne
   connecté: function() {
     var sessionID = Session.get("userID");
     var contacts = Inscription.find({
@@ -92,6 +97,7 @@ Template.accueil.helpers({
     }).fetch();
   },
 
+// Retourn les inscriptions trouvés avec le mot de recherche
   inscriptionFind: function() {
     var infoRecherche = Session.get("infoRecherche");
     var sessionID = Session.get("userID");
@@ -117,6 +123,7 @@ Template.accueil.helpers({
     return Session.get("inscriptionFind");
   },
 
+// Retourn les messsage trouvés avec le mot de recherche
   messageFind: function() {
     var infoRecherche = Session.get("infoRecherche");
     var sessionID = Session.get("userID");
@@ -138,6 +145,7 @@ Template.accueil.helpers({
     }
   },
 
+// Affiche le mot Recherche dans la page
   Motrecherche: function() {
     var rech = Session.get("rech");
     if (rech == "rech") {
@@ -145,6 +153,7 @@ Template.accueil.helpers({
     }
   },
 
+// Affiche le nom de l'auteur du message lors de la  recherche
   infoNom: function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
@@ -160,6 +169,7 @@ Template.accueil.helpers({
     }
   },
 
+// Affiche l'auteur du message lors de la recherche
   infoPrenom: function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
@@ -189,6 +199,7 @@ Template.accueil.helpers({
     }
   },
 
+// Affiche l'heure du message trouvé dans la recherche
   infoHeure: function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
@@ -209,6 +220,8 @@ Template.accueil.helpers({
 });
 
 Template.accueil.events({
+
+// Clique pour ajouter un nouveau contact
   'click .goAjouter': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -222,6 +235,7 @@ Template.accueil.events({
     }
   },
 
+// clique pour ajouter un nouveau contact depuis la recherche
   'click .goInscription': function() {
     var sessionID = Session.get("userID");
     var inscription = Inscription.findOne({
@@ -262,6 +276,7 @@ Template.accueil.events({
     }
   },
 
+// Allez à la discussion depuis un message lors d'une recherche
   'click #goRecherche': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -303,6 +318,7 @@ Template.accueil.events({
     $("#recherche").val('');
   },
 
+// Remet à 0 les variable de recherche quand on change de page depuis la navbar
   'click ul': function() {
     Session.set("inscriptionFind", null);
     Session.set("messageFind", null);

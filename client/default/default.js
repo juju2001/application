@@ -3,6 +3,8 @@ Template.default.rendered = function() {
 };
 
 Template.default.helpers({
+
+// Notification dans la navbar
   notif: function() {
     var sessionID = Session.get("userID");
     if (sessionID != null) {

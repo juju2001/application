@@ -1,18 +1,16 @@
 Template.message.rendered = function() {
   document.title = "Message";
-  if (Session.get("userID") == null) {
+  if ( (Session.get("userID") == null) || (!sessionID && sessionID != find.userIdNow) ) {
     Router.go('/connexion');
   }
 
-  Session.set("recherche", '');
+
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID && sessionID != find.userIdNow) {
-    Router.go('/connexion');
-  }
 
+// Déscent l'overflow toujours en bas lorsqu'on rejoind une discussion ou qu'il y ait un nouveau message
   Message.find().observeChanges({
     changed: function() {
       setTimeout(function() {
@@ -28,6 +26,7 @@ Template.message.rendered = function() {
     }
   });
 
+// Controle si on change de recherche, ne nous laisse pas accéder à la page si il n'y a pas ID valabe (sécurité)
   Tracker.autorun(function() {
     setTimeout(function() {
       var x = document.getElementById("enbas");
@@ -35,7 +34,7 @@ Template.message.rendered = function() {
     }, 300);
 
     var recherche = document.getElementById("rechercheContact");
-    recherche.addEventListener("change", function(event){
+    recherche.addEventListener("change", function(event) {
       var recherche = $('#rechercheContact').val();
       Session.set("recherche", recherche);
     });
@@ -54,16 +53,27 @@ Template.message.rendered = function() {
 
 Template.message.helpers({
 
-  noId : function() {
+  // Retourne les discussions
+  discussion: function() {
+    var sessionID = Session.get("userID");
+    var contact = Contact.find({
+      userIdNow: sessionID,
+    });
+    return contact;
+  },
+
+  // Si il n'y a pas de contactID , il n'affiche pas de message, ni information personnelle du contact
+  noId: function() {
     var contactID = Session.get("contactID");
-    if(contactID == undefined){
+    if (contactID == undefined) {
       return "rien";
     }
   },
 
+  // Affiche les recherches dans la liste des discussion
   recherche: function() {
-      var recherche = Session.get("recherche");
-      if(recherche){
+    var recherche = Session.get("recherche");
+    if (recherche != null && recherche != '') {
       var mongo = Contact.find({
         userIdNow: Session.get("userID"),
       }).fetch();
@@ -88,6 +98,136 @@ Template.message.helpers({
     }
   },
 
+// Affiche la notification dans la liste des discussions
+  notification: function() {
+    var sessionID = Session.get("userID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var notification = Message.findOne({
+      idClient1: id.contact,
+      idClient2: sessionID,
+      lu: false,
+    });
+    if (notification) {
+      return notification;
+    }
+  },
+
+  // Retourne le dernier message avec le contact dans la liste des discussions
+  lastMessage: function() {
+    var sessionID = Session.get("userID");
+    var contact = Contact.findOne({
+      _id: this._id,
+    });
+    var contactID = contact.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+        luClient1: true,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+        luClient2: true,
+      }],
+    }, {
+      sort: {
+        hours: -1,
+      },
+    });
+    if (lastMessage) {
+      return lastMessage.message;
+    }
+  },
+
+  // Affiche l'auteur du dernier message dans la liste des discussions
+  auteur: function() {
+    var sessionID = Session.get("userID");
+    var contact = Contact.findOne({
+      _id: this._id,
+    });
+    var contactID = contact.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+        luClient1: true,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+        luClient2: true,
+      }],
+    }, {
+      sort: {
+        hours: -1,
+      },
+    });
+    if (lastMessage) {
+      var id = lastMessage.idClient1;
+      if (id == sessionID) {
+        return "Moi :"
+      } else {
+        var name = Inscription.findOne({
+          _id: id,
+        });
+        return name.nom + " " + name.prenom + " :";
+      }
+    }
+  },
+
+  // Affiche les informations de la personne avec qui on discute
+  infoPerso: function() {
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var infoPersonne = Contact.find({
+      userIdNow: sessionID,
+      contact: contactID,
+    });
+    return infoPersonne;
+  },
+
+  // Affiche si le contact de la discussion est en ligne ou l'heure de sa dernière connexion
+  lastConnexion: function() {
+    var contactID = Session.get("contactID");
+    var sessionID = Session.get("sessionID");
+    var deco = Connexion.findOne({
+      userIdNow: contactID,
+    });
+    if (deco) {
+      if (deco.deconnexion != 0) {
+        var deconnexion = deco.deconnexion;
+        var date = new Date(deconnexion);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        return final;
+      } else {
+        return "En ligne";
+      }
+    }
+  },
+
+// Détermine la couleur pour les informations de connexion du contact avec qui on parle
+  couleur: function() {
+    var contactID = Session.get("contactID");
+    var sessionID = Session.get("sessionID");
+    var deco = Connexion.findOne({
+      userIdNow: contactID,
+    });
+    if (deco) {
+      if (deco.deconnexion == 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }
+    }
+  },
+
+  // Retourne les messages
   messages: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
@@ -109,6 +249,7 @@ Template.message.helpers({
     }).fetch();
   },
 
+  // Retourne la date du jour de la discussion avec l'Index
   date: function(index) {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
@@ -155,66 +296,8 @@ Template.message.helpers({
     }
   },
 
-  lastMessage: function() {
-    var sessionID = Session.get("userID");
-    var contact = Contact.findOne({
-      _id: this._id,
-    });
-    var contactID = contact.contact;
-    var lastMessage = Message.findOne({
-      $or: [{
-        idClient1: sessionID,
-        idClient2: contactID,
-        luClient1: true,
-      }, {
-        idClient1: contactID,
-        idClient2: sessionID,
-        luClient2: true,
-      }],
-    }, {
-      sort: {
-        hours: -1,
-      },
-    });
-    if (lastMessage) {
-      return lastMessage.message;
-    }
-  },
 
-  auteur: function() {
-    var sessionID = Session.get("userID");
-    var contact = Contact.findOne({
-      _id: this._id,
-    });
-    var contactID = contact.contact;
-    var lastMessage = Message.findOne({
-      $or: [{
-        idClient1: sessionID,
-        idClient2: contactID,
-        luClient1: true,
-      }, {
-        idClient1: contactID,
-        idClient2: sessionID,
-        luClient2: true,
-      }],
-    }, {
-      sort: {
-        hours: -1,
-      },
-    });
-    if (lastMessage) {
-      var id = lastMessage.idClient1;
-      if (id == sessionID) {
-        return "Moi :"
-      } else {
-        var name = Inscription.findOne({
-          _id: id,
-        });
-        return name.nom + " " + name.prenom + " :";
-      }
-    }
-  },
-
+// Détermine la couleur du message
   color: function() {
     if (this.idClient1 === Session.get("userID")) {
       return 'text-success';
@@ -222,16 +305,7 @@ Template.message.helpers({
     return 'text-danger';
   },
 
-  infoPerso: function() {
-    var sessionID = Session.get("userID");
-    var contactID = Session.get("contactID");
-    var infoPersonne = Contact.find({
-      userIdNow: sessionID,
-      contact: contactID,
-    });
-    return infoPersonne;
-  },
-
+// Affiche l'heure du message
   heure: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
@@ -252,83 +326,11 @@ Template.message.helpers({
     return time;
   },
 
-  lastConnexion: function() {
-    var contactID = Session.get("contactID");
-    var sessionID = Session.get("sessionID");
-    var deco = Connexion.findOne({
-      userIdNow: contactID,
-    });
-    if (deco) {
-      if (deco.deconnexion != 0) {
-        var deconnexion = deco.deconnexion;
-        var date = new Date(deconnexion);
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-        return final;
-      } else {
-        return "En ligne";
-      }
-    }
-  },
-
-  couleur: function() {
-    var contactID = Session.get("contactID");
-    var sessionID = Session.get("sessionID");
-    var deco = Connexion.findOne({
-      userIdNow: contactID,
-    });
-    if (deco) {
-      if (deco.deconnexion == 0) {
-        return 'text-success'
-      } else {
-        return 'text-danger'
-      }
-    }
-  },
-
-  statut: function() {
-    var contactID = Session.get("contactID");
-    var statut = Inscription.findOne({
-      _id: contactID,
-    });
-    if (statut) {
-      return statut.statut;
-    }
-  },
-
-
-
-  notification: function() {
-    var sessionID = Session.get("userID");
-    var id = Contact.findOne({
-      _id: this._id,
-    });
-    var notification = Message.findOne({
-      idClient1: id.contact,
-      idClient2: sessionID,
-      lu: false,
-    });
-    if (notification) {
-      return notification;
-    }
-  },
-
-  discussion: function() {
-    var sessionID = Session.get("userID");
-    var contact = Contact.find({
-      userIdNow: sessionID,
-    });
-    return contact;
-  },
-
 });
 
 
 Template.message.events({
+  // Envoie le message et l'enregistre dans la MongoDB
   'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -357,7 +359,9 @@ Template.message.events({
     }
   },
 
+  // Rejoind une discussion depuis la liste des contacts
   'click .goDiscu': function(event) {
+    Session.set("recherche", null);
     event.preventDefault();
     event.stopPropagation();
     var id = Contact.findOne({
@@ -380,7 +384,9 @@ Template.message.events({
     }, 300);
   },
 
+  // Rejoind la discussion depuis une recherche dans la liste de contact
   'click .goDiscution': function(event) {
+    Session.set("recherche", null);
     event.preventDefault();
     event.stopPropagation();
     var contactId = this._id;
@@ -394,4 +400,7 @@ Template.message.events({
     }, 300);
   },
 
+  'click ul' : function(){
+    Session.set("recherche", null);
+  }
 });
