@@ -13,7 +13,7 @@
   {{#if Motrecherche}}
 
   <!-- Recherche -->
-      <div style="overflow:auto ; max-height: 450px ; width : 1140px">
+      <div style="overflow:auto ; max-height: 450px ; width : 100%">
         <h2 style="text-align:center; font-size:40px">{{Motrecherche}}</h2>
         {{#each recherche}}
           <div style="background-color : green;">
@@ -38,6 +38,7 @@
    {{else}}
   <h1>Bonjour {{prenomAccueil}}, </h1>
   <!-- amis connectés / nouveaux contacts -->
+  <div style="overflow-y : auto; max-height: 300px">
       {{#if amiConnecté}}
           <h2 style="font-size:34px;">{{amiConnecté}}</h2>
           <div class="overflow">
@@ -51,10 +52,9 @@
           <h1 style="font-size:34px;">{{ajouterAmi}}</h1>
           <div class="overflow">
             {{#each contacter}}
-            <div class="col-sm-3">
-              Nom : {{nom}}
+            <div class="col-sm-3" id="ajouterNewContact">
+                   Nom : {{nom}}
               <br> Prénom : {{prenom}}
-              <br> Pseudo : {{pseudo}}
               <br>
               <a id="{{_id}}" style="color : #009018; float : right" class="goAjouter">Ajouter</a>
             </div>
@@ -62,7 +62,7 @@
           </div>
       {{else}}
           <h2 style="font-size:34px;">{{ajouterAmi}}</h2>
-          <div style="overflow:auto ; width:1150px ; max-height:350px ">
+          <div style="overflow:auto ; width:100% ; max-height:350px ">
             {{#each contacter}}
             <div class="col-sm-3">
               Nom : {{nom}}
@@ -74,6 +74,7 @@
             {{/each}}
           </div>
       {{/if}}
+    </div>
   {{/if}}
 
   </div>

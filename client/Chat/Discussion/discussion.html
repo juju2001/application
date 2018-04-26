@@ -1,39 +1,42 @@
 <template name="discussion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <div class="container">
     <div class="form-group">
        {{> default}}
-      <table class="discu">
-        <div  class="scroo">
-          <div>
-            {{#each noFriend}}
-            <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
-            <tr style="background-color: #99e9ff; height:50px ; ">
-              <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
-              <td>Nouvelle discussion</td>
-              <td></td>
-              <td style="text-align:center; border-bottom: #dedede 1px solid"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
-            </tr>
-            {{/each}}
-          </div>
-            <div>
-              {{#each discussion}}
-              <!-- Affiche les discussions -->
-              <tr class="discuss">
-                <td><a href='message' style="color : #223966;" class="goDiscu" id="{{contact}}">{{nom}} {{prenom}}</a></td>
-                <td> {{#if notification}}
-                  <div class="rond"></div>
-                  {{/if}}
-                </td>
-                <td id="infos" class="{{couleur}}" style="text-align : center">
-                  {{lastConnexion}}
-                </td>
-                <td style="text-align:center"><a style="color : red" id="supp" href="">Supprimer</a></td>
-              </tr>
-              {{/each}}
-            </div>
-        </div>
-      </table>
-     <br>
+       <div>
+         <table class="discu">
+           <div  class="scroo">
+             <div>
+               {{#each noFriend}}
+               <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
+               <tr style="background-color: #99e9ff; height:50px ; ">
+                 <td><a href='message' style="color : #223966 " class="goNewDiscu" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+                 <td>Nouvelle discussion</td>
+                 <td></td>
+                 <td style="text-align:center; border-bottom: #dedede 1px solid"><a style="color : red" id="suppNoFriend" href="">Supprimer</a></td>
+               </tr>
+               {{/each}}
+             </div>
+               <div>
+                 {{#each discussion}}
+                 <!-- Affiche les discussions -->
+                 <tr class="discuss">
+                   <td><a href='message' style="color : #223966;" class="goDiscu" id="{{contact}}">{{nom}} {{prenom}}</a></td>
+                   <td> {{#if notification}}
+                     <div class="rond"></div>
+                     {{/if}}
+                   </td>
+                   <td id="infos" class="{{couleur}}" style="text-align : center">
+                     {{lastConnexion}}
+                   </td>
+                   <td style="text-align:center"><a style="color : red" id="supp" href="">Supprimer</a></td>
+                 </tr>
+                 {{/each}}
+               </div>
+           </div>
+         </table>
+        <br>
+       </div>
     </div>
   </div>
 </template>

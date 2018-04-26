@@ -2,9 +2,22 @@
   text-align: center;
 }
 
-
 p{
   color:#223966;
+}
+
+.container{
+width : 100%
+}
+
+#tableauMessage{
+ width: 100%;
+ height: 400px;
+}
+
+.tableMessage{
+  width: 100%;
+  overflow : auto;
 }
 
 .gauche{
@@ -15,10 +28,11 @@ p{
   margin-top : 100px;
   vertical-align: top;
   border : #acacac solid 1px;
+  width: 20%;
 }
 
 .bar{
-  width: 230px;
+  width: 95%;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: auto;
@@ -34,14 +48,13 @@ p{
 
 .contactDiscu{
 background-color: white;
-width: 240px;
 height: 40px;
 font-size: 17px;
 }
 
 .rechercheContact{
 background-color: white;
-width: 240px;
+width: 40%;
 height: 60px;
 border-bottom: 1px solid #acacac;
 font-size : 17px;
@@ -60,14 +73,13 @@ font-size : 17px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
+  max-width: 90px;
   margin-left: 30px;
 }
 
 .droite{
-   background-color: #fbfbfc;
    margin-left: auto;
-   width: 900px;
+   width: 60%;
    max-height:390.443px;
    min-height:390.443px;
    height : 390.443px;
@@ -77,19 +89,21 @@ font-size : 17px;
 
 .perso{
   background-color : #dedbdb;
+  width: 100%;
   height: 30px;
 }
 
 .dis{
   margin-left: auto;
   margin-right: auto;
-  width: 900px;
+  width: 60%;
   background-color: #f8f9f9 ;
   height: 325px;
 }
 
 #enbas{
   overflow: auto;
+  width: 100%;
 }
 
 .date{
@@ -98,14 +112,14 @@ font-size : 17px;
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  width : 150px;
+  width : 200px;
   border-radius: 5px;
 }
 
 .chat{
   border-radius: 3px;
-  min-width: 50px;
-  max-width : 600px;
+  min-width: 60%;
+  max-width : 60%;
   background-color :white ;
   margin-top : 10px; ;
   overflow: hidden;

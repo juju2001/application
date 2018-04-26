@@ -1,7 +1,7 @@
 <template name="default">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header" style="margin-left : auto; margin-right: auto;">
           <a class="web navbar-brand" href="#">WebSiteName</a>
         </div>
         <ul class="nav navbar-nav">
@@ -18,7 +18,9 @@
           <li class="{{isActiveRoute 'inscription'}}"><a href='/inscription'>Insciption</a></li>
           <li class="{{isActiveRoute 'contact'}}"><a href='/contact'>Contact</a></li>
           <li class="{{isActiveRoute 'deconnexion'}}"><a href='/deconnexion'>Déconnexion</a></li>
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" style="width: 100%;
+    margin-left: auto;
+    margin-right: auto;">
             <div class="input-group">
               <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
               <div class="input-group-btn">
