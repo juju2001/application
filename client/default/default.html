@@ -1,9 +1,22 @@
 <template name="default">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header" style="margin-left : auto; margin-right: auto;">
-          <a class="web navbar-brand" href="#">WebSiteName</a>
-        </div>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="{{isActiveRoute 'accueil'}}"><a href='/accueil'>Accueil</a></li>
           <li class="{{isActiveRoute 'discussion'}}  {{isActiveRoute 'message'}}">
@@ -18,9 +31,8 @@
           <li class="{{isActiveRoute 'inscription'}}"><a href='/inscription'>Insciption</a></li>
           <li class="{{isActiveRoute 'contact'}}"><a href='/contact'>Contact</a></li>
           <li class="{{isActiveRoute 'deconnexion'}}"><a href='/deconnexion'>Déconnexion</a></li>
-          <form class="navbar-form navbar-left" style="width: 100%;
-    margin-left: auto;
-    margin-right: auto;">
+          <li>
+            <form class="navbar-form navbar-left" style="margin-left:auto ; margin-right:auto; width:98%">
             <div class="input-group">
               <input type="text" name="recherche" id="recherche" class="form-control" placeholder="Search">
               <div class="input-group-btn">
@@ -30,7 +42,12 @@
               </div>
             </div>
           </form>
+        </li>
         </ul>
-      </div>
-    </nav>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+
 </template>

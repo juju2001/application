@@ -15,8 +15,6 @@ body {
   margin-right : auto;
   margin-left : auto;
   background: #f6f6f6;
-  margin-top: 10px;
-  margin-bottom: 10px;
   border: solid 1px darkgrey;
 }
 
@@ -36,17 +34,6 @@ html {
 }
 
 li {
-  width:  auto;
   text-align: center;
   font-size: 15px;
-}
-
-.navbar-header{
-  min-width: 165px;
-}
-
-.web{
-  text-align: center;
-  font-size: 20px;
-  width: 100%
 }

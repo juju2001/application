@@ -17,8 +17,8 @@ p{
     text-align: center;
     width:100%;
     overflow: auto;
-    max-height: 391.167px;
-    height: 260px;
+    max-height: 700px;
+    height: auto;
     background-color : white;
 }
 
