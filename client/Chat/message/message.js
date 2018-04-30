@@ -11,20 +11,20 @@ Template.message.rendered = function() {
   });
 
 // Déscent l'overflow toujours en bas lorsqu'on rejoind une discussion ou qu'il y ait un nouveau message
-  Message.find().observeChanges({
-    changed: function() {
-      setTimeout(function() {
-        var x = document.getElementById("enbas");
-        x.scrollTop = x.scrollHeight;
-      }, 300);
-    },
-    added: function() {
-      setTimeout(function() {
-        var x = document.getElementById("enbas");
-        x.scrollTop = x.scrollHeight;
-      }, 300);
-    }
-  });
+Message.find().observeChanges({
+  changed: function() {
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
+    }, 300);
+  },
+  added: function() {
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
+    }, 300);
+  }
+});
 
 // Controle si on change de recherche, ne nous laisse pas accéder à la page si il n'y a pas ID valabe (sécurité)
   Tracker.autorun(function() {
@@ -42,7 +42,7 @@ Template.message.rendered = function() {
     var sessionID = Session.get("userID");
     var user = Inscription.findOne({
       _id: sessionID,
-      etat: false,
+      etatCompte: false,
     });
     if (user) {
       Router.go('/connexion');
@@ -184,7 +184,9 @@ Template.message.helpers({
       userIdNow: sessionID,
       contact: contactID,
     });
-    return infoPersonne;
+    if(infoPersonne){
+        return infoPersonne;
+    }
   },
 
   // Affiche si le contact de la discussion est en ligne ou l'heure de sa dernière connexion
@@ -295,6 +297,23 @@ Template.message.helpers({
       return '<div class="date">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>';
     }
   },
+
+// Index active class autreDiscussion
+autreDiscussionActiveClass: function(index) {
+  var sessionID = Session.get("userID");
+  var contactID = Session.get("contactID");
+  var contacts = Contact.find({
+    userIdNow : sessionIS,
+  }).fetch();
+
+  var contact = this.contact;
+
+  if (index == contact) {
+    return 'bg-info'
+  }
+},
+
+
 
 
 // Détermine la couleur du message

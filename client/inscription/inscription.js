@@ -27,7 +27,7 @@ Template.inscription.events({
               email: $('#email').val(),
               pseudo: $('#pseudo').val(),
               password:$('#mdp1').val(),
-              etat: false,
+              etatCompte: false,
               statut: ""
             };
             Meteor.call('insertInscription', hash, function(error, result) {

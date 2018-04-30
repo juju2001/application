@@ -1,13 +1,10 @@
-Template.LayoutDefault.rendered = function() {
+Template.connexion.rendered = function() {
   document.title = "Connexion";
-  if (Session.get("userID") == null) {
-    Router.go('/connexion');
-  }
 };
 
 
-Template.LayoutDefault.events({
-  'submit form': function(event) {
+Template.connexion.events({
+  'click #envoyer': function(event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -34,15 +31,17 @@ Template.LayoutDefault.events({
             var hash = {
               userIdNow: controleUser._id,
               hours: now.getTime(),
+              etatSession : true,
               deconnexion: 0,
             };
             Meteor.call('connexion', hash);
-            Meteor.call('etat', userIdNow);
+            Meteor.call('etatCompte', userIdNow);
             Router.go('/accueil');
           } else {
             Session.setPersistent("userID", userIdNow);
             Meteor.call('dec0', userIdNow);
-            Meteor.call('etat', userIdNow);
+            Meteor.call('etatCompte', userIdNow);
+            Meteor.call('etatSession', userIdNow);
             Router.go('/accueil');
           }
         }

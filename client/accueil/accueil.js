@@ -36,11 +36,11 @@ Template.accueil.helpers({
       userIdNow: sessionID,
     }).fetch();
     var ids = _.pluck(amis, 'contact');
-    var connecter = Inscription.findOne({
-      _id: {
+    var connecter = Connexion.findOne({
+      userIdNow: {
         $in: ids,
       },
-      etat: true,
+      etatSession: true,
     });
     if (connecter) {
       return "Ami(s) actuellement connecté(s) !"
@@ -84,10 +84,10 @@ Template.accueil.helpers({
 // Les amis qui sont en ligne
   connecté: function() {
     var sessionID = Session.get("userID");
-    var contacts = Inscription.find({
-      etat: true,
+    var contacts = Connexion.find({
+      etatSession: true,
     }).fetch();
-    var ids = _.pluck(contacts, '_id');
+    var ids = _.pluck(contacts, 'userIdNow');
     ids.push(sessionID);
     return Contact.find({
       contact: {

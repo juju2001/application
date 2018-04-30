@@ -31,15 +31,17 @@ Template.connexion.events({
             var hash = {
               userIdNow: controleUser._id,
               hours: now.getTime(),
+              etatSession : true,
               deconnexion: 0,
             };
             Meteor.call('connexion', hash);
-            Meteor.call('etat', userIdNow);
+            Meteor.call('etatCompte', userIdNow);
             Router.go('/accueil');
           } else {
             Session.setPersistent("userID", userIdNow);
             Meteor.call('dec0', userIdNow);
-            Meteor.call('etat', userIdNow);
+            Meteor.call('etatCompte', userIdNow);
+            Meteor.call('etatSession', userIdNow);
             Router.go('/accueil');
           }
         }

@@ -36,6 +36,7 @@
                     <!-- autres discussions -->
                     <div class="ami">
                       {{#each discussion}}
+                      {{{autreDiscussionActiveClass @index}}}
                       <tr>
                         <td class="contactDiscu"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
                         <td style="width: 30px;">
@@ -57,22 +58,16 @@
                   <td class="droite">
                     <!-- colone de droite / information du contact-->
 
-                      {{#each infoPerso}}
+
+
                       <tr class="perso">
-                        <td class='text-center' style="font-size:14px ;" >{{nom}} {{prenom}}</td>
-                        <td class='text-center {{couleur}}' style="width:50%">{{lastConnexion}}</td>
+                          <td class='text-center' style="font-size:14px ;" > {{#each infoPerso}} {{nom}} {{prenom}} {{/each}}</td>
+                          <td class='text-center {{couleur}}' style="width:50%">{{#each infoPerso}} {{lastConnexion}} {{/each}}</td>
                       </tr>
-                      {{/each}}
 
                       <!-- colone de droite / messages -->
 
                       <div class="dis" id="enbas">
-                        {{#if noId}}
-                        <tr class="perso">
-                          <td class='text-center' style="font-size:14px ;width:50%" >{{nom}} {{prenom}}</td>
-                          <td class='text-center {{couleur}}' style="width:50%">{{lastConnexion}}</td>
-                        </tr>
-                        {{else}}
                         {{#each messages}}
                         {{{date @index}}}
                           <div class="chat {{color}}">
@@ -80,7 +75,6 @@
                             <div class="heure">{{heure}}</div>
                           </div>
                         {{/each}}
-                        {{/if}}
                       </div>
 
 

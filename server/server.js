@@ -92,7 +92,7 @@ Meteor.methods({
       _id: sessionID,
     }, {
       $set: {
-        etat: false,
+        etatCompte: false,
       }
     }, {
       multi: true
@@ -117,12 +117,43 @@ Meteor.methods({
 
 Meteor.methods({
 // Met à jour ton état à True quand tu te connectes
-  etat: function(userIdNow) {
+  etatCompte: function(userIdNow) {
     return Inscription.update({
       _id: userIdNow,
     }, {
       $set: {
-        etat: true,
+        etatCompte: true,
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+
+Meteor.methods({
+// Met à jour ton état à false quand tu quittes la page
+  etatSession1: function(userIdNow) {
+    return Connexion.update({
+      userIdNow: userIdNow,
+    }, {
+      $set: {
+        etatSession: false,
+      }
+    }, {
+      multi: true
+    });
+  },
+});
+
+Meteor.methods({
+// Met à jour ton état à True quand tu te connectes
+  etatSession2: function(userIdNow) {
+    return Connexion.update({
+      userIdNow: userIdNow,
+    }, {
+      $set: {
+        etatSession: true,
       }
     }, {
       multi: true

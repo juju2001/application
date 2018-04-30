@@ -17,7 +17,7 @@ Template.contact.rendered = function() {
 
     var user = Inscription.findOne({
       _id: sessionID,
-      etat: false,
+      etatCompte: false,
     });
     if (user) {
       Router.go('/connexion');

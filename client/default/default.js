@@ -1,5 +1,17 @@
 Template.default.rendered = function() {
   Session.set("recherche", '');
+    var sessionID = Session.get("userID");
+  $("html").on("mouseleave", function () {
+    var heure = new Date();
+    var heureDeco = heure.getTime();
+    Meteor.call('heureDeco', sessionID, heureDeco);
+    Meteor.call('etatSession1', sessionID);
+  });
+
+  $("html").on("mouseenter", function () {
+    Meteor.call('dec0', sessionID);
+    Meteor.call('etatSession2', sessionID);
+  });
 };
 
 Template.default.helpers({

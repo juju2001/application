@@ -3,7 +3,7 @@ Template.newContact.rendered = function() {
   if (Session.get("userID") == null) {
     Router.go('/connexion');
   }
-  
+
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
@@ -17,7 +17,7 @@ Template.newContact.rendered = function() {
 
     var user = Inscription.findOne({
       _id: sessionID,
-      etat: false,
+      etatCompte: false,
     });
     if (user) {
       Router.go('/connexion');
