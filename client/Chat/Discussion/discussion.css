@@ -22,6 +22,12 @@ p{
     background-color : white;
 }
 
+.discussionDesign{
+  width: 99.5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 td, tr{
   width: 1140px;
   vertical-align: middle;
@@ -43,4 +49,11 @@ td{
   width : 100% ;
   border-bottom: #dedede 1px solid;
   font-size : 16px
+}
+
+tr:nth-child(4n+2), tr:nth-child(4n){
+    background: #F3F3F3;
+}
+tr:nth-child(4n+1), tr:nth-child(4n-1){
+    background: white;
 }

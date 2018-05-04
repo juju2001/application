@@ -1,5 +1,4 @@
-
-  .rondInscr {
+.rondInscr {
   border-radius: 60px;
   width: 15px;
   height: 15px;
@@ -12,19 +11,19 @@
 body {
   height: 100%;
   width: 90%;
-  margin-right : auto;
-  margin-left : auto;
-  background: #f6f6f6;
-  border: solid 1px darkgrey;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  background: none;
 }
 
-.conainer{
+.conainer {
   width: 100%;
   height: 100%;
 }
 
 html {
-  background: linear-gradient(to bottom, #0000c6 150px, #dfdfdf 150px);
+  background-image: url("https://www.xmple.com/wallpaper/blue-yellow-gradient-linear-2880x1800-c2-ffffe0-1e90ff-a-30-f-14.svg");
   height: 100%;
   width: 100%;
 }
@@ -35,5 +34,14 @@ html {
 
 li {
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
+}
+
+.form-control {
+  background-color: #F9F9F9;
+  border: #a1a1a1;
+}
+
+#recherche {
+  border: solid 1px #cecece;
 }

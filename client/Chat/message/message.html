@@ -3,7 +3,7 @@
       <form>
         <div class="form-group">
           {{> default}}
-          <div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
             <table id="tableauMessage">
               <div class="tableMessage">
                 <tr  style=" max-height:390.443px; min-height:390.443px;height : 390.443px;">
@@ -11,12 +11,14 @@
                   <td  class="gauche">
 
                 <!-- barre de recherche -->
-                      <div class="bar input-group">
-                        <input type="text" name="recherche" id="rechercheContact" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                          <button class="btn btn-default" id="goRecherche" type="submit">
-                                        <i class="glyphicon glyphicon-search"></i>
-                          </button>
+                   <div style="width : 100%">
+                        <div class="bar input-group">
+                          <input type="text" name="recherche" id="rechercheContact" class="form-control" placeholder="Search">
+                          <div class="input-group-btn">
+                            <button class="btn btn-default" id="goRecherche" type="submit">
+                                          <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                          </div>
                         </div>
                       </div>
 
@@ -34,20 +36,21 @@
                     {{else}}
 
                     <!-- autres discussions -->
-                    <div class="ami">
+                    <div class="ami ">
                       {{#each discussion}}
-                      {{{autreDiscussionActiveClass @index}}}
-                      <tr>
-                        <td class="contactDiscu"><a href='message' style="color : #223966; " id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
-                        <td style="width: 30px;">
-                          {{#if notification}}
-                          <div class="rond"></div>
-                          {{/if}}
-                        </td>
-                      </tr>
-                      <tr style=" border-bottom: solid #acacac 1px;">
-                        <div class="lastMessage">{{auteur}} {{lastMessage}}</div>
-                      </tr>
+                      <div class="{{autreDiscussionActiveClass @index}}">
+                        <tr class="{{autreDiscussionActiveClass @index}}">
+                          <td class="contactDiscu {{autreDiscussionActiveClass @index}}"><a href='message' id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
+                          <td style="width: 30px;" class="{{autreDiscussionActiveClass @index}}">
+                            {{#if notification}}
+                            <div class="rond"></div>
+                            {{/if}}
+                          </td>
+                        </tr>
+                        <tr class="{{autreDiscussionActiveClass @index}}" style="border-bottom: solid #acacac 1px;">
+                          <div class="lastMessage {{autreDiscussionActiveClass @index}}">{{auteur}} {{lastMessage}}</div>
+                        </tr>
+                      </div>
                       {{/each}}
                     </div>
                     {{/if}}
@@ -61,8 +64,8 @@
 
 
                       <tr class="perso">
-                          <td class='text-center' style="font-size:14px ;" > {{#each infoPerso}} {{nom}} {{prenom}} {{/each}}</td>
-                          <td class='text-center {{couleur}}' style="width:50%">{{#each infoPerso}} {{lastConnexion}} {{/each}}</td>
+                          <td class='text-center' style="font-size:20px ;" > {{#each infoPerso}} {{nom}} {{prenom}} {{/each}}</td>
+                          <td class='text-center {{couleur}}' style="font-size : 20px ; width:50%">{{#each infoPerso}} {{lastConnexion}} {{/each}}</td>
                       </tr>
 
                       <!-- colone de droite / messages -->

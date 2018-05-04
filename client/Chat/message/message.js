@@ -303,13 +303,13 @@ autreDiscussionActiveClass: function(index) {
   var sessionID = Session.get("userID");
   var contactID = Session.get("contactID");
   var contacts = Contact.find({
-    userIdNow : sessionIS,
+    userIdNow : sessionID,
   }).fetch();
 
   var contact = this.contact;
 
-  if (index == contact) {
-    return 'bg-info'
+  if (contactID === contact) {
+      return 'bg-discussion';// 'bg-secondary';
   }
 },
 

@@ -28,10 +28,6 @@ p {
   height: 65px;
 }
 
-.container{
-  background-color : #f6f6f6;
-}
-
 .overflow{
   overflow:auto;
   width: 80%;
