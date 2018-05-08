@@ -1,39 +1,38 @@
 Template.message.rendered = function() {
   document.title = "Message";
-  if ( (Session.get("userID") == null) || (!sessionID && sessionID != find.userIdNow) ) {
+  if ((Session.get("userID") == null) || (!sessionID && sessionID != find.userIdNow)) {
     Router.go('/connexion');
   }
-
 
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
 
-// Déscent l'overflow toujours en bas lorsqu'on rejoind une discussion ou qu'il y ait un nouveau message
-Message.find().observeChanges({
-  changed: function() {
-    setTimeout(function() {
-      var x = document.getElementById("enbas");
-      x.scrollTop = x.scrollHeight;
-    }, 300);
-  },
-  added: function() {
-    setTimeout(function() {
-      var x = document.getElementById("enbas");
-      x.scrollTop = x.scrollHeight;
-    }, 300);
-  }
-});
+  // Déscent l'overflow toujours en bas lorsqu'on rejoind une discussion ou qu'il y ait un nouveau message
+  Message.find().observeChanges({
+    changed: function() {
+      setTimeout(function() {
+        var x = document.getElementById("enbas");
+        x.scrollTop = x.scrollHeight;
+      }, 300);
+    },
+    added: function() {
+      setTimeout(function() {
+        var x = document.getElementById("enbas");
+        x.scrollTop = x.scrollHeight;
+      }, 300);
+    }
+  });
 
-// Controle si on change de recherche, ne nous laisse pas accéder à la page si il n'y a pas ID valabe (sécurité)
+  // Controle si on change de recherche, ne nous laisse pas accéder à la page si il n'y a pas ID valabe (sécurité)
   Tracker.autorun(function() {
     setTimeout(function() {
       var x = document.getElementById("enbas");
       x.scrollTop = x.scrollHeight;
     }, 300);
 
-    var recherche = document.getElementById("rechercheContact");
+    var recherche = document.getElementById("rechercheContact").value;
     recherche.addEventListener("change", function(event) {
       var recherche = $('#rechercheContact').val();
       Session.set("recherche", recherche);
@@ -58,8 +57,14 @@ Template.message.helpers({
     var sessionID = Session.get("userID");
     var contact = Contact.find({
       userIdNow: sessionID,
+    }, {
+      sort: {
+        lastMessage: -1
+      }
     });
-    return contact;
+    if(contact){
+      return contact;
+    }
   },
 
   // Si il n'y a pas de contactID , il n'affiche pas de message, ni information personnelle du contact
@@ -98,7 +103,7 @@ Template.message.helpers({
     }
   },
 
-// Affiche la notification dans la liste des discussions
+  // Affiche la notification dans la liste des discussions
   notification: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -141,41 +146,6 @@ Template.message.helpers({
     }
   },
 
-  // Affiche l'auteur du dernier message dans la liste des discussions
-  auteur: function() {
-    var sessionID = Session.get("userID");
-    var contact = Contact.findOne({
-      _id: this._id,
-    });
-    var contactID = contact.contact;
-    var lastMessage = Message.findOne({
-      $or: [{
-        idClient1: sessionID,
-        idClient2: contactID,
-        luClient1: true,
-      }, {
-        idClient1: contactID,
-        idClient2: sessionID,
-        luClient2: true,
-      }],
-    }, {
-      sort: {
-        hours: -1,
-      },
-    });
-    if (lastMessage) {
-      var id = lastMessage.idClient1;
-      if (id == sessionID) {
-        return "Moi :"
-      } else {
-        var name = Inscription.findOne({
-          _id: id,
-        });
-        return name.nom + " " + name.prenom + " :";
-      }
-    }
-  },
-
   // Affiche les informations de la personne avec qui on discute
   infoPerso: function() {
     var sessionID = Session.get("userID");
@@ -184,8 +154,8 @@ Template.message.helpers({
       userIdNow: sessionID,
       contact: contactID,
     });
-    if(infoPersonne){
-        return infoPersonne;
+    if (infoPersonne) {
+      return infoPersonne;
     }
   },
 
@@ -209,22 +179,6 @@ Template.message.helpers({
         return final;
       } else {
         return "En ligne";
-      }
-    }
-  },
-
-// Détermine la couleur pour les informations de connexion du contact avec qui on parle
-  couleur: function() {
-    var contactID = Session.get("contactID");
-    var sessionID = Session.get("sessionID");
-    var deco = Connexion.findOne({
-      userIdNow: contactID,
-    });
-    if (deco) {
-      if (deco.deconnexion == 0) {
-        return 'text-success'
-      } else {
-        return 'text-danger'
       }
     }
   },
@@ -298,33 +252,72 @@ Template.message.helpers({
     }
   },
 
-// Index active class autreDiscussion
-autreDiscussionActiveClass: function(index) {
-  var sessionID = Session.get("userID");
-  var contactID = Session.get("contactID");
-  var contacts = Contact.find({
-    userIdNow : sessionID,
-  }).fetch();
+  // Index active class autreDiscussion
+  autreDiscussionActiveClass: function(index) {
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var contacts = Contact.find({
+      userIdNow: sessionID,
+    }).fetch();
 
-  var contact = this.contact;
+    var contact = this.contact;
 
-  if (contactID === contact) {
-      return 'bg-discussion';// 'bg-secondary';
-  }
-},
-
-
-
-
-// Détermine la couleur du message
-  color: function() {
-    if (this.idClient1 === Session.get("userID")) {
-      return 'text-success';
+    if (contactID === contact) {
+      return 'bg-discussion'; // 'bg-secondary';
     }
-    return 'text-danger';
   },
 
-// Affiche l'heure du message
+  // Vu dans les autres discussions
+  vuColorAutreDiscussion: function() {
+    var sessionID = Session.get("userID");
+    var contactID = this.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+      }],
+    }, {
+      sort: {
+        hours: -1
+      }
+    });
+    if (lastMessage) {
+      if (lastMessage.idClient1 == sessionID) {
+        if (lastMessage.lu == false) {
+          return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
+        } else {
+          return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
+        }
+      }
+    }
+  },
+
+
+
+  // Détermine la couleur du message
+  position: function() {
+    if (this.idClient1 === Session.get("userID")) {
+      return 'textright';
+    }
+    return 'textleft';
+  },
+
+  // Détermine la couleur du vu dans le message
+  color: function() {
+    var sessionID = Session.get("userID");
+    if (this.idClient1 == sessionID) {
+      if (this.lu == false) {
+        return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "ok";
+      } else {
+        return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "ok";
+      }
+    }
+  },
+
+  // Affiche l'heure du message
   heure: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
@@ -359,7 +352,7 @@ Template.message.events({
       userIdNow: sessionID,
     });
     var message = event.target.message.value;
-    if (message) {
+    if (message && contactID != null) {
       var now = new Date();
       var hash3 = {
         idClient1: sessionID,
@@ -374,6 +367,7 @@ Template.message.events({
       var time = now.getTime();
       Meteor.call('message', hash3, function(data3) {});
       Meteor.call('lastMessage', time, sessionID, contactID);
+      Meteor.call('lastMessage2', time, sessionID, contactID);
       $('#messages').val('');
     }
   },
@@ -397,6 +391,7 @@ Template.message.events({
     if (noFriendId) {
       Session.set("contactID", noFriendId._id)
     }
+    $('#messages').val('');
     setTimeout(function() {
       var x = document.getElementById("enbas");
       x.scrollTop = x.scrollHeight;
@@ -413,13 +408,15 @@ Template.message.events({
       Session.set("contactID", contactId);
       Router.go('/message');
     };
+    $('#messages').val('');
     setTimeout(function() {
       var x = document.getElementById("enbas");
       x.scrollTop = x.scrollHeight;
     }, 300);
   },
 
-  'click ul' : function(){
+  'click ul': function() {
     Session.set("recherche", null);
+    $('#messages').val('');
   }
 });

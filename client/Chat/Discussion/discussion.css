@@ -11,6 +11,7 @@ p{
 .discu{
   text-align: center;
   width:100%;
+  border: 1px solid #acacac;
 }
 
 .scroo{
@@ -51,9 +52,9 @@ td{
   font-size : 16px
 }
 
-tr:nth-child(4n+2), tr:nth-child(4n){
+.scroo > div > tr:nth-child(4n+2), tr:nth-child(4n){
     background: #F3F3F3;
 }
-tr:nth-child(4n+1), tr:nth-child(4n-1){
+.scroo > div > tr:nth-child(4n+1), tr:nth-child(4n-1){
     background: white;
 }

@@ -23,7 +23,7 @@ body {
 }
 
 html {
-  background-image: url("https://www.xmple.com/wallpaper/blue-yellow-gradient-linear-2880x1800-c2-ffffe0-1e90ff-a-30-f-14.svg");
+  background: url('/html.svg');
   height: 100%;
   width: 100%;
 }
@@ -38,10 +38,14 @@ li {
 }
 
 .form-control {
-  background-color: #F9F9F9;
+  background-color: white;
   border: #a1a1a1;
 }
 
 #recherche {
   border: solid 1px #cecece;
+}
+
+label {
+  color : white;
 }

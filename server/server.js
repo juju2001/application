@@ -86,6 +86,20 @@ Meteor.methods({
 });
 
 Meteor.methods({
+// Retourne les discussion par ordre du message le plus récent au plus vieux (page discussion)
+  lastMessage2: function(time, sessionID, contactID) {
+    return Contact.update({
+      contact: contactID,
+      userIdNow: sessionID,
+    }, {
+      $set: {
+        lastMessage: time,
+      }
+    });
+  },
+});
+
+Meteor.methods({
 // Met à jour ton état à False quand tu te déconnecte
   deco: function(sessionID) {
     return Inscription.update({

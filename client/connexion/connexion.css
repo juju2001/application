@@ -1,10 +1,37 @@
-#form-titre{
+#form-titre {
   text-align: center;
 }
 
-p{
-  color:#223966;
+p {
+  color: #223966;
 }
-label{
-  color:#223966;
+
+label {
+  color: white;
+}
+
+.form-group>a {
+  color: white;
+}
+
+.formConnexion {
+  width: 40%;
+  margin: auto
+  height: 400px;
+  background-color: rgba(23, 145, 231, 0.8);
+}
+
+.divConnexion {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inputConnexion {
+  border: 1px solid #acacac;
+  background: black;
+}
+
+body {
+  background-image: url('http://www.desktopwallpaperhd.net/wallpapers/6/e/windows-background-image-logon-change-leopard-snow-63934.jpg')
 }
