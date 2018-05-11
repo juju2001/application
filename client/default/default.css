@@ -45,6 +45,6 @@ li {
   border: solid 1px #cecece;
 }
 
-label {
-  color : white;
+.col-sm-3 {
+background-image: url('contact.jpg');
 }

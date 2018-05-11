@@ -4,7 +4,7 @@ Template.connexion.rendered = function() {
 
 
 Template.connexion.events({
-  'click #envoyer': function(event) {
+  'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
 

@@ -1,5 +1,5 @@
 html {
-  background: url('/html.svg');
+  background: url('/html.jpg');
 }
 
 #form-titre {
@@ -28,7 +28,7 @@ p {
 }
 
 #ajouterNewContact {
-  height: 65px;
+  height: 55px;
 }
 
 .overflow {

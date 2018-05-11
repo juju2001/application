@@ -8,7 +8,8 @@ p {
 
 label {
   color: white;
-  font-size: 13px;
+  font-size: 15px;
+  margin-top: 10px;
 }
 
 .form-group>a {

@@ -77,7 +77,7 @@ email : function(){
 });
 
 Template.newContact.events({
-  'click #enregister': function(event) {
+  'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var trouver = Inscription.findOne({

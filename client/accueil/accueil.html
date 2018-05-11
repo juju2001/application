@@ -40,7 +40,7 @@
   <!-- amis connectés / nouveaux contacts -->
   <div style="overflow-y : auto; max-height: 655px">
       {{#if amiConnecté}}
-          <h2 style="font-size:24px;">{{amiConnecté}}</h2>
+          <h2 style="font-size:24px; color: white">{{amiConnecté}}</h2>
           <div class="overflow">
             {{#each connecté}}
             <div class="col-sm-3" id="connecté">
@@ -49,26 +49,24 @@
             </div>
             {{/each}}
           </div>
-          <h1 style="font-size:24px;">{{ajouterAmi}}</h1>
+          <h1 style="font-size:24px; color: white">{{ajouterAmi}}</h1>
           <div class="overflow">
             {{#each contacter}}
             <div class="col-sm-3" id="ajouterNewContact">
+              <a id="{{_id}}" style="color : #009018 ; float : right; margin-top: 8px" class="goAjouter glyphicon glyphicon-plus"></a>
                    Nom : {{nom}}
               <br> Prénom : {{prenom}}
-              <br>
-              <a id="{{_id}}" style="color : #009018; float : right" class="goAjouter">Ajouter</a>
             </div>
             {{/each}}
           </div>
       {{else}}
-          <h2 style="font-size:24px;">{{ajouterAmi}}</h2>
+          <h2 style="font-size:24px; color: white">{{ajouterAmi}}</h2>
           <div style="overflow:auto ; width:100% ; max-height:350px ">
             {{#each contacter}}
             <div class="col-sm-3">
+              <a id="{{_id}}" style="color : #009018 ; float : right; margin-top: 8px" class="goAjouter glyphicon glyphicon-plus"></a>
               Nom : {{nom}}
          <br> Prénom : {{prenom}}
-              <br>
-              <a id="{{_id}}" style="color : #009018 ; float : right" class="goAjouter">Ajouter</a>
             </div>
             {{/each}}
           </div>
