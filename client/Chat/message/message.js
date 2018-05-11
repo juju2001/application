@@ -1,6 +1,6 @@
 Template.message.rendered = function() {
   document.title = "Message";
-  if ((Session.get("userID") == null) || (!sessionID && sessionID != find.userIdNow)) {
+  if (Session.get("userID") == null ) {
     Router.go('/connexion');
   }
 
@@ -30,13 +30,13 @@ Template.message.rendered = function() {
     setTimeout(function() {
       var x = document.getElementById("enbas");
       x.scrollTop = x.scrollHeight;
+      var recherche = document.getElementById("rechercheContact");
+      recherche.addEventListener("change", function() {
+        var recherche2 = $('#rechercheContact').val();
+        Session.set("recherche", recherche2);
+      });
     }, 300);
 
-    var recherche = document.getElementById("rechercheContact").value;
-    recherche.addEventListener("change", function(event) {
-      var recherche = $('#rechercheContact').val();
-      Session.set("recherche", recherche);
-    });
 
     var sessionID = Session.get("userID");
     var user = Inscription.findOne({
@@ -62,7 +62,7 @@ Template.message.helpers({
         lastMessage: -1
       }
     });
-    if(contact){
+    if (contact) {
       return contact;
     }
   },
@@ -84,16 +84,19 @@ Template.message.helpers({
       }).fetch();
       var ids = _.pluck(mongo, 'contact');
       var connecter = Inscription.find({
-        _id: {
-          $in: ids,
-        },
         $or: [{
           prenom: {
             $regex: recherche,
           },
+          _id: {
+            $in: ids,
+          },
         }, {
           nom: {
             $regex: recherche,
+          },
+          _id: {
+            $in: ids,
           },
         }],
       }).fetch();

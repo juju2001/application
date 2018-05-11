@@ -1,16 +1,18 @@
 <template name="connexion">
- <div class="container">
-  <form class="formConnexion">
-    <div class="form-group divConnexion">
-      {{> default}}
-      <label for="name">Pseudo :</label>
-      <input class="form-control inputConnexion" type="text" id="pseudoConnexion" name="pseudoConnexion">
-      <label for="password">password : </label>
-      <input class="form-control inputConnexion" type="password" id="passwordConnexion" name="passwordConnexion">
-      <br>
-      <a style="font-size : 17px ; color : #003399" id="envoyer">Connexion</a>
-    </div>
-  </form>
-  <a style="float : right ; font-size : 17px; color : #003399"  href="/inscription">S'inscrire</a>
-</div>
+  <html class="html">
+   <div class="container tailleConnexion" id="{{background}}">
+    <form class="formConnexion">
+      <div class="form-group divConnexion">
+        {{> default}}
+        <label for="name">Pseudo :</label>
+        <input class="form-control inputConnexion" type="text" id="pseudoConnexion" name="pseudoConnexion">
+        <label for="password">password : </label>
+        <input class="form-control inputConnexion" type="password" id="passwordConnexion" name="passwordConnexion">
+        <br>
+        <a style="font-size : 17px ; color : white" id="envoyer">Connexion</a>
+        <a style="float : right ; font-size : 17px; color : #003399; margin-top: 40px; color: white"  href="/inscription">S'inscrire</a>
+      </div>
+    </form>
+  </div>
+  </html>
 </template>

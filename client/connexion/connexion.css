@@ -8,6 +8,7 @@ p {
 
 label {
   color: white;
+  font-size: 13px;
 }
 
 .form-group>a {
@@ -15,10 +16,15 @@ label {
 }
 
 .formConnexion {
-  width: 40%;
-  margin: auto
-  height: 400px;
-  background-color: rgba(23, 145, 231, 0.8);
+  width: 30%;
+  margin: auto;
+  height: 566px;
+  background-color: rgba(105, 130, 127, 0.8);
+}
+
+.tailleConnexion {
+  width: 60%;
+  height: 807px;
 }
 
 .divConnexion {
@@ -32,6 +38,6 @@ label {
   background: black;
 }
 
-body {
-  background-image: url('http://www.desktopwallpaperhd.net/wallpapers/6/e/windows-background-image-logon-change-leopard-snow-63934.jpg')
+.html {
+  background: url("lac.jpg")  ;
 }

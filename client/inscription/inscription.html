@@ -1,8 +1,8 @@
 <template name="inscription">
-
+<html class="html">
   <div class="container">
-    <form>
-      <div class="form-group">
+    <form id="formInscription">
+      <div class="form-group" id="divInscription">
           <div class="form-group">
               {{> default}}
         </div>
@@ -21,10 +21,10 @@
         <label for="password">password :</label>
         <input class="form-control" type="password" id="mdp2" name="mdp2">
         <br>
-        <a style="font-size : 17px; color : #003399" id="inscription">S'inscrire</a>
+        <a style="font-size : 17px; color : white" id="inscription">S'inscrire</a>
+        <a style="float : right; font-size : 17px; color : white;margin-top: 40px" href="/connexion">Connexion</a>
       </div>
     </form>
-    <a style="float : right; font-size : 17px; color : #003399" href="/connexion">Connexion</a>
   </div>
-
+</html>
 </template>

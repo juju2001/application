@@ -10,20 +10,19 @@
 
 body {
   height: 100%;
-  width: 90%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   margin-top: 50px;
   background: none;
 }
 
-.conainer {
-  width: 100%;
+.container {
+  width: 90%;
   height: 100%;
 }
 
 html {
-  background: url('/html.svg');
   height: 100%;
   width: 100%;
 }

@@ -19,3 +19,7 @@
     max-height: 705px;
     height: auto;
   }
+
+  html {
+    background: url('/html.svg') ;
+  }

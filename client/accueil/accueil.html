@@ -22,14 +22,14 @@
         {{/each}}
         {{#each inscriptionFind}}
           <div class="rechercheAccueil">
-            <a class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
+            <a class="goInscription" id="{{_id}}" style=" margin-left: 10px">{{prenom}} {{nom}} {{email}}</a>
           </div>
           <br>
         {{/each}}
         {{#each messageFind}}
           <div class="rechercheAccueil">
-            <a class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
-            <p style="text-align : right ; color: #0000aa">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+            <a class="goMessage" id="{{contact}}" style="color : black; margin-left: 10px">{{message}}</a>
+            <p style="text-align : right ; color: #0000aa; margin-right: 10px;">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
           </div>
           <br>
        {{/each}}
