@@ -155,7 +155,7 @@ Meteor.methods({
         etatSession: false,
       }
     }, {
-      multi: true
+      multi: true,
     });
   },
 });
