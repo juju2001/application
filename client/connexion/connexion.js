@@ -55,4 +55,14 @@ Template.connexion.events({
       }
     }
   },
+
+  'click #showPassword': function() {
+    var x = document.getElementById("passwordConnexion");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
 });

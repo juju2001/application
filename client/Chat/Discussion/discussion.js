@@ -43,6 +43,10 @@ Template.discussion.helpers({
     var sessionID = Session.get("userID");
     var contact = Contact.find({
       userIdNow: sessionID,
+    }, {
+      sort: {
+        lastMessage: -1,
+      },
     });
     return contact;
   },

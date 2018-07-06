@@ -19,7 +19,7 @@ label {
 .formConnexion {
   width: 30%;
   margin: auto;
-  height: 566px;
+  height: 600px;
   background-color: rgba(105, 130, 127, 0.8);
 }
 
@@ -41,4 +41,10 @@ label {
 
 .html {
   background: url("lac.jpg")  ;
+}
+
+#showPassword {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
 }

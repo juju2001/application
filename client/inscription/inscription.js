@@ -12,29 +12,29 @@ Template.inscription.events({
     var pseudoDb = Inscription.findOne({
       pseudo: pseudo,
     });
-    var age= $("#age").val();
+    var age = $("#age").val();
     var nouveau = new Date(age);
     var auj = new Date();
     if (mdp1 == mdp2) {
       if (mdp1.length > 3) {
         if (!pseudoDb) {
-          if (nouveau.getFullYear() < auj.getFullYear()  && nouveau.getFullYear() < auj.getFullYear()-14 ) {
+          if (nouveau.getFullYear() < auj.getFullYear() && nouveau.getFullYear() < auj.getFullYear() - 14) {
             var hash = {
               nom: $('#name').val(),
               prenom: $('#prenom').val(),
               date: $('#age').val(),
-              age : auj.getFullYear() - nouveau.getFullYear(),
+              age: auj.getFullYear() - nouveau.getFullYear(),
               email: $('#email').val(),
               pseudo: $('#pseudo').val(),
-              password:$('#mdp1').val(),
+              password: $('#mdp1').val(),
               etatCompte: false,
               statut: ""
             };
             Meteor.call('insertInscription', hash, function(error, result) {
-                alert("Merci de l'inscription !");
-                Router.go('/connexion');
+              alert("Merci de l'inscription !");
+              Router.go('/connexion');
             });
-          }else{
+          } else {
             alert("Date invalide !");
           }
         } else {
@@ -48,4 +48,27 @@ Template.inscription.events({
       alert("Vos mots de passe ne sont pas identiques ! ");
     }
   },
+
+  'click #showPassword1': function() {
+    event.preventDefault();
+    event.stopPropagation();
+    var x = document.getElementById("mdp1");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
+  'click #showPassword2': function() {
+    event.preventDefault();
+    event.stopPropagation();
+    var x = document.getElementById("mdp2");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
 });

@@ -354,7 +354,67 @@ Template.message.events({
     var find = Connexion.findOne({
       userIdNow: sessionID,
     });
-    var message = event.target.message.value;
+    var message = $('#messages').val();
+    if (message && contactID != null) {
+      var now = new Date();
+      var hash3 = {
+        idClient1: sessionID,
+        idClient2: contactID,
+        message: message,
+        lu: false,
+        notification: true,
+        hours: now.getTime(),
+        luClient1: true,
+        luClient2: true,
+      };
+      var time = now.getTime();
+      Meteor.call('message', hash3, function(data3) {});
+      Meteor.call('lastMessage', time, sessionID, contactID);
+      Meteor.call('lastMessage2', time, sessionID, contactID);
+      $('#messages').val('');
+    }
+  },
+
+  // Envoie le message et l'enregistre dans la MongoDB
+  'click #sendMessage': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var find = Connexion.findOne({
+      userIdNow: sessionID,
+    });
+    var message = $('#messages').val();
+    if (message && contactID != null) {
+      var now = new Date();
+      var hash3 = {
+        idClient1: sessionID,
+        idClient2: contactID,
+        message: message,
+        lu: false,
+        notification: true,
+        hours: now.getTime(),
+        luClient1: true,
+        luClient2: true,
+      };
+      var time = now.getTime();
+      Meteor.call('message', hash3, function(data3) {});
+      Meteor.call('lastMessage', time, sessionID, contactID);
+      Meteor.call('lastMessage2', time, sessionID, contactID);
+      $('#messages').val('');
+    }
+  },
+
+  // Envoie le message et l'enregistre dans la MongoDB
+  'click #boutonMessage': function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var find = Connexion.findOne({
+      userIdNow: sessionID,
+    });
+    var message = $('#messages').val();
     if (message && contactID != null) {
       var now = new Date();
       var hash3 = {
