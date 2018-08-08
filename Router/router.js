@@ -31,12 +31,12 @@ Router.route('/inscription', {
   name: 'inscription'
 });
 
-Router.route('/message', {
-  name: 'message'
-});
-
 Router.route('/newContact', {
   name: 'newContact'
+});
+
+Router.route('/message', {
+  name: 'message'
 });
 
 Router.route('/modifier', {
