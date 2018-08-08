@@ -1,13 +1,3 @@
-.rondInscr {
-  border-radius: 60px;
-  width: 15px;
-  height: 15px;
-  background-color: #2E54F3;
-  z-index: 1;
-  position: absolute;
-  right: 3px;
-}
-
 body {
   height: 100%;
   width: 100%;
@@ -17,14 +7,37 @@ body {
   background: none;
 }
 
+.col-sm-3 {
+  background-image: url('contact.jpg');
+}
+
 .container {
   width: 90%;
   height: 100%;
 }
 
+#defaultRecherche {
+  border: solid 1px #cecece;
+}
+
+.defaultForm {
+  margin-left: auto;
+  margin-right: auto;
+  width: 98%;
+}
+
+.defaultNav {
+  border-bottom: 1px solid #00AED1;
+}
+
 html {
   height: 100%;
   width: 100%;
+}
+
+.form-control {
+  background-color: white;
+  border: #a1a1a1;
 }
 
 .form-group {
@@ -36,15 +49,12 @@ li {
   font-size: 17px;
 }
 
-.form-control {
-  background-color: white;
-  border: #a1a1a1;
-}
-
-#recherche {
-  border: solid 1px #cecece;
-}
-
-.col-sm-3 {
-background-image: url('contact.jpg');
+.rondInscr {
+  border-radius: 60px;
+  width: 15px;
+  height: 15px;
+  background-color: #2E54F3;
+  z-index: 1;
+  position: absolute;
+  right: 3px;
 }
