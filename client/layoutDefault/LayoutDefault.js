@@ -1,12 +1,21 @@
-Template.LayoutDefault.rendered = function() {
-  document.title = "LayoutDefault";
+Template.layoutDefault.rendered = function() {
+  document.title = "Connexion";
 };
 
-Template.LayoutDefault.events({
+Template.layoutDefault.events({
+
+  'click #showPassword': function() {
+    var x = document.getElementById("passwordConnexion");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
   'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
-
     var pseudoConnexion = $('#pseudoConnexion').val();
     var passwordConnexion = $('#passwordConnexion').val();
     var controleUser = Inscription.findOne({
@@ -30,37 +39,22 @@ Template.LayoutDefault.events({
             if (!alreadyConnexion) {
               Meteor.call('deco', Session.get("userID"));
               Meteor.call('etatSession1', Session.get("userID"));
-              if (Session.get("userID")) {
-                Session.get('userID', controleUser._id);
-                console.log("hello1");
-              } else {
-                Session.setPersistent('userID',controleUser._id);
-                console.log("hello2");
-              }
               var hash = {
-                userIdNow: controleUser._id,
+                userIdNow: userIdNow,
                 hours: now.getTime(),
                 etatSession: true,
                 deconnexion: 0,
               };
+              Session.setPersistent('userID', userIdNow);
               Meteor.call('connexion', hash);
-              Meteor.call('etatCompte', Session.get("userID"));
-              Meteor.call('etatSession2', Session.get("userID"));
+              Meteor.call('etatCompte', userIdNow);
               Router.go('/accueil');
             } else {
               Meteor.call('etatSession1', Session.get("userID"));
               Meteor.call('deco', Session.get("userID"));
-              Meteor.call('etatSession1', Session.get("userID"));
-              if (Session.get("userID")) {
-                Session.get('userID', controleUser._id);
-                console.log("Salut1");
-              } else {
-                Session.setPersistent("userID", controleUser._id);
-                console.log("Salut2");
-              }
-              Meteor.call('dec0', Session.get("userID"));
-              Meteor.call('etatCompte', Session.get("userID"));
-              Meteor.call('etatSession2', Session.get("userID"));
+              Session.setPersistent('userID', userIdNow);
+              Meteor.call('dec0', userIdNow);
+              Meteor.call('etatCompte', userIdNow);
               Router.go('/accueil');
             }
           }
@@ -70,4 +64,5 @@ Template.LayoutDefault.events({
       }
     }
   },
+
 });

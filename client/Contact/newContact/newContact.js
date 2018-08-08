@@ -12,7 +12,7 @@ Template.newContact.rendered = function() {
     Router.go('/connexion');
   }
 
-  Tracker.autorun(function () {
+  Tracker.autorun(function() {
     var sessionID = Session.get("userID");
 
     var user = Inscription.findOne({
@@ -27,53 +27,56 @@ Template.newContact.rendered = function() {
 
 
 Template.newContact.helpers({
-  nom : function(){
+
+  age: function() {
     var newContact = Inscription.findOne({
-      _id : Session.get("newContactID"),
+      _id: Session.get("newContactID"),
     });
-    if(newContact){
+    if (newContact) {
+      var date = newContact.date;
+      var birthday = new Date(date);
+      var nouveau = new Date();
+      var age = new Number(nouveau.getTime() - birthday.getTime()) / 31557600000;
+      return Math.floor(age);
+    }
+  },
+
+  email: function() {
+    var newContact = Inscription.findOne({
+      _id: Session.get("newContactID"),
+    });
+    if (newContact) {
+      return newContact.email;
+    }
+  },
+
+  nom: function() {
+    var newContact = Inscription.findOne({
+      _id: Session.get("newContactID"),
+    });
+    if (newContact) {
       return newContact.nom;
     }
   },
 
-prenom : function(){
-  var newContact = Inscription.findOne({
-    _id : Session.get("newContactID"),
-  });
-  if(newContact){
-    return newContact.prenom;
-  }
-},
+  prenom: function() {
+    var newContact = Inscription.findOne({
+      _id: Session.get("newContactID"),
+    });
+    if (newContact) {
+      return newContact.prenom;
+    }
+  },
 
-age : function(){
-  var newContact = Inscription.findOne({
-    _id : Session.get("newContactID"),
-  });
-  if(newContact){
-    var date = newContact.date;
-    var birthday = new Date(date);
-    var nouveau = new Date();
-    var age =new Number(nouveau.getTime() - birthday.getTime()) / 31557600000;
-    return Math.floor(age);
-  }
-},
-
-pseudo : function(){
-  var newContact = Inscription.findOne({
-    _id : Session.get("newContactID"),
-  });
-  if(newContact){
-    return newContact.pseudo;
-  }
-},
-email : function(){
-  var newContact = Inscription.findOne({
-    _id : Session.get("newContactID"),
-  });
-  if(newContact){
-    return newContact.email;
-  }
-},
+  pseudo: function() {
+    var newContact = Inscription.findOne({
+      _id: Session.get("newContactID"),
+    });
+    if (newContact) {
+      return newContact.pseudo;
+    }
+  },
+  
 });
 
 Template.newContact.events({
@@ -84,28 +87,28 @@ Template.newContact.events({
       _id: Session.get("newContactID"),
     });
     if (trouver) {
-        var nom = trouver.nom;
-        var prenom = trouver.prenom;
-        var pseudo = trouver.pseudo;
-        var age = trouver.age;
-        var date = trouver.date;
-        var email = trouver.email;
-        var now = new Date();
-        var hash5 = {
-          userIdNow: Session.get("userID"),
-          nom: nom,
-          prenom: prenom,
-          age: age,
-          date : date,
-          email: email,
-          pseudo: pseudo,
-          contact: Session.get("newContactID"),
-          hours: now.getTime(),
-          lastMessage : 0,
-        };
-        Meteor.call('newContact', hash5)
-        Router.go('/contact');
-                Session.set("newContactID", null);
-      }
+      var nom = trouver.nom;
+      var prenom = trouver.prenom;
+      var pseudo = trouver.pseudo;
+      var age = trouver.age;
+      var date = trouver.date;
+      var email = trouver.email;
+      var now = new Date();
+      var hash5 = {
+        userIdNow: Session.get("userID"),
+        nom: nom,
+        prenom: prenom,
+        age: age,
+        date: date,
+        email: email,
+        pseudo: pseudo,
+        contact: Session.get("newContactID"),
+        hours: now.getTime(),
+        lastMessage: 0,
+      };
+      Meteor.call('newContact', hash5)
+      Router.go('/contact');
+      Session.set("newContactID", null);
+    }
   },
 });

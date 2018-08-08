@@ -1,17 +1,46 @@
-#form-titre{
+#enregister {
+  font-size: 17px;
+  color: green;
+}
+
+#form-titre {
   text-align: center;
- }
+}
 
- p{
-   color:#223966;
- }
+.newContactAttributs {
+  color: #223966;
+  margin-left: 5px;
+}
 
- #enregister{
-   font-size: 17px;
-   color : green;
- }
+.newContactButton {
+  color: white;
+  border: none;
+  background: transparent;
+  font-size: 17px;
+}
 
-#retour{
+.newContactDivSize {
+  border: 1px solid #239CE0;
+  background: #F9FCFC;
+}
+
+.newContactImage {
   float: right;
-  color:red;
+  height: 155px;
+  margin-top: -130px;
+  margin-right: 10%;
+}
+
+.newContactLinkContact {
+  color: white;
+  font-size: 17px;
+}
+
+p {
+  color: #223966;
+}
+
+#retour {
+  float: right;
+  color: red;
 }

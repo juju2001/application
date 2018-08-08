@@ -6,16 +6,16 @@
     </div>
   </form>
     <div class="contact">
-      {{#each contacter}}
+      {{#each contactList}}
       <div class="col-sm-3">
         Nom : {{nom}}
         <br> Prénom : {{prenom}}
-        <br> Age : {{anni}}
+        <br> Age : {{contactAge}}
         <br> Date naissance : {{date}}
         <br> E-mail : {{email}}
         <br> Pseudo : {{pseudo}}
         <br>
-        <a href="" class="supprimer" style="color : red ; float : right" id="{{contact}}">Supprimer</a>
+        <a href="" class="supprimer contactDelete" id="{{contact}}">Supprimer</a>
       </div>
       {{/each}}
     </div>

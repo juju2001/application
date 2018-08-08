@@ -28,19 +28,8 @@ Template.contact.rendered = function() {
 
 Template.contact.helpers({
 
-// Retourne la liste de nos contacts
-  contacter: function() {
-    var sessionID = Session.get("userID");
-    var last = Contact.find({
-      userIdNow: sessionID,
-    }).fetch();
-    if (last) {
-      return last;
-    };
-  },
-
-//  Retourne l'âge exacte d'un contact
-  anni: function() {
+  //  Retourne l'âge exacte d'un contact
+  contactAge: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
@@ -59,11 +48,23 @@ Template.contact.helpers({
       };
     }
   },
+
+  // Retourne la liste de nos contacts
+  contactList: function() {
+    var sessionID = Session.get("userID");
+    var last = Contact.find({
+      userIdNow: sessionID,
+    }).fetch();
+    if (last) {
+      return last;
+    };
+  },
+
 });
 
 Template.contact.events({
 
-// Supprimer un contact
+  // Supprimer un contact
   'click .supprimer': function(event) {
     event.preventDefault();
     event.stopPropagation();
