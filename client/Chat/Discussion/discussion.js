@@ -38,7 +38,26 @@ Template.discussion.rendered = function() {
 
 Template.discussion.helpers({
 
-// Affiche les discussions
+  // Couleur vert/rouge pour si la personne est connectée ou pas
+  couleur: function() {
+    var sessionID = Session.get("userID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var ids = id.contact;
+    var deco = Connexion.findOne({
+      userIdNow: ids,
+    });
+    if (deco) {
+      if (deco.deconnexion == 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }
+    }
+  },
+
+  // Affiche les discussions
   discussion: function() {
     var sessionID = Session.get("userID");
     var contact = Contact.find({
@@ -51,59 +70,7 @@ Template.discussion.helpers({
     return contact;
   },
 
-// Affiche les discussions des personnes avec qui on est pas ami
-  noFriend: function() {
-    var sessionID = Session.get("userID");
-    var messages = Message.find({
-      idClient2: sessionID,
-      lu: false,
-      luClient2: true,
-    }).fetch();
-    var ids = _.pluck(messages, 'idClient1');
-    var alreadyFriend = Contact.findOne({
-      userIdNow: sessionID,
-      contact: {
-        $in: ids,
-      },
-    });
-    if (!alreadyFriend) {
-      return Inscription.find({
-        _id: {
-          $in: ids,
-        },
-      });
-    }
-  },
-
-//notification dans le tableau discussion
-  notification: function() {
-    var sessionID = Session.get("userID");
-    var id = Contact.findOne({
-      _id: this._id,
-    });
-    var notification = Message.findOne({
-      idClient1: id.contact,
-      idClient2: sessionID,
-      lu: false,
-    });
-    if (notification) {
-      return notification;
-    }
-  },
-
-//Enlève la notifcation dans la navbar
-  notif: function() {
-    var sessionID = Session.get("userID");
-    var session = Message.findOne({
-      idClient2: sessionID,
-      notification: true,
-    });
-    if (session) {
-      return session;
-    }
-  },
-
-// Affiche l'heure de la nouvelle discussion
+  // Affiche l'heure de la nouvelle discussion
   lastConnexion: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -139,22 +106,55 @@ Template.discussion.helpers({
     }
   },
 
-// Couleur vert/rouge pour si la personne est connectée ou pas
-  couleur: function() {
+  // Affiche les discussions des personnes avec qui on est pas ami
+  noFriend: function() {
+    var sessionID = Session.get("userID");
+    var messages = Message.find({
+      idClient2: sessionID,
+      lu: false,
+      luClient2: true,
+    }).fetch();
+    var ids = _.pluck(messages, 'idClient1');
+    var alreadyFriend = Contact.findOne({
+      userIdNow: sessionID,
+      contact: {
+        $in: ids,
+      },
+    });
+    if (!alreadyFriend) {
+      return Inscription.find({
+        _id: {
+          $in: ids,
+        },
+      });
+    }
+  },
+
+  //Enlève la notifcation dans la navbar
+  notif: function() {
+    var sessionID = Session.get("userID");
+    var session = Message.findOne({
+      idClient2: sessionID,
+      notification: true,
+    });
+    if (session) {
+      return session;
+    }
+  },
+
+  //notification dans le tableau discussion
+  notification: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });
-    var ids = id.contact;
-    var deco = Connexion.findOne({
-      userIdNow: ids,
+    var notification = Message.findOne({
+      idClient1: id.contact,
+      idClient2: sessionID,
+      lu: false,
     });
-    if (deco) {
-      if (deco.deconnexion == 0) {
-        return 'text-success'
-      } else {
-        return 'text-danger'
-      }
+    if (notification) {
+      return notification;
     }
   },
 
@@ -162,7 +162,7 @@ Template.discussion.helpers({
 
 Template.discussion.events({
 
-// Rejoind la page message
+  // Rejoind la page message
   'click .goDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -182,7 +182,7 @@ Template.discussion.events({
     }
   },
 
-// Ajoute le nouveau contact avant d'aller à la page message
+  // Ajoute le nouveau contact avant d'aller à la page message
   'click .goNewDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -199,7 +199,7 @@ Template.discussion.events({
     }
   },
 
-// Supprime la discussion
+  // Supprime la discussion
   'click #supp': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -217,7 +217,7 @@ Template.discussion.events({
     }
   },
 
-// Supprime la discussion de la personne avec qui on est pas ami
+  // Supprime la discussion de la personne avec qui on est pas ami
   'click #suppNoFriend': function(event) {
     event.preventDefault();
     event.stopPropagation();

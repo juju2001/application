@@ -1,60 +1,78 @@
-
-
-  #form-titre{
-  text-align: center;
+.discussionColor223966 {
+  color: #223966;
 }
 
-p{
-  color:#223966;
-}
-
-.discu{
-  text-align: center;
-  width:100%;
-  border: 1px solid #acacac;
-}
-
-.scroo{
-    text-align: center;
-    width:100%;
-    overflow: auto;
-    max-height: 700px;
-    height: auto;
-    background-color : white;
-}
-
-.discussionDesign{
+.discussionDesign {
   width: 99.5%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-td, tr{
+.discussionDevDelete {
+  text-align: center;
+  border-bottom: #dedede 1px solid;
+}
+
+.discussionEach {
+  height: 50px;
+  width: 100%;
+  border-bottom: #dedede 1px solid;
+  font-size: 16px;
+}
+
+.discussionNoFriend {
+  background-color: #99e9ff;
+  height: 50px;
+}
+
+.discussionNotificationRond {
+  border-radius: 60px;
+  width: 15px;
+  height: 15px;
+  background-color: #2E54F3;
+}
+
+.discussionRed {
+  color: red;
+}
+
+.discussionScroll {
+  text-align: center;
+  width: 100%;
+  overflow: auto;
+  max-height: 700px;
+  height: auto;
+  background-color: white;
+}
+
+.discussionScroll>div>tr:nth-child(4n+2), tr:nth-child(4n) {
+  background: #F3F3F3;
+}
+
+.discussionScroll>div>tr:nth-child(4n+1), tr:nth-child(4n-1) {
+  background: white;
+}
+
+.discussionTable {
+  text-align: center;
+  width: 100%;
+  border: 1px solid #acacac;
+}
+
+#form-titre {
+  text-align: center;
+}
+
+p {
+  color: #223966;
+}
+
+td, tr {
   width: 1140px;
   vertical-align: middle;
 }
 
-td{
+td {
   text-align: center;
-  margin:0 auto;
-}
-
-.rond{
-  border-radius: 60px;
-  width:15px;
-  height: 15px;
-  background-color: #2E54F3;
-}
-.discuss{
-  height:50px  ;
-  width : 100% ;
-  border-bottom: #dedede 1px solid;
-  font-size : 16px
-}
-
-.scroo > div > tr:nth-child(4n+2), tr:nth-child(4n){
-    background: #F3F3F3;
-}
-.scroo > div > tr:nth-child(4n+1), tr:nth-child(4n-1){
-    background: white;
+  margin: 0 auto;
 }
