@@ -177,8 +177,27 @@ Template.message.helpers({
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
         var hours = date.getHours();
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
         var minutes = date.getMinutes();
-        var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        var today = new Date();
+        if(day == today.getDate()) {
+          if(month == today.getMonth()+1) {
+            if(year == today.getFullYear()) {
+              var final = "Hors ligne depuis " + "  " + hours + ":" + minutes;
+            } else {
+              var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+            }
+          } else {
+            var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+          }
+        } else {
+          var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        }
         return final;
       } else {
         return "En ligne";
