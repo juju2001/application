@@ -1,33 +1,47 @@
- p {
-   color: #223966;
- }
+.html {
+  background: url("lac.jpg");
+}
 
- #formInscription {
-   width: 30%;
-   margin-right: auto;
-   margin-left: auto;
-   height: 600px;
-   background-color: rgba(105, 130, 127, 0.8);
- }
+.inscriptionButton {
+  font-size: 17px;
+  color: white;
+  background: transparent;
+  border: none
+}
 
- #divInscription {
-   width: 60%;
-   margin-left: auto;
-   margin-right: auto;
- }
+#inscriptionDiv {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
- .html {
-   background: url("lac.jpg")  ;
- }
+#inscriptionForm {
+  width: 30%;
+  margin-right: auto;
+  margin-left: auto;
+  height: 600px;
+  background-color: rgba(105, 130, 127, 0.8);
+}
 
- #showPassword1 {
-   border: transparent;
-   background: transparent;
-   font-size: 12px;
- }
+.inscriptionLinkConnexion {
+  float : right;
+  font-size : 17px;
+  color : white;
+  margin-top: 30px
+}
 
- #showPassword2 {
-   border: transparent;
-   background: transparent;
-   font-size: 12px;
- }
+p {
+  color: #223966;
+}
+
+#showPassword1 {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
+}
+
+#showPassword2 {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
+}

@@ -1,8 +1,8 @@
 <template name="inscription">
 <html class="html">
   <div class="container">
-    <form id="formInscription">
-      <div class="form-group" id="divInscription">
+    <form id="inscriptionForm">
+      <div class="form-group" id="inscriptionDiv">
           <div class="form-group">
               {{> default}}
         </div>
@@ -25,8 +25,8 @@
         <button id="showPassword2">Show Password</button>
         <br>
         <br>
-        <input style="font-size : 17px; color : white; background: transparent; border: none" id="inscription" value="S'inscrire" type="submit">
-        <a style="float : right; font-size : 17px; color : white;margin-top: 30px" href="/connexion">Connexion</a>
+        <input class="inscriptionButton" id="inscription" value="S'inscrire" type="submit">
+        <a class="inscriptionLinkConnexion" href="/connexion">Connexion</a>
       </div>
     </form>
   </div>

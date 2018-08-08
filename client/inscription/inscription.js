@@ -3,6 +3,29 @@ Template.inscription.rendered = function() {
 };
 
 Template.inscription.events({
+
+  'click #showPassword1': function() {
+    event.preventDefault();
+    event.stopPropagation();
+    var x = document.getElementById("mdp1");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
+  'click #showPassword2': function() {
+    event.preventDefault();
+    event.stopPropagation();
+    var x = document.getElementById("mdp2");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
   'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -46,28 +69,6 @@ Template.inscription.events({
 
     } else {
       alert("Vos mots de passe ne sont pas identiques ! ");
-    }
-  },
-
-  'click #showPassword1': function() {
-    event.preventDefault();
-    event.stopPropagation();
-    var x = document.getElementById("mdp1");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  },
-
-  'click #showPassword2': function() {
-    event.preventDefault();
-    event.stopPropagation();
-    var x = document.getElementById("mdp2");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
     }
   },
 
