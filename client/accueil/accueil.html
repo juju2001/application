@@ -13,58 +13,57 @@
   {{#if Motrecherche}}
 
   <!-- Recherche -->
-      <div style="overflow:auto ; max-height: 625px ; width : 100%">
-        <h2 style="text-align:center; font-size:40px; color: white">{{Motrecherche}}</h2>
+      <div class="rechercheaccueilDiv">
+        <h2 class="accueilRechercheMot accueilTextWhite">{{Motrecherche}}</h2>
         {{#each recherche}}
-          <div style="background-color : green;">
+          <div>
             {{prenom}} {{nom}} {{age}} {{email}}
           </div>
         {{/each}}
-        {{#each inscriptionFind}}
-          <div class="rechercheAccueil">
-            <a class="goInscription" id="{{_id}}" style=" margin-left: 10px">{{prenom}} {{nom}} {{email}}</a>
+        {{#each findInscription}}
+          <div class="accueilRecherche">
+            <a class="goInscription accueilRechercheMessage" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
           </div>
           <br>
         {{/each}}
-        {{#each messageFind}}
-          <div class="rechercheAccueil">
-            <a class="goMessage" id="{{contact}}" style="color : black; margin-left: 10px">{{message}}</a>
-            <p style="text-align : right ; color: #0000aa; margin-right: 10px;">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+        {{#each findMessage}}
+          <div class="accueilRecherche">
+            <a class="goMessage accueilRechercheMessage" id="{{contact}}">{{message}}</a>
+            <p class="accueilRechercheMessageBy">De : {{rechercheMessageAuthor}} {{rechercheMessageHours}}</p>
           </div>
           <br>
        {{/each}}
       </div>
 
    {{else}}
-  <h1 style="color : white">Bonjour {{prenomAccueil}}, </h1>
+  <h1 class="accueilTextWhite">Bonjour {{prenomAccueil}}, </h1>
   <!-- amis connectés / nouveaux contacts -->
-  <div style="overflow-y : auto; max-height: 655px">
-      {{#if amiConnecté}}
-          <h2 style="font-size:24px; color: white">{{amiConnecté}}</h2>
+  <div class="accueilusersOnline">
+      {{#if friendsOnline}}
           <div class="overflow">
-            {{#each connecté}}
-            <div class="col-sm-3" id="connecté">
+            {{#each friendsOnline}}
+            <div class="col-sm-3" id="friendsOnline">
               Nom : {{nom}}
-        <br> Prénom : {{prenom}} 
+        <br> Prénom : {{prenom}}
             </div>
             {{/each}}
           </div>
-          <h1 style="font-size:24px; color: white">{{ajouterAmi}}</h1>
+          {{#if anthonerUsers}}
           <div class="overflow">
-            {{#each contacter}}
-            <div class="col-sm-3" id="ajouterNewContact">
-              <a id="{{_id}}" style="color : #009018 ; float : right; margin-top: 8px" class="goAjouter glyphicon glyphicon-plus"></a>
+            {{#each anthonerUsers}}
+            <div class="col-sm-3" id="anthonerUsers">
+              <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilAnthonerUsers"></a>
                    Nom : {{nom}}
               <br> Prénom : {{prenom}}
             </div>
             {{/each}}
           </div>
+          {{/if}}
       {{else}}
-          <h2 style="font-size:24px; color: white">{{ajouterAmi}}</h2>
-          <div style="overflow:auto ; width:100% ; max-height:350px ">
-            {{#each contacter}}
+          <div class="accueilAnotherUsers">
+            {{#each anthonerUsers}}
             <div class="col-sm-3">
-              <a id="{{_id}}" style="color : #009018 ; float : right; margin-top: 8px" class="goAjouter glyphicon glyphicon-plus"></a>
+              <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilAnthonerUsersText"></a>
               Nom : {{nom}}
          <br> Prénom : {{prenom}}
             </div>
