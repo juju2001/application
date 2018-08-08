@@ -3,10 +3,19 @@ Template.connexion.rendered = function() {
 };
 
 Template.connexion.events({
+  
+  'click #showPassword': function() {
+    var x = document.getElementById("passwordConnexion");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  },
+
   'submit form': function(event) {
     event.preventDefault();
     event.stopPropagation();
-
     var pseudoConnexion = $('#pseudoConnexion').val();
     var passwordConnexion = $('#passwordConnexion').val();
     var controleUser = Inscription.findOne({
@@ -53,15 +62,6 @@ Template.connexion.events({
       } else {
         alert("Le psueudo ou le mot de passe n'est pas juste !");
       }
-    }
-  },
-
-  'click #showPassword': function() {
-    var x = document.getElementById("passwordConnexion");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
     }
   },
 

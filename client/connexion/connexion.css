@@ -1,9 +1,50 @@
+.connexionButton {
+  font-size: 17px;
+  color: white;
+  background: transparent;
+  border: none;
+}
+
+.connexionDivlittle {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.connexionDivSize {
+  width: 60%;
+  height: 807px;
+}
+
+.connexionLinkInscription {
+  float: right;
+  font-size: 17px;
+  margin-top: 40px;
+  color: white;
+}
+
+.connexionForm {
+  width: 30%;
+  margin: auto;
+  height: 600px;
+  background-color: rgba(105, 130, 127, 0.8);
+}
+
+.connexionInput {
+  border: 1px solid #acacac;
+  background: black;
+}
+
+.form-group>a {
+  color: white;
+}
+
 #form-titre {
   text-align: center;
 }
 
-p {
-  color: #223966;
+.html {
+  background: url("lac.jpg");
 }
 
 label {
@@ -12,35 +53,8 @@ label {
   margin-top: 10px;
 }
 
-.form-group>a {
-  color: white;
-}
-
-.formConnexion {
-  width: 30%;
-  margin: auto;
-  height: 600px;
-  background-color: rgba(105, 130, 127, 0.8);
-}
-
-.tailleConnexion {
-  width: 60%;
-  height: 807px;
-}
-
-.divConnexion {
-  width: 60%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.inputConnexion {
-  border: 1px solid #acacac;
-  background: black;
-}
-
-.html {
-  background: url("lac.jpg")  ;
+p {
+  color: #223966;
 }
 
 #showPassword {
