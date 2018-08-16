@@ -12,7 +12,7 @@
 
                 <!-- barre de recherche -->
                    <div>
-                        <div class="bar input-group">
+                        <div class="messageBarRecherche input-group">
                           <input style="border : 1px solid #cecece ; background-color:white" type="text" name="recherche" id="rechercheContact" class="form-control" placeholder="Search">
                           <div class="input-group-btn">
                             <button class="btn btn-default" id="goRecherche" type="submit">
@@ -25,10 +25,10 @@
                     <!-- affichage recherche ou amis -->
                     {{#if recherche}}
                     <!-- recherche -->
-                    <div class="ami">
+                    <div class="messageAmi">
                       {{#each recherche}}
                       <tr>
-                        <td class="rechercheContact"><a href='message' style="color : #223966; " id="{{_id}}" class="goDiscution">{{nom}} {{prenom}}</a></td>
+                        <td class="rechercheContact"><a href='message' style="color : #223966; " id="{{_id}}" class="goDiscutionRecherche">{{nom}} {{prenom}}</a></td>
                       </tr>
                       {{/each}}
                     </div>
@@ -36,22 +36,22 @@
                     {{else}}
 
                     <!-- autres discussions -->
-                    <div class="ami ">
+                    <div class="messageAmi ">
                       {{#each discussion}}
-                      <div class="{{autreDiscussionActiveClass @index}}" style="border-bottom : solid 1px #acacac">
-                        <tr class="{{autreDiscussionActiveClass @index}}">
-                          <td class="contactDiscu {{autreDiscussionActiveClass @index}}"><a href='message' id="{{contact}}" class="goDiscu">{{nom}} {{prenom}}</a></td>
-                          <td style="width: 30px;" class="{{autreDiscussionActiveClass @index}}">
-                            {{#if notification}}
+                      <div class="{{messageAnotherDiscussionActiveClass @index}}" style="border-bottom : solid 1px #acacac">
+                        <tr class="{{messageAnotherDiscussionActiveClass @index}}">
+                          <td class="messageContacAnthoner {{messageAnotherDiscussionActiveClass @index}}"><a href='message' id="{{contact}}" class="goDiscussionSecondaire">{{nom}} {{prenom}}</a></td>
+                          <td style="width: 30px;" class="{{messageAnotherDiscussionActiveClass @index}}">
+                            {{#if notificationAnthonerDiscussion}}
                             <div class="rond"></div>
                             {{/if}}
                           </td>
                         </tr>
-                        <tr class="{{autreDiscussionActiveClass @index}}">
-                          {{#if lastMessage}}
-                          <div class="{{vuColorAutreDiscussion}}"></div>
+                        <tr class="{{messageAnotherDiscussionActiveClass @index}}">
+                          {{#if lastMessageAnthonerDiscussion}}
+                          <div class="{{messageAnothersDiscussionGlyphiconColor}}"></div>
                           {{/if}}
-                          <div class="lastMessage {{autreDiscussionActiveClass @index}}">{{lastMessage}}</div>
+                          <div class="lastMessage {{messageAnotherDiscussionActiveClass @index}}">{{lastMessageAnthonerDiscussion}}</div>
                         </tr>
                       </div>
                       {{/each}}
@@ -67,20 +67,20 @@
 
 
                       <tr class="perso">
-                          <td class='text-center' style="font-size:20px" > {{#each infoPerso}} {{nom}} {{prenom}} {{/each}}</td>
-                          <td class='text-center' style="font-size : 20px ">{{#each infoPerso}} {{lastConnexion}} {{/each}}</td>
+                          <td class='text-center' style="font-size:20px" > {{#each messageFriendInformation}} {{nom}} {{prenom}} {{/each}}</td>
+                          <td class='text-center' style="font-size : 20px ">{{#each messageFriendInformation}} {{messageFriendLastConnexion}} {{/each}}</td>
                       </tr>
 
                       <!-- colone de droite / messages -->
                       <div class="dis" id="enbas">
                         {{#each messages}}
-                        {{{date @index}}}
-                          <div class="chat {{position}}">
+                        {{{messageDateSend @index}}}
+                          <div class="messageChatDiv {{messageSide}}">
                             <div class="message">
                               {{message}}
                             </div>
-                            <div class="{{color}}"></div>
-                            <div class="heure">{{heure}}</div>
+                            <div class="{{messageThisDiscussionGlyphiconColor}}"></div>
+                            <div class="messageHeure">{{messageHeure}}</div>
                           </div>
                         {{/each}}
                         <br>
@@ -90,8 +90,8 @@
                       <!-- colone de droite / envoyer et écrire message-->
                       <tr class="form-groupe" style=" background-color:#EFEFEF; height:80px; background:transparent ">
                         <tr style="width : 100%; height:80px;">
-                          <td style="width : 85%"><input type="text" class="form-control bouton"  placeholder="Ecrire un message" name="message" id="messages"></td>
-                          <td><button id="boutonMessage" type="submit" ><div type="submit" id="sendMessage" class="glyphicon glyphicon-send"></div></button></td>
+                          <td style="width : 85%"><input type="text" class="form-control messageBoutonSend"  placeholder="Ecrire un message" name="message" id="messages"></td>
+                          <td><button id="messageButton" type="submit" ><div type="submit" id="messageSend" class="glyphicon glyphicon-send"></div></button></td>
                         </tr>
                       </tr>
 

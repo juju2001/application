@@ -48,11 +48,11 @@
             </div>
             {{/each}}
           </div>
-          {{#if anthonerUsers}}
+          {{#if anotherUsers}}
           <div class="overflow">
-            {{#each anthonerUsers}}
-            <div class="col-sm-3" id="anthonerUsers">
-              <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilAnthonerUsers"></a>
+            {{#each anotherUsers}}
+            <div class="col-sm-3" id="anotherUsers">
+              <a id="{{_id}}" class="pull right goAjouter glyphicon glyphicon-plus accueilanotherUsers"></a>
                    Nom : {{nom}}
               <br> Prénom : {{prenom}}
             </div>
@@ -61,9 +61,9 @@
           {{/if}}
       {{else}}
           <div class="accueilAnotherUsers">
-            {{#each anthonerUsers}}
+            {{#each anotherUsers}}
             <div class="col-sm-3">
-              <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilAnthonerUsersText"></a>
+              <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilanotherUsersText"></a>
               Nom : {{nom}}
          <br> Prénom : {{prenom}}
             </div>

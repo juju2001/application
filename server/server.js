@@ -39,6 +39,20 @@ Meteor.methods({
     });
   },
 
+  // Met à jour pour j'ai vu la notification navbar
+  discussionNotNoti: function(sessionID) {
+    return Message.update({
+      idClient2: sessionID,
+      notification: true,
+    }, {
+      $set: {
+        notification: false,
+      }
+    }, {
+      multi: true,
+    });
+  },
+
   // Met à jour ton état à True quand tu te connectes
   etatCompte: function(userIdNow) {
     return Inscription.update({
@@ -146,20 +160,6 @@ Meteor.methods({
     });
   },
 
-  // Met à jour pour j'ai vu la notification navbar
-  notNoti: function(sessionID) {
-    return Message.update({
-      idClient2: sessionID,
-      notification: true,
-    }, {
-      $set: {
-        notification: false,
-      }
-    }, {
-      multi: true,
-    });
-  },
-
   // Supprime ton ami quand tu le veux
   supprimerContact: function(sessionID, contactID) {
     return Contact.remove({
@@ -169,7 +169,7 @@ Meteor.methods({
   },
 
   // Supprime ta discussion mais l'autre utilisateur peut toujours la lire
-  supprimerMessage1: function(sessionID, contactID) {
+  discussionSupprimerMessage1: function(sessionID, contactID) {
     return Message.update({
       idClient1: sessionID,
       idClient2: contactID,
@@ -183,7 +183,7 @@ Meteor.methods({
   },
 
   // Supprime ta discussion mais l'autre utilisateur peut toujours la lire
-  supprimerMessage2: function(sessionID, contactID) {
+  discussionSupprimerMessage2: function(sessionID, contactID) {
     return Message.update({
       idClient1: contactID,
       idClient2: sessionID,

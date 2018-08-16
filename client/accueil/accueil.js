@@ -18,7 +18,7 @@ Template.accueil.rendered = function() {
 Template.accueil.helpers({
 
   // D'autres utilisateurs que l'on pourrait ajouter
-  anthonerUsers: function() {
+  anotherUsers: function() {
     var sessionID = Session.get("userID");
 
     var contacts = Contact.find({

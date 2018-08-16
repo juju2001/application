@@ -20,7 +20,7 @@ Template.discussion.rendered = function() {
     notification: true,
   }).fetch();
 
-  Meteor.call('notNoti', sessionID);
+  Meteor.call('discussionNotNoti', sessionID);
 
 
   Tracker.autorun(function() {
@@ -209,8 +209,8 @@ Template.discussion.events({
     });
     if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
       var contactID = id.contact;
-      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
-        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+      Meteor.call('discussionSupprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('discussionSupprimerMessage2', sessionID, contactID, function() {
           alert("Discussio supprimée !");
         });
       });
@@ -227,8 +227,8 @@ Template.discussion.events({
     });
     if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
       var contactID = id._id;
-      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
-        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+      Meteor.call('discussionSupprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('discussionSupprimerMessage2', sessionID, contactID, function() {
           alert("Discussio supprimée !");
         });
       });

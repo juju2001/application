@@ -1,16 +1,13 @@
-#anthonerUsers {
-  height: 55px;
+.accueilanotherUsers {
+  overflow: auto;
+  width: 100%;
+  max-height: 350px;
+  height: 16px;
 }
 
-.accueilAnthonerUsers {
-  overflow:auto;
-  width:100%;
-  max-height:350px
-}
-
-.accueilAnthonerUsersText {
-  color : #009018;
-  float : right;
+.accueilanotherUsersText {
+  color: #009018;
+  float: right;
   margin-top: 8px
 }
 
@@ -19,29 +16,29 @@
   width: 95%;
   margin-right: auto;
   margin-left: auto;
-  border-radius : 5px;
+  border-radius: 5px;
 }
 
 .rechercheaccueilDiv {
-  overflow:auto;
+  overflow: auto;
   max-height: 625px;
-  width : 100%;
+  width: 100%;
 }
 
 .accueilRechercheMessage {
-  color : black;
+  color: black;
   margin-left: 10px;
 }
 
 .accueilRechercheMessageBy {
-  text-align : right;
+  text-align: right;
   color: #0000aa;
   margin-right: 10px;
 }
 
 .accueilRechercheMot {
-  text-align:center;
-  font-size:40px;
+  text-align: center;
+  font-size: 40px;
 }
 
 .accueilTextWhite {
@@ -49,7 +46,7 @@
 }
 
 .accueilusersOnline {
-  overflow-y : auto;
+  overflow-y: auto;
   max-height: 655px
 }
 

@@ -1,6 +1,6 @@
 Template.message.rendered = function() {
   document.title = "Message";
-  if (Session.get("userID") == null ) {
+  if (Session.get("userID") == null) {
     Router.go('/connexion');
   }
 
@@ -49,7 +49,6 @@ Template.message.rendered = function() {
   });
 };
 
-
 Template.message.helpers({
 
   // Retourne les discussions
@@ -67,63 +66,8 @@ Template.message.helpers({
     }
   },
 
-  // Si il n'y a pas de contactID , il n'affiche pas de message, ni information personnelle du contact
-  noId: function() {
-    var contactID = Session.get("contactID");
-    if (contactID == undefined) {
-      return "rien";
-    }
-  },
-
-  // Affiche les recherches dans la liste des discussion
-  recherche: function() {
-    var recherche = Session.get("recherche");
-    if (recherche != null && recherche != '') {
-      var mongo = Contact.find({
-        userIdNow: Session.get("userID"),
-      }).fetch();
-      var ids = _.pluck(mongo, 'contact');
-      var connecter = Inscription.find({
-        $or: [{
-          prenom: {
-            $regex: recherche,
-          },
-          _id: {
-            $in: ids,
-          },
-        }, {
-          nom: {
-            $regex: recherche,
-          },
-          _id: {
-            $in: ids,
-          },
-        }],
-      }).fetch();
-      if (connecter) {
-        return connecter;
-      }
-    }
-  },
-
-  // Affiche la notification dans la liste des discussions
-  notification: function() {
-    var sessionID = Session.get("userID");
-    var id = Contact.findOne({
-      _id: this._id,
-    });
-    var notification = Message.findOne({
-      idClient1: id.contact,
-      idClient2: sessionID,
-      lu: false,
-    });
-    if (notification) {
-      return notification;
-    }
-  },
-
   // Retourne le dernier message avec le contact dans la liste des discussions
-  lastMessage: function() {
+  lastMessageAnthonerDiscussion: function() {
     var sessionID = Session.get("userID");
     var contact = Contact.findOne({
       _id: this._id,
@@ -149,62 +93,6 @@ Template.message.helpers({
     }
   },
 
-  // Affiche les informations de la personne avec qui on discute
-  infoPerso: function() {
-    var sessionID = Session.get("userID");
-    var contactID = Session.get("contactID");
-    var infoPersonne = Contact.find({
-      userIdNow: sessionID,
-      contact: contactID,
-    });
-    if (infoPersonne) {
-      return infoPersonne;
-    }
-  },
-
-  // Affiche si le contact de la discussion est en ligne ou l'heure de sa dernière connexion
-  lastConnexion: function() {
-    var contactID = Session.get("contactID");
-    var sessionID = Session.get("sessionID");
-    var deco = Connexion.findOne({
-      userIdNow: contactID,
-    });
-    if (deco) {
-      if (deco.deconnexion != 0) {
-        var deconnexion = deco.deconnexion;
-        var date = new Date(deconnexion);
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var hours = date.getHours();
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
-        var minutes = date.getMinutes();
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-        var today = new Date();
-        if(day == today.getDate()) {
-          if(month == today.getMonth()+1) {
-            if(year == today.getFullYear()) {
-              var final = "Hors ligne depuis " + "  " + hours + ":" + minutes;
-            } else {
-              var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-            }
-          } else {
-            var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-          }
-        } else {
-          var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
-        }
-        return final;
-      } else {
-        return "En ligne";
-      }
-    }
-  },
-
   // Retourne les messages
   messages: function() {
     var sessionID = Session.get("userID");
@@ -227,8 +115,51 @@ Template.message.helpers({
     }).fetch();
   },
 
+  // Index active class autreDiscussion
+  messageAnotherDiscussionActiveClass: function(index) {
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var contacts = Contact.find({
+      userIdNow: sessionID,
+    }).fetch();
+
+    var contact = this.contact;
+
+    if (contactID === contact) {
+      return 'bg-discussion'; // 'bg-secondary';
+    }
+  },
+
+  // Vu dans les autres discussions
+  messageAnothersDiscussionGlyphiconColor: function() {
+    var sessionID = Session.get("userID");
+    var contactID = this.contact;
+    var lastMessage = Message.findOne({
+      $or: [{
+        idClient1: sessionID,
+        idClient2: contactID,
+      }, {
+        idClient1: contactID,
+        idClient2: sessionID,
+      }],
+    }, {
+      sort: {
+        hours: -1
+      }
+    });
+    if (lastMessage) {
+      if (lastMessage.idClient1 == sessionID) {
+        if (lastMessage.lu == false) {
+          return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
+        } else {
+          return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
+        }
+      }
+    }
+  },
+
   // Retourne la date du jour de la discussion avec l'Index
-  date: function(index) {
+  messageDateSend: function(index) {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
     var messages = Message.find({
@@ -261,7 +192,7 @@ Template.message.helpers({
     }
 
     if (index === 0) {
-      return '<div class="date">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>'
+      return '<div class="messageDateSend">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>'
     }
 
     var dayBefore = new Date(messages[index - 1].hours);
@@ -270,77 +201,68 @@ Template.message.helpers({
     dayBefore.setHours(0, 0, 0, 0);
 
     if (dayBefore < day) {
-      return '<div class="date">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>';
+      return '<div class="messageDateSend">' + jour + "/" + mois + "/" + day.getFullYear() + '</div>';
     }
   },
 
-  // Index active class autreDiscussion
-  autreDiscussionActiveClass: function(index) {
+  // Affiche si le contact de la discussion est en ligne ou l'heure de sa dernière connexion
+  messageFriendLastConnexion: function() {
+    var contactID = Session.get("contactID");
+    var sessionID = Session.get("sessionID");
+    var deco = Connexion.findOne({
+      userIdNow: contactID,
+    });
+    if (deco) {
+      if (deco.deconnexion != 0) {
+        var deconnexion = deco.deconnexion;
+        var date = new Date(deconnexion);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var hours = date.getHours();
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        var minutes = date.getMinutes();
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        var today = new Date();
+        if (day == today.getDate()) {
+          if (month == today.getMonth() + 1) {
+            if (year == today.getFullYear()) {
+              var final = "Hors ligne depuis " + "  " + hours + ":" + minutes;
+            } else {
+              var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+            }
+          } else {
+            var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+          }
+        } else {
+          var final = "Hors ligne depuis " + day + "/" + month + "/" + year + "  " + hours + ":" + minutes;
+        }
+        return final;
+      } else {
+        return "En ligne";
+      }
+    }
+  },
+
+  // Affiche les informations de la personne avec qui on discute
+  messageFriendInformation: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
-    var contacts = Contact.find({
+    var infoPersonne = Contact.find({
       userIdNow: sessionID,
-    }).fetch();
-
-    var contact = this.contact;
-
-    if (contactID === contact) {
-      return 'bg-discussion'; // 'bg-secondary';
-    }
-  },
-
-  // Vu dans les autres discussions
-  vuColorAutreDiscussion: function() {
-    var sessionID = Session.get("userID");
-    var contactID = this.contact;
-    var lastMessage = Message.findOne({
-      $or: [{
-        idClient1: sessionID,
-        idClient2: contactID,
-      }, {
-        idClient1: contactID,
-        idClient2: sessionID,
-      }],
-    }, {
-      sort: {
-        hours: -1
-      }
+      contact: contactID,
     });
-    if (lastMessage) {
-      if (lastMessage.idClient1 == sessionID) {
-        if (lastMessage.lu == false) {
-          return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
-        } else {
-          return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "discussionOK";
-        }
-      }
-    }
-  },
-
-
-
-  // Détermine la couleur du message
-  position: function() {
-    if (this.idClient1 === Session.get("userID")) {
-      return 'textright';
-    }
-    return 'textleft';
-  },
-
-  // Détermine la couleur du vu dans le message
-  color: function() {
-    var sessionID = Session.get("userID");
-    if (this.idClient1 == sessionID) {
-      if (this.lu == false) {
-        return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "ok";
-      } else {
-        return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "ok";
-      }
+    if (infoPersonne) {
+      return infoPersonne;
     }
   },
 
   // Affiche l'heure du message
-  heure: function() {
+  messageHeure: function() {
     var sessionID = Session.get("userID");
     var contactID = Session.get("contactID");
     var message = Message.findOne({
@@ -358,6 +280,73 @@ Template.message.helpers({
     }
     var time = heure + ":" + minute;
     return time;
+  },
+
+  // Détermine la couleur du message
+  messageSide: function() {
+    if (this.idClient1 === Session.get("userID")) {
+      return 'textright';
+    }
+    return 'textleft';
+  },
+
+  // Détermine la couleur du vu dans le message
+  messageThisDiscussionGlyphiconColor: function() {
+    var sessionID = Session.get("userID");
+    if (this.idClient1 == sessionID) {
+      if (this.lu == false) {
+        return "colorGray" + " " + "glyphicon glyphicon-ok" + " " + "ok";
+      } else {
+        return "colorBlue" + " " + "glyphicon glyphicon-ok" + " " + "ok";
+      }
+    }
+  },
+
+  // Affiche la notification dans la liste des discussions
+  notificationAnthonerDiscussion: function() {
+    var sessionID = Session.get("userID");
+    var id = Contact.findOne({
+      _id: this._id,
+    });
+    var notification = Message.findOne({
+      idClient1: id.contact,
+      idClient2: sessionID,
+      lu: false,
+    });
+    if (notification) {
+      return notification;
+    }
+  },
+
+  // Affiche les recherches dans la liste des discussion
+  recherche: function() {
+    var recherche = Session.get("recherche");
+    if (recherche != null && recherche != '') {
+      var mongo = Contact.find({
+        userIdNow: Session.get("userID"),
+      }).fetch();
+      var ids = _.pluck(mongo, 'contact');
+      var connecter = Inscription.find({
+        $or: [{
+          prenom: {
+            $regex: recherche,
+          },
+          _id: {
+            $in: ids,
+          },
+        }, {
+          nom: {
+            $regex: recherche,
+          },
+          _id: {
+            $in: ids,
+          },
+        }],
+      }).fetch();
+      if (connecter) {
+        return connecter;
+      }
+    }
   },
 
 });
@@ -395,7 +384,7 @@ Template.message.events({
   },
 
   // Envoie le message et l'enregistre dans la MongoDB
-  'click #sendMessage': function(event) {
+  'click #messageSend': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var sessionID = Session.get("userID");
@@ -423,39 +412,30 @@ Template.message.events({
       $('#messages').val('');
     }
   },
-
-  // Envoie le message et l'enregistre dans la MongoDB
-  'click #boutonMessage': function(event) {
+  // Rejoind la discussion depuis une recherche dans la liste de contact
+  'click .goDiscutionRecherche': function(event) {
+    Session.set("recherche", null);
     event.preventDefault();
     event.stopPropagation();
-    var sessionID = Session.get("userID");
-    var contactID = Session.get("contactID");
-    var find = Connexion.findOne({
-      userIdNow: sessionID,
-    });
-    var message = $('#messages').val();
-    if (message && contactID != null) {
-      var now = new Date();
-      var hash3 = {
-        idClient1: sessionID,
-        idClient2: contactID,
-        message: message,
-        lu: false,
-        notification: true,
-        hours: now.getTime(),
-        luClient1: true,
-        luClient2: true,
-      };
-      var time = now.getTime();
-      Meteor.call('message', hash3, function(data3) {});
-      Meteor.call('lastMessage', time, sessionID, contactID);
-      Meteor.call('lastMessage2', time, sessionID, contactID);
-      $('#messages').val('');
-    }
+    var contactId = this._id;
+    if (contactId) {
+      Session.set("contactID", contactId);
+      Router.go('/message');
+    };
+    $('#messages').val('');
+    setTimeout(function() {
+      var x = document.getElementById("enbas");
+      x.scrollTop = x.scrollHeight;
+    }, 300);
+  },
+
+  'click ul': function() {
+    Session.set("recherche", null);
+    $('#messages').val('');
   },
 
   // Rejoind une discussion depuis la liste des contacts
-  'click .goDiscu': function(event) {
+  'click .goDiscussionSecondaire': function(event) {
     Session.set("recherche", null);
     event.preventDefault();
     event.stopPropagation();
@@ -480,25 +460,34 @@ Template.message.events({
     }, 300);
   },
 
-  // Rejoind la discussion depuis une recherche dans la liste de contact
-  'click .goDiscution': function(event) {
-    Session.set("recherche", null);
+  // Envoie le message et l'enregistre dans la MongoDB
+  'click #messageButton': function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var contactId = this._id;
-    if (contactId) {
-      Session.set("contactID", contactId);
-      Router.go('/message');
-    };
-    $('#messages').val('');
-    setTimeout(function() {
-      var x = document.getElementById("enbas");
-      x.scrollTop = x.scrollHeight;
-    }, 300);
+    var sessionID = Session.get("userID");
+    var contactID = Session.get("contactID");
+    var find = Connexion.findOne({
+      userIdNow: sessionID,
+    });
+    var message = $('#messages').val();
+    if (message && contactID != null) {
+      var now = new Date();
+      var hash3 = {
+        idClient1: sessionID,
+        idClient2: contactID,
+        message: message,
+        lu: false,
+        notification: true,
+        hours: now.getTime(),
+        luClient1: true,
+        luClient2: true,
+      };
+      var time = now.getTime();
+      Meteor.call('message', hash3, function(data3) {});
+      Meteor.call('lastMessage', time, sessionID, contactID);
+      Meteor.call('lastMessage2', time, sessionID, contactID);
+      $('#messages').val('');
+    }
   },
 
-  'click ul': function() {
-    Session.set("recherche", null);
-    $('#messages').val('');
-  }
 });
