@@ -45,17 +45,10 @@
   color: white;
 }
 
-.accueilusersOnline {
-  overflow-y: auto;
-  max-height: 655px
-}
-
-.col-sm-3 {
-  margin-right: 75px;
+#anotherUsers {
   margin-top: 20px;
   border-radius: 3px;
-  background-color: #F9FCFC;
-  border: 2px solid #239CE0;
+  background-color: #F9FCFC;  
 }
 
 #form-titre {
@@ -64,7 +57,6 @@
 }
 
 #friendsOnline {
-  margin-right: 95px;
   margin-top: 20px;
   border-radius: 3px;
   background-color: #FFFFFF;

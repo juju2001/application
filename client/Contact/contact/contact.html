@@ -5,19 +5,23 @@
       {{> default}}
     </div>
   </form>
-    <div class="contact">
+    <div class="col-lg-12 col-md-12 col-sm-12">
       {{#each contactList}}
-      <div class="col-sm-3">
-        Nom : {{nom}}
-        <br> Prénom : {{prenom}}
-        <br> Age : {{contactAge}}
-        <br> Date naissance : {{date}}
-        <br> E-mail : {{email}}
-        <br> Pseudo : {{pseudo}}
-        <br>
-        <a href="" class="supprimer contactDelete" id="{{contact}}">Supprimer</a>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+          <div class="panel panel-info" id="taille">
+            <div  id="noBackground">
+              Nom : {{nom}}
+              <br> Prénom : {{prenom}}
+              <br> Age : {{contactAge}}
+              <br> Date naissance : {{date}}
+              <br> E-mail : {{email}}
+              <br> Pseudo : {{pseudo}}
+              <br>
+              <a href="" class="supprimer contactDelete" id="{{contact}}">Supprimer</a>
+            </div>
+          </div>
       </div>
       {{/each}}
     </div>
-</div>
+  </div>
 </template>
