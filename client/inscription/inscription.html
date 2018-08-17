@@ -1,7 +1,7 @@
 <template name="inscription">
 <html class="html">
   <div class="container">
-    <form id="inscriptionForm">
+    <form class="col-sm-12 col-md-12 col-lg-12">
       <div class="form-group" id="inscriptionDiv">
           <div class="form-group">
               {{> default}}
@@ -18,11 +18,11 @@
         <input class="form-control" type="text" id="pseudo" name="pseudo">
         <label for="password">password : </label>
         <input class="form-control" type="password" id="mdp1" name="mdp1">
-        <button id="showPassword1">Show Password</button>
+        <a id="showPassword1">Show Password</a>
         <br>
         <label for="password">password :</label>
         <input class="form-control" type="password" id="mdp2" name="mdp2">
-        <button id="showPassword2">Show Password</button>
+        <a id="showPassword2">Show Password</a>
         <br>
         <br>
         <input class="inscriptionButton" id="inscription" value="S'inscrire" type="submit">

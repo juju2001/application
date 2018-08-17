@@ -29,6 +29,12 @@ Template.default.helpers({
       }
     }
   },
+
+  sessionId: function() {
+    if(Session.get('userID') == null || Session.get('userID') == undefined) {
+      return true;
+    }
+  }
 });
 
 

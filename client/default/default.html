@@ -14,12 +14,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">WebSiteName</a>
+        <a class="navbar-brand" href="#">Menu</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          {{#if sessionId}}
+          <li class="{{isActiveRoute 'connexion'}}"><a href='/connexion'>Connexion</a></li>
+          <li class="{{isActiveRoute 'inscription'}}"><a href='/inscription'>Insciption</a></li>
+          {{else}}
           <li class="{{isActiveRoute 'accueil'}}"><a href='/accueil'>Accueil</a></li>
           <li class="{{isActiveRoute 'discussion'}}  {{isActiveRoute 'message'}}">
             {{#if notif}}
@@ -29,8 +33,6 @@
             <a href='/discussion'>Discussion</a>
             {{/if}}
           </li>
-          <li class="{{isActiveRoute 'connexion'}}"><a href='/connexion'>Connexion</a></li>
-          <li class="{{isActiveRoute 'inscription'}}"><a href='/inscription'>Insciption</a></li>
           <li class="{{isActiveRoute 'contact'}}"><a href='/contact'>Contact</a></li>
           <li class="{{isActiveRoute 'deconnexion'}}"><a href='/deconnexion'>Déconnexion</a></li>
           <li>
@@ -45,6 +47,7 @@
             </div>
           </form>
         </li>
+        {{/if}}
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

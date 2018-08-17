@@ -50,7 +50,6 @@ Template.message.rendered = function() {
 };
 
 Template.message.helpers({
-
   // Retourne les discussions
   discussion: function() {
     var sessionID = Session.get("userID");

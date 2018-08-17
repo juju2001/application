@@ -2,12 +2,6 @@
   color: #223966;
 }
 
-.discussionDesign {
-  width: 99.5%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 .discussionDevDelete {
   text-align: center;
   border-bottom: #dedede 1px solid;
@@ -15,15 +9,17 @@
 
 .discussionEach {
   height: 50px;
-  width: 100%;
   border-bottom: #dedede 1px solid;
-  font-size: 16px;
-  background: blue;
+  font-size: 16px;  
+}
+
+.discussion-max-height {
+  max-height: calc(100vh - 70px - 80px - 40px - 40px);
 }
 
 .discussionNoFriend {
-  background-color: #99e9ff;
   height: 50px;
+  background: #bce8f1;
 }
 
 .discussionNotificationRond {
@@ -37,27 +33,9 @@
   color: red;
 }
 
-.discussionScroll {
+#discussionTitle {
   text-align: center;
-  width: 100%;
-  overflow: auto;
-  max-height: 700px;
-  height: auto;
-  background-color: white;
-}
-
-.discussionScroll>div>tr:nth-child(4n+2), tr:nth-child(4n) {
-  background: #F3F3F3;
-}
-
-.discussionScroll>div>tr:nth-child(4n+1), tr:nth-child(4n-1) {
-  background: white;
-}
-
-.discussionTable {
-  text-align: center;
-  width: 100%;
-  border: 1px solid #acacac;
+  font-size: 35px;
 }
 
 #form-titre {

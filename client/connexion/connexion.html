@@ -1,7 +1,7 @@
 <template name="connexion">
   <html class="html">
-   <div class="container connexionDivSize" id="{{background}}">
-    <form class="connexionForm">
+   <div class="container col-sm-12 col-md-12 col-lg-12 connexionDivSize" id="{{background}}">
+    <form>
       <div class="form-group connexionDivlittle">
         {{> default}}
         <label for="name">Pseudo :</label>
@@ -9,11 +9,11 @@
         <label for="password">password : </label>
         <input class="form-control connexionInput" type="password" id="passwordConnexion" name="passwordConnexion">
         <br>
-        <button id="showPassword">Show Password</button>
+        <a href="" id="showPassword">Show Password</a>
         <br>
         <br>
         <input class="connexionButton" id="envoyer" value="Connexion" type="submit">
-        <a class="connexionLinkInscription"  href="/inscription">S'inscrire</a>
+        <a class="connexionLinkInscription pull-right"  href="/inscription">S'inscrire</a>
       </div>
     </form>
   </div>

@@ -4,38 +4,40 @@
     <div class="form-group">
        {{> default}}
        <div class="col-lg-12 col-md-12 col-sm-12">
-         <table>
-           <div>
-             <div>
-               {{#each noFriend}}
-               <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
-               <tr class="discussionNoFriend">
-                 <td><a href='message' class="goNewDiscu discussionColor223966" id="{{_id}}">{{nom}} {{prenom}}</a></td>
-                 <td>Nouvelle discussion</td>
-                 <td></td>
-                 <td class="discussionDevDelete"><a class="discussionRed" id="suppNoFriend" href="">Supprimer</a></td>
-               </tr>
-               {{/each}}
-             </div>
-               <div>
-                 {{#each discussion}}
-                 <!-- Affiche les discussions -->
-                 <tr class="discussionEach">
-                   <td><a href='message' class="goDiscu discussionColor223966" id="{{contact}}">{{nom}} {{prenom}}</a></td>
-                   <td> {{#if notification}}
-                     <div class="discussionNotificationRond"></div>
-                     {{/if}}
-                   </td>
-                   <td id="infos" class="{{couleur}} text-center">
-                     {{lastConnexion}}
-                   </td>
-                   <td class="text-center"><a class="discussionRed" id="supp" href="">Supprimer</a></td>
-                 </tr>
-                 {{/each}}
-               </div>
-           </div>
-         </table>
-        <br>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <h3 id="discussionTitle">Discussion</h3>
+              </div>
+              </div>
+              <div class="discussion-max-height">
+                <table>
+                  {{#each noFriend}}
+                  <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
+                  <tr class="discussionNoFriend">
+                    <td><a href='message' class="goNewDiscu discussionColor223966" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+                    <td>Nouvelle discussion</td>
+                    <td></td>
+                    <td class="discussionDevDelete"><a class="discussionRed" id="suppNoFriend" href="">Supprimer</a></td>
+                  </tr>
+                  {{/each}}
+                  {{#each discussion}}
+                  <!-- Affiche les discussions -->
+                  <tr class="discussionEach">
+                    <td><a href='message' class="goDiscu discussionColor223966" id="{{contact}}">{{nom}} {{prenom}}</a></td>
+                    <td> {{#if notification}}
+                      <div class="discussionNotificationRond"></div>
+                      {{/if}}
+                    </td>
+                    <td id="infos" class="{{couleur}} text-center">
+                      {{lastConnexion}}
+                    </td>
+                    <td class="text-center"><a class="discussionRed" id="supp" href="">Supprimer</a></td>
+                  </tr>
+                  {{/each}}
+                </table>
+              </div>
+          </div>
        </div>
     </div>
   </div>

@@ -15,14 +15,6 @@
   margin-right: auto;
 }
 
-#inscriptionForm {
-  width: 30%;
-  margin-right: auto;
-  margin-left: auto;
-  height: 600px;
-  background-color: rgba(105, 130, 127, 0.8);
-}
-
 .inscriptionLinkConnexion {
   float : right;
   font-size : 17px;

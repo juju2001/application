@@ -16,18 +16,10 @@
   height: 807px;
 }
 
-.connexionLinkInscription {
-  float: right;
+.connexionLinkInscription {  
   font-size: 17px;
   margin-top: 40px;
   color: white;
-}
-
-.connexionForm {
-  width: 30%;
-  margin: auto;
-  height: 600px;
-  background-color: rgba(105, 130, 127, 0.8);
 }
 
 .connexionInput {
