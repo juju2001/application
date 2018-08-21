@@ -89,10 +89,10 @@ p {
 
 .droite {
   margin-left: auto;
-  width: 80%;
   max-height: 390.443px;
   min-height: 390.443px;
   height: 390.443px;
+  max-width: 900px;
   background-color: #f8f9f9;
   background: url('/paysage.jpg');
 }
@@ -106,7 +106,6 @@ p {
   background-color: white;
   margin-top: 100px;
   vertical-align: top;
-  width: 20%;
   background: #F3F3F3;
 }
 
@@ -206,6 +205,10 @@ p {
   background-color: #2E54F3;
   margin-left: auto;
   margin-right: auto;
+}
+
+#tableauMessage {
+  border: solid 1px #00aeff;
 }
 
 .textright {

@@ -1,3 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) .container {
+  width: 1170px;
+}
+
+@media (min-width: 992px) .container {
+  width: 970px;
+}
+
+@media (min-width: 768px) .container {
+  width: 750px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 body {
   height: 100%;
   padding-top: 50px;
@@ -6,11 +29,6 @@ body {
 
 .col-sm-3 {
   background-image: url('contact.jpg');
-}
-
-.container {
-  width: 90%;
-  height: 100%;
 }
 
 #defaultRecherche {
