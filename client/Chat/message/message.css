@@ -22,10 +22,10 @@ p {
 
 .messageBarRecherche {
   width: 90%;
-  margin-top: 20px;
-  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 12px;
+  padding-top: 12px;
 }
 
 .messageBoutonSend {
@@ -41,7 +41,6 @@ p {
   max-width: 600px;
   background-color: white;
   margin-top: 10px;
-  ;
   overflow: hidden;
   display: table;
   margin-left: 30px;
@@ -88,11 +87,7 @@ p {
 }
 
 .droite {
-  margin-left: auto;
-  max-height: 390.443px;
-  min-height: 390.443px;
-  height: 390.443px;
-  max-width: 900px;
+  height: 100%;
   background-color: #f8f9f9;
   background: url('/paysage.jpg');
 }
@@ -102,9 +97,8 @@ p {
 }
 
 .gauche {
-  height: 700px;
+  height: 100%;
   background-color: white;
-  margin-top: 100px;
   vertical-align: top;
   background: #F3F3F3;
 }
@@ -113,6 +107,12 @@ p {
   color: #223966;
   font-size: 19px;
   margin-left: 10px;
+}
+
+.infoPerso {
+  width: 50%;
+  text-align: center;
+  height: 100%;
 }
 
 .lastMessage {
@@ -132,7 +132,6 @@ p {
 }
 
 #messages {
-  width: 97%;
   border-radius: 25px;
   margin-bottom: 7px;
 }
@@ -141,9 +140,6 @@ p {
   background: transparent;
   color: transparent;
   border: transparent;
-  width: 100px;
-  height: 74px;
-  margin-right: -19px;
 }
 
 .messageHeure {
@@ -207,10 +203,19 @@ p {
   margin-right: auto;
 }
 
+.tableauMessage {
+  padding-top: 50px;
+  overflow-y: auto;
+}
+
 #tableauMessage {
   border: solid 1px #00aeff;
 }
 
 .textright {
   margin-left: auto;
+}
+
+.wap {
+  padding-bottom: 60px;
 }

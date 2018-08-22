@@ -2,23 +2,29 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 1200px) .container {
-  width: 1170px;
-}
-
-@media (min-width: 992px) .container {
-  width: 970px;
-}
-
-@media (min-width: 768px) .container {
-  width: 750px;
-}
-
 .container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: inherit;
+    max-height: 100%;
+  }
+
+  .wap {
+    overflow-y: auto;
+    padding: inherit;
+  }
+
+  .tableauMessage {
+    padding-top: inherit;
+    width: 100%;
+    padding-left: 10px;
+  }
 }
 
 body {
