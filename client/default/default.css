@@ -16,28 +16,80 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .discussionColor223966 {
-    padding-left: inherit;
+@media screen and (max-width: 450px) {
+  body {
+    width: 100%;
   }
   .container {
     padding: inherit;
     padding-top: 0px;
-    max-height: 100%;
+    max-height: auto;
   }
-  .wap {
-    overflow-y: auto;
-    padding: inherit;
+  .dis {
+    height: calc(100vh - 165px);
   }
-  .tableauMessage {
-    padding-top: inherit;
-    width: 100%;
-    padding-left: 10px;
+  .discussionColor223966 {
+    padding-left: inherit;
+  }
+  .droite {
+    min-width: 100vw;
+    ;
+    height: calc(100vh - 50px);
+  }
+  .gauche {
+    height: calc(100vh - 50px);
+    max-width: 250px;
+  }
+  .infoPerso {
+    width: inherit;
+    margin-right: 10px;
+  }
+  #messages {
+    height: 30px;
+  }
+  .messageAmi {
+    height: calc(100vh - 108px);
+    ;
+    max-height: calc(100vh - 108px);
+    ;
+  }
+  .messageChatDiv {
+    font-size: 14px;
+  }
+  .messageHeure {
+    font-size: 14px;
+    height: 20px;
+  }
+  .messageContacAnthoner {
+    height: 50px;
+    vertical-align: middle;
+    line-height: 50px;
+  }
+  .messageDateSend {
+    width: 112px;
+    font-size: 14px;
   }
   .newContactImage {
     margin-top: -185px;
     margin-right: 8px;
     height: 128px;
+  }
+  .perso {
+    font-size: 15px;
+  }
+  .tab {
+    width: 100%;
+  }
+  .tableauMessage {
+    padding-top: inherit;
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: inline-flex;
+    overflow-x: auto;
+  }
+  .wap {
+    padding: inherit;
+    height: calc(100vh - 50px);
   }
 }
 

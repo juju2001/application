@@ -1,6 +1,6 @@
 <template name="messageGauche">
   <!-- colone de gauche -->
-  <div  class="col-sm-2 col-md-2 col-lg-2 gauche" style="padding: 0px">
+  <div  class="col-md-2 col-lg-2 gauche" style="padding: 0px">
 <!-- barre de recherche -->
    <div>
         <div class="messageBarRecherche input-group">
@@ -25,7 +25,7 @@
     <!-- autres discussions -->
     <div class="messageAmi ">
       {{#each discussion}}
-      <div class="{{messageAnotherDiscussionActiveClass @index}}" style="border-bottom : solid 1px #acacac">
+      <div class="{{messageAnotherDiscussionActiveClass @index}} messageDiscussionAmi">
         <div class="{{messageAnotherDiscussionActiveClass @index}}">
           <div class="messageContacAnthoner {{messageAnotherDiscussionActiveClass @index}}"><a href='message' id="{{contact}}" class="goDiscussionSecondaire">{{nom}} {{prenom}}</a></div>
           <div style="width: 30px;" class="{{messageAnotherDiscussionActiveClass @index}}">

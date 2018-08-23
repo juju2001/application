@@ -1,13 +1,14 @@
 <template name="message">
-  <div style="min-height: 100%">
-    <div class="wap">
-      <div class="container">
-        {{> default}}
-          <div class="tableauMessage"  style="max-width:1250px;">
-            {{> messageGauche}}
-            {{> messageDroite}}
+  <div class="container">
+    {{> default}}
+    <div class="tab">
+      <div class="wap">
+        <div class="tableauMessage">
+          {{> messageGauche}}
+          {{> messageDroite}}
         </div>
       </div>
+
     </div>
-  </div>
+    </div>
 </template>

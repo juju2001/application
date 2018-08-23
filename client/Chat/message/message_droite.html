@@ -1,9 +1,9 @@
 <template name="messageDroite">
   <!-- colone de droite -->
-  <div class="col-sm-10 col-md-10 col-lg-10 droite" style="padding: 0px">
+  <div class="col-md-10 col-lg-10 droite" style="padding: 0px">
     <!-- colone de droite / information du contact-->
       <div class="perso">
-          <div class='text-center' style="vertical-align: middle; height: 100%;">
+          <div class='text-center'>
             {{#each messageFriendInformation}} {{nom}} {{prenom}}
             <span class="pull-right infoPerso">{{messageFriendLastConnexion}}</span>
             {{/each}}
@@ -18,8 +18,8 @@
             <div class="message">
               {{message}}
             </div>
-            <div class="{{messageThisDiscussionGlyphiconColor}}"></div>
-            <div class="messageHeure">{{messageHeure}}</div>
+            <div class="pull-right messageHeure {{messageThisDiscussionGlyphiconColor}}">
+          {{messageHeure}}</div>
           </div>
         {{/each}}
         <br>

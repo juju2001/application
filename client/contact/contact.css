@@ -8,10 +8,6 @@
   text-align: center;
 }
 
-html {
-  background: url('/html.jpg');
-}
-
 #noBackground {
   padding: 15px 15px;
 }
