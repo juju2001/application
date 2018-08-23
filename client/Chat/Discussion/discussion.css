@@ -1,5 +1,6 @@
 .discussionColor223966 {
   color: #223966;
+  padding-left: 15px;
 }
 
 .discussionDevDelete {
@@ -10,11 +11,7 @@
 .discussionEach {
   height: 50px;
   border-bottom: #dedede 1px solid;
-  font-size: 16px;  
-}
-
-.discussion-max-height {
-  max-height: calc(100vh - 70px - 80px - 40px - 40px);
+  font-size: 16px;
 }
 
 .discussionNoFriend {

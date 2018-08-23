@@ -182,7 +182,7 @@ Template.accueil.events({
     var id = identifiant._id;
     if (id) {
       Session.set("newContactID", id);
-      Router.go('/newContact');
+      $('#modalNewContact').modal('show');      
     }
   },
 

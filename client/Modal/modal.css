@@ -1,0 +1,26 @@
+.newContactAttributs {
+  color: #223966;
+  margin-left: 18px;
+  font-size: 17px;
+}
+
+.newContactImage {
+  float: right;
+  height: 155px;
+  margin-top: -138px;
+  margin-right: 10%;
+}
+
+.newContactLinkContact {
+  color: white;
+  font-size: 17px;
+}
+
+p {
+  color: #223966;
+}
+
+#retour {
+  float: right;
+  color: red;
+}

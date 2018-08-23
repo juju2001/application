@@ -19,7 +19,7 @@
 
 .rechercheaccueilDiv {
   overflow: auto;
-  max-height: 625px;  
+  max-height: 625px;
 }
 
 .accueilRechercheMessage {
@@ -39,6 +39,7 @@
 }
 
 .accueilTextWhite {
+  padding-left: 20px;
   color: white;
 }
 

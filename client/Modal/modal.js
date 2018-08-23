@@ -1,4 +1,4 @@
-Template.newContact.rendered = function() {
+Template.modalNewContact.rendered = function() {
   document.title = "Nouveau contact";
   if (Session.get("userID") == null) {
     Router.go('/connexion');
@@ -26,7 +26,7 @@ Template.newContact.rendered = function() {
 };
 
 
-Template.newContact.helpers({
+Template.modalNewContact.helpers({
 
   age: function() {
     var newContact = Inscription.findOne({
@@ -76,11 +76,11 @@ Template.newContact.helpers({
       return newContact.pseudo;
     }
   },
-  
+
 });
 
-Template.newContact.events({
-  'submit form': function(event) {
+Template.modalNewContact.events({
+  'click #newContactButton': function(event) {
     event.preventDefault();
     event.stopPropagation();
     var trouver = Inscription.findOne({
@@ -106,9 +106,9 @@ Template.newContact.events({
         hours: now.getTime(),
         lastMessage: 0,
       };
-      Meteor.call('newContact', hash5)
-      Router.go('/contact');
+      Meteor.call('newContact', hash5);
+      $('#modalNewContact').modal('hide');      
       Session.set("newContactID", null);
     }
   },
-});
+})

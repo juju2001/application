@@ -9,21 +9,35 @@
   padding-right: 15px;
 }
 
+@media screen and (min-width: 1700px) {
+  .main {
+    padding-left: 300px;
+    padding-right: 300px;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .discussionColor223966 {
+    padding-left: inherit;
+  }
   .container {
     padding: inherit;
+    padding-top: 0px;
     max-height: 100%;
   }
-
   .wap {
     overflow-y: auto;
     padding: inherit;
   }
-
   .tableauMessage {
     padding-top: inherit;
     width: 100%;
     padding-left: 10px;
+  }
+  .newContactImage {
+    margin-top: -185px;
+    margin-right: 8px;
+    height: 128px;
   }
 }
 
