@@ -35,7 +35,7 @@
   .container {
     padding: inherit;
     padding-top: 0px;
-    max-height: auto;
+    max-height: calc(100vh - 50px);
   }
   .dis {
     height: calc(100vh - 165px);
@@ -115,6 +115,15 @@
 @media screen and (max-width: 480px) {
   .messageChatDiv {
     max-width: 300px;
+  }
+  .connexionFormSize {
+    width: 100%;
+  }
+  .form-control {
+    height: 30px;
+  }
+  #inscriptionDiv {
+    margin-top: -10px;
   }
 }
 
