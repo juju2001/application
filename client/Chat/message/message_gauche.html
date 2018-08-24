@@ -1,0 +1,49 @@
+<template name="messageGauche">
+  <!-- colone de gauche -->
+  <div  class="col-md-2 col-lg-2 gauche" style="padding: 0px">
+<!-- barre de recherche -->
+   <div>
+        <div class="messageBarRecherche input-group">
+          <input style="border : 1px solid #cecece ; background-color:white" type="text" name="recherche" id="rechercheContact" class="form-control" placeholder="Search">
+          <div class="input-group-btn">
+            <button class="btn btn-default" id="goRecherche" type="submit">
+                          <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    <!-- affichage recherche ou amis -->
+    {{#if recherche}}
+    <!-- recherche -->
+    <div class="messageAmi">
+      {{#each recherche}}
+        <div class="rechercheContact"><a href='message' style="color : #223966; " id="{{_id}}" class="goDiscutionRecherche">{{nom}} {{prenom}}</a>
+        </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <!-- autres discussions -->
+    <div class="messageAmi ">
+      {{#each discussion}}
+      <div class="{{messageAnotherDiscussionActiveClass @index}} messageDiscussionAmi">
+        <div class="{{messageAnotherDiscussionActiveClass @index}}">
+          <div class="messageContacAnthoner {{messageAnotherDiscussionActiveClass @index}}"><a href='message' id="{{contact}}" class="goDiscussionSecondaire">{{nom}} {{prenom}}</a></div>
+          <div style="width: 30px;" class="{{messageAnotherDiscussionActiveClass @index}}">
+            {{#if notificationAnthonerDiscussion}}
+            <div class="rond"></div>
+            {{/if}}
+          </div>
+        </div>
+        <div class="{{messageAnotherDiscussionActiveClass @index}}">
+          {{#if lastMessageAnthonerDiscussion}}
+          <div class="{{messageAnothersDiscussionGlyphiconColor}}"></div>
+          {{/if}}
+          <div class="lastMessage {{messageAnotherDiscussionActiveClass @index}}">{{lastMessageAnthonerDiscussion}}</div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+
+</template>

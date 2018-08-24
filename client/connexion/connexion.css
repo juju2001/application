@@ -1,10 +1,56 @@
-#form-titre{
+.connexionButton {
+  font-size: 17px;
+  color: white;
+  background: transparent;
+  border: none;
+}
+
+.connexionDivlittle {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.connexionDivSize {
+  width: 60%;
+  height: 807px;
+}
+
+.connexionLinkInscription {  
+  font-size: 17px;
+  margin-top: 40px;
+  color: white;
+}
+
+.connexionInput {
+  border: 1px solid #acacac;
+  background: black;
+}
+
+.form-group>a {
+  color: white;
+}
+
+#form-titre {
   text-align: center;
 }
 
-p{
-  color:#223966;
+.html {
+  background: url("lac.jpg");
 }
-label{
-  color:#223966;
+
+label {
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+p {
+  color: #223966;
+}
+
+#showPassword {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
 }

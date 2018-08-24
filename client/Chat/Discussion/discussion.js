@@ -20,7 +20,7 @@ Template.discussion.rendered = function() {
     notification: true,
   }).fetch();
 
-  Meteor.call('notNoti', sessionID);
+  Meteor.call('discussionNotNoti', sessionID);
 
 
   Tracker.autorun(function() {
@@ -28,7 +28,7 @@ Template.discussion.rendered = function() {
 
     var user = Inscription.findOne({
       _id: sessionID,
-      etat: false,
+      etatCompte: false,
     });
     if (user) {
       Router.go('/connexion');
@@ -37,65 +37,40 @@ Template.discussion.rendered = function() {
 };
 
 Template.discussion.helpers({
-  discussion: function() {
-    var sessionID = Session.get("userID");
-    var contact = Contact.find({
-      userIdNow: sessionID,
-    });
-    return contact;
-  },
 
-  noFriend: function() {
-    var sessionID = Session.get("userID");
-    var messages = Message.find({
-      idClient2: sessionID,
-      lu: false,
-      luClient2: true,
-    }).fetch();
-    var ids = _.pluck(messages, 'idClient1');
-    var alreadyFriend = Contact.findOne({
-      userIdNow: sessionID,
-      contact: {
-        $in: ids,
-      },
-    });
-    if (!alreadyFriend) {
-      return Inscription.find({
-        _id: {
-          $in: ids,
-        },
-      });
-    }
-  },
-
-  notification: function() {
+  // Couleur vert/rouge pour si la personne est connectée ou pas
+  couleur: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });
-    var notification = Message.findOne({
-      idClient1: id.contact,
-      idClient2: sessionID,
-      lu: false,
+    var ids = id.contact;
+    var deco = Connexion.findOne({
+      userIdNow: ids,
     });
-    if (notification) {
-      return notification;
+    if (deco) {
+      if (deco.deconnexion == 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }
     }
   },
 
-
-  notif: function() {
+  // Affiche les discussions
+  discussion: function() {
     var sessionID = Session.get("userID");
-    var session = Message.findOne({
-      idClient2: sessionID,
-      notification: true,
+    var contact = Contact.find({
+      userIdNow: sessionID,
+    }, {
+      sort: {
+        lastMessage: -1,
+      },
     });
-    if (session) {
-      return session;
-    }
+    return contact;
   },
 
-
+  // Affiche l'heure de la nouvelle discussion
   lastConnexion: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
@@ -131,27 +106,63 @@ Template.discussion.helpers({
     }
   },
 
-  couleur: function() {
+  // Affiche les discussions des personnes avec qui on est pas ami
+  noFriend: function() {
+    var sessionID = Session.get("userID");
+    var messages = Message.find({
+      idClient2: sessionID,
+      lu: false,
+      luClient2: true,
+    }).fetch();
+    var ids = _.pluck(messages, 'idClient1');
+    var alreadyFriend = Contact.findOne({
+      userIdNow: sessionID,
+      contact: {
+        $in: ids,
+      },
+    });
+    if (!alreadyFriend) {
+      return Inscription.find({
+        _id: {
+          $in: ids,
+        },
+      });
+    }
+  },
+
+  //Enlève la notifcation dans la navbar
+  notif: function() {
+    var sessionID = Session.get("userID");
+    var session = Message.findOne({
+      idClient2: sessionID,
+      notification: true,
+    });
+    if (session) {
+      return session;
+    }
+  },
+
+  //notification dans le tableau discussion
+  notification: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
     });
-    var ids = id.contact;
-    var deco = Connexion.findOne({
-      userIdNow: ids,
+    var notification = Message.findOne({
+      idClient1: id.contact,
+      idClient2: sessionID,
+      lu: false,
     });
-    if (deco) {
-      if (deco.deconnexion == 0) {
-        return 'text-success'
-      } else {
-        return 'text-danger'
-      }
+    if (notification) {
+      return notification;
     }
   },
 
 });
 
 Template.discussion.events({
+
+  // Rejoind la page message
   'click .goDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -171,7 +182,7 @@ Template.discussion.events({
     }
   },
 
-
+  // Ajoute le nouveau contact avant d'aller à la page message
   'click .goNewDiscu': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -182,13 +193,13 @@ Template.discussion.events({
       var idContact = id._id;
       if (idContact) {
         Session.set("newContactID", idContact);
-        Router.go('newContact');
+        $('#modalNewContact').modal('show');         
       };
 
     }
   },
 
-
+  // Supprime la discussion
   'click #supp': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -198,14 +209,15 @@ Template.discussion.events({
     });
     if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
       var contactID = id.contact;
-      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
-        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+      Meteor.call('discussionSupprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('discussionSupprimerMessage2', sessionID, contactID, function() {
           alert("Discussio supprimée !");
         });
       });
     }
   },
 
+  // Supprime la discussion de la personne avec qui on est pas ami
   'click #suppNoFriend': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -215,8 +227,8 @@ Template.discussion.events({
     });
     if (id && confirm("Etes-vous sûr de vouloir supprimer la discussion ?")) {
       var contactID = id._id;
-      Meteor.call('supprimerMessage1', sessionID, contactID, function() {
-        Meteor.call('supprimerMessage2', sessionID, contactID, function() {
+      Meteor.call('discussionSupprimerMessage1', sessionID, contactID, function() {
+        Meteor.call('discussionSupprimerMessage2', sessionID, contactID, function() {
           alert("Discussio supprimée !");
         });
       });

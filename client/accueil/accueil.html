@@ -4,71 +4,80 @@
     <div class="form-group">
       {{> default}}
     </div>
-
   </form>
-
+<!-- conetnu de la page -->
   {{#if Motrecherche}}
-      <div style="overflow:auto ; max-height: 450px ; width : 1140px">
-        <h2 style="text-align:center; font-size:40px">{{Motrecherche}}</h2>
-        {{#each recherche}}
-          <div style="background-color : green;">
-            {{prenom}} {{nom}} {{age}} {{email}}
+
+  <!-- Recherche -->
+      <div class="rechercheaccueilDiv">
+        <h2 class="accueilRechercheMot accueilTextWhite">{{Motrecherche}}</h2>
+        {{#each findInscription}}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          {{#each findInscription}}
+          <div class="col-lg-3 col-md-6 col-sm-12">
+              <div class="panel panel-heading">
+                <button id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilanotherUsersText" data-toggle="modal" data-target="#modalNewContact"></button>
+                Nom : {{nom}}
+                <br> Prénom : {{prenom}}
+              </div>
           </div>
+          {{/each}}
+        </div>
         {{/each}}
-        {{#each inscriptionFind}}
-          <div class="rechercheAccueil">
-            <a class="goInscription" id="{{_id}}">{{prenom}} {{nom}} {{email}}</a>
-          </div>
-          <br>
-        {{/each}}
-        {{#each messageFind}}
-          <div class="rechercheAccueil">
-            <a class="goMessage" id="{{contact}}" style="color : black">{{message}}</a>
-            <p style="text-align : right ; color: #0000aa">De : {{infoNom}} {{infoPrenom}} {{infoHeure}}</p>
+        {{#each findMessage}}
+          <div class="accueilRecherche col-sm-12 col-md-6 col-lg-3">
+            <a class="goMessage accueilRechercheMessage" id="{{contact}}">{{message}}</a>
+            <p class="accueilRechercheMessageBy">De : {{rechercheMessageAuthor}} {{rechercheMessageHours}}</p>
           </div>
           <br>
        {{/each}}
       </div>
 
    {{else}}
-  <h1>Bonjour {{prenomAccueil}}, </h1>
-      {{#if amiConnecté}}
-          <h2 style="font-size:34px;">{{amiConnecté}}</h2>
-          <div class="overflow">
-            {{#each connecté}}
-            <div class="col-sm-3" id="connecté">
+  <h1 class="accueilTextWhite">Bonjour {{prenomAccueil}}, </h1>
+  <!-- amis connectés / nouveaux contacts -->
+      {{#if friendsOnline}}
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            {{#each friendsOnline}}
+            <div class="col-lg-3 col-md-6 col-sm-12 ">
+            <div class="panel panel-heading" id="friendsOnline">
               Nom : {{nom}}
-              <br> Prénom : {{prenom}}
+        <br> Prénom : {{prenom}}
+            </div>
+          </div>
+            {{/each}}
+          </div>
+          {{#if anotherUsers}}
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            {{#each anotherUsers}}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="panel panel-heading">
+                  <button id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilanotherUsersText" data-toggle="modal" data-target="#modalNewContact"></button>
+                  Nom : {{nom}}
+                  <br> Prénom : {{prenom}}
+                </div>
             </div>
             {{/each}}
           </div>
-          <h1 style="font-size:34px;">{{ajouterAmi}}</h1>
-          <div class="overflow">
-            {{#each contacter}}
-            <div class="col-sm-3">
-              Nom : {{nom}}
-              <br> Prénom : {{prenom}}
-              <br> Pseudo : {{pseudo}}
-              <br>
-              <a id="{{_id}}" style="color : #009018; float : right" class="goAjouter">Ajouter</a>
-            </div>
-            {{/each}}
-          </div>
+          {{/if}}
       {{else}}
-          <h2 style="font-size:34px;">{{ajouterAmi}}</h2>
-          <div style="overflow:auto ; width:1150px ; max-height:350px ">
-            {{#each contacter}}
-            <div class="col-sm-3">
-              Nom : {{nom}}
-              <br> Prénom : {{prenom}}
-              <br> Pseudo : {{pseudo}}
-              <br>
-              <a id="{{_id}}" style="color : #009018 ; float : right" class="goAjouter">Ajouter</a>
+          <div class="accueilAnotherUsers">
+            {{#each anotherUsers}}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="panel panel-heading">
+                  <a id="{{_id}}" class="goAjouter glyphicon glyphicon-plus accueilanotherUsersText" data-toggle="modal" data-target="#modalNewContact"></a>
+                  Nom : {{nom}}
+                  <br> Prénom : {{prenom}}
+                </div>
             </div>
             {{/each}}
           </div>
       {{/if}}
   {{/if}}
-
   </div>
+
+
+  {{> modalNewContact}}
+
+
 </template>

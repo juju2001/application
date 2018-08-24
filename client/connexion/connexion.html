@@ -1,16 +1,21 @@
 <template name="connexion">
- <div class="container">
-  <form>
-    <div class="form-group">
-      {{> default}}
-      <label for="name">Pseudo :</label>
-      <input class="form-control" type="text" id="pseudoConnexion" name="pseudoConnexion">
-      <label for="password">password : </label>
-      <input class="form-control" type="password" id="passwordConnexion" name="passwordConnexion">
-      <br>
-      <a style="font-size : 17px" id="envoyer">Connexion</a>
-    </div>
-  </form>
-  <a style="float : right ; font-size : 17px"  href="/inscription">S'inscrire</a>
-</div>
+  <html class="html">
+   <div class="container col-sm-12 col-md-12 col-lg-12 connexionDivSize" id="{{background}}">
+    <form>
+      <div class="form-group connexionDivlittle">
+        {{> default}}
+        <label for="name">Pseudo :</label>
+        <input class="form-control connexionInput" type="text" id="pseudoConnexion" name="pseudoConnexion">
+        <label for="password">password : </label>
+        <input class="form-control connexionInput" type="password" id="passwordConnexion" name="passwordConnexion">
+        <br>
+        <a href="" id="showPassword">Show Password</a>
+        <br>
+        <br>
+        <input class="connexionButton" id="envoyer" value="Connexion" type="submit">
+        <a class="connexionLinkInscription pull-right"  href="/inscription">S'inscrire</a>
+      </div>
+    </form>
+  </div>
+  </html>
 </template>

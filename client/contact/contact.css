@@ -1,0 +1,24 @@
+.contactDelete {
+  color: red;
+  float: right;
+  margin-right: 10px;
+}
+
+#form-titre {
+  text-align: center;
+}
+
+#noBackground {
+  padding: 15px 15px;
+}
+
+p {
+  color: #223966;
+}
+
+#taille {
+  margin-top: 20px;
+  border-radius: 3px;
+  background-color: #F5F5F5;
+  height: 177px;
+}

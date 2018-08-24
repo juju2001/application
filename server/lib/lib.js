@@ -36,7 +36,7 @@ if (forceLogout !== false) {
     Meteor.setInterval(function() {
         var now = new Date(), overdueTimestamp = new Date(now-inactivityTimeout);
         Inscription.update({heartbeat: {$lt: overdueTimestamp}},
-                            {$set: {etat : false},
+                            {$set: {etatCompte : false},
                              $unset: {heartbeat:1}},
                             {multi: true});
 

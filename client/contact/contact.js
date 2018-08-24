@@ -3,7 +3,7 @@ Template.contact.rendered = function() {
   if (Session.get("userID") == null) {
     Router.go('/connexion');
   }
-  
+
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
@@ -17,7 +17,7 @@ Template.contact.rendered = function() {
 
     var user = Inscription.findOne({
       _id: sessionID,
-      etat: false,
+      etatCompte: false,
     });
     if (user) {
       Router.go('/connexion');
@@ -27,17 +27,9 @@ Template.contact.rendered = function() {
 
 
 Template.contact.helpers({
-  contacter: function() {
-    var sessionID = Session.get("userID");
-    var last = Contact.find({
-      userIdNow: sessionID,
-    }).fetch();
-    if (last) {
-      return last;
-    };
-  },
 
-  anni: function() {
+  //  Retourne l'âge exacte d'un contact
+  contactAge: function() {
     var sessionID = Session.get("userID");
     var id = Contact.findOne({
       _id: this._id,
@@ -56,9 +48,23 @@ Template.contact.helpers({
       };
     }
   },
+
+  // Retourne la liste de nos contacts
+  contactList: function() {
+    var sessionID = Session.get("userID");
+    var last = Contact.find({
+      userIdNow: sessionID,
+    }).fetch();
+    if (last) {
+      return last;
+    };
+  },
+
 });
 
 Template.contact.events({
+
+  // Supprimer un contact
   'click .supprimer': function(event) {
     event.preventDefault();
     event.stopPropagation();

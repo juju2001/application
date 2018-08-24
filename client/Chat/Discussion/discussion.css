@@ -1,38 +1,54 @@
-#form-titre{
+.discussionColor223966 {
+  color: #223966;
+  padding-left: 15px;
+}
+
+.discussionDevDelete {
+  text-align: center;
+  border-bottom: #dedede 1px solid;
+}
+
+.discussionEach {
+  height: 50px;
+  border-bottom: #dedede 1px solid;
+  font-size: 16px;
+}
+
+.discussionNoFriend {
+  height: 50px;
+  background: #bce8f1;
+}
+
+.discussionNotificationRond {
+  border-radius: 60px;
+  width: 15px;
+  height: 15px;
+  background-color: #2E54F3;
+}
+
+.discussionRed {
+  color: red;
+}
+
+#discussionTitle {
+  text-align: center;
+  font-size: 35px;
+}
+
+#form-titre {
   text-align: center;
 }
 
-p{
-  color:#223966;
+p {
+  color: #223966;
 }
 
-.discu{
-  text-align: center;
-  width:1140px;
-}
-
-.scroo{
-    text-align: center;
-    width:1140px;
-    overflow: auto;
-    max-height: 391.167px;
-    height: 391.167px;
-    background-color : white;
-}
-
-td, tr{
+td, tr {
   width: 1140px;
   vertical-align: middle;
 }
 
-td{
+td {
   text-align: center;
-  margin:0 auto;
-}
-
-.rond{
-  border-radius: 60px;
-  width:15px;
-  height: 15px;
-  background-color: #2E54F3;
+  margin: 0 auto;
 }

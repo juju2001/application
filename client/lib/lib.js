@@ -18,7 +18,7 @@ Meteor.startup(function() {
     // periodically send a heartbeat if activity has been detected within the interval
     //
     Meteor.setInterval(function() {
-      var inscription = Inscription.find({}).fetch();
+      var inscription = Inscription.find().fetch();
       var ids = _.pluck(inscription, '_id');
 
 

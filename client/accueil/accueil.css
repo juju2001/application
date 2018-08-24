@@ -1,39 +1,74 @@
-#form-titre{
+.accueilanotherUsers {
+  overflow: auto;
+  max-height: 350px;
+  height: 16px;
+}
+
+.accueilanotherUsersText {
+  color: #009018;
+  float: right;
+}
+
+.accueilRecherche {
+  background-color: white;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 5px;
+}
+
+.rechercheaccueilDiv {
+  overflow: auto;
+  max-height: 625px;
+}
+
+.accueilRechercheMessage {
+  color: black;
+  margin-left: 10px;
+}
+
+.accueilRechercheMessageBy {
+  text-align: right;
+  color: #0000aa;
+  margin-right: 10px;
+}
+
+.accueilRechercheMot {
   text-align: center;
-  font-size : 45px;
+  font-size: 40px;
 }
 
-p {
-  color:#233B69;
+.accueilTextWhite {
+  padding-left: 20px;
+  color: white;
 }
 
-.col-sm-3{
-  margin-right: 95px;
+#anotherUsers {
   margin-top: 20px;
   border-radius: 3px;
   background-color: #F9FCFC;
-  border: 2px solid #239CE0;
 }
 
+#form-titre {
+  text-align: center;
+  font-size: 45px;
+}
 
-#connecté{
-  margin-right: 95px;
+#friendsOnline {
   margin-top: 20px;
   border-radius: 3px;
   background-color: #FFFFFF;
-  border: 2px solid #009018;
+  border: 4px solid #AAF9B5;
 }
 
-.container{
-  background-color : #f6f6f6;
+.goAjouter {
+  background: none;
+  border: none;
 }
 
-.overflow{
-  overflow:auto;
-  width: 1150px;
-  max-height: 150px;
+html {
+  background: url('/html.jpg');
 }
 
-.rechercheAccueil{
-  background-color: white;
+p {
+  color: #233B69;
 }

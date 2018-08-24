@@ -1,0 +1,30 @@
+<template name="modalNewContact">
+  <div class="modal fade" id="modalNewContact" tabindex="-1" role="dialog" aria-labelledby="modalNewContact">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Ajouter un contact</h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label class="newContactAttributs">Nom : {{nom}}</label>
+            <br>
+            <label class="newContactAttributs">Prénom : {{prenom}}</label>
+            <br>
+            <label class="newContactAttributs">Pseudo : {{pseudo}}</label>
+            <br>
+            <label class="newContactAttributs">Age :  {{age}}</label>
+            <br>
+            <label class="newContactAttributs">E-mail : {{email}}</label>
+            <img src="http://persiantuts.ir/wp-content/uploads/2017/12/WEB_ICO_Technical-Support.png" class="newContactImage">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="newContactButton">Save</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</template>

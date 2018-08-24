@@ -1,68 +1,20 @@
 Template.accueil.rendered = function() {
   document.title = "Accueil";
 
-  if (Session.get("userID") == null) {
-    Router.go('/connexion');
-  }
-
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID && sessionID != find.userIdNow) {
+  if (!sessionID && sessionID != find.userIdNow || sessionID == null) {
     Router.go('/connexion');
   }
 };
 
 
 Template.accueil.helpers({
-  prenomAccueil: function() {
-    var sessionID = Session.get("userID");
-    var find = Inscription.findOne({
-      _id: sessionID,
-    });
 
-    if (find) {
-      return find.prenom;
-    }
-  },
-
-  amiConnecté: function() {
-    var sessionID = Session.get("userID");
-    var amis = Contact.find({
-      userIdNow: sessionID,
-    }).fetch();
-    var ids = _.pluck(amis, 'contact');
-    var connecter = Inscription.findOne({
-      _id: {
-        $in: ids,
-      },
-      etat: true,
-    });
-    if (connecter) {
-      return "Ami(s) actuellement connecté(s) !"
-    }
-  },
-
-
-  ajouterAmi: function() {
-    sessionID = Session.get("userID");
-    var contact = Contact.find({
-      userIdNow: sessionID,
-    }).fetch();
-    var ids = _.pluck(contact, 'contact');
-    ids.push(sessionID);
-    var inscription = Inscription.findOne({
-      _id: {
-        $nin: ids,
-      },
-    });
-    if (inscription) {
-      return "Ajouter de nouveau(x) ami(s) !";
-    }
-  },
-
-  contacter: function() {
+  // D'autres utilisateurs que l'on pourrait ajouter
+  anotherUsers: function() {
     var sessionID = Session.get("userID");
 
     var contacts = Contact.find({
@@ -77,25 +29,11 @@ Template.accueil.helpers({
     }).fetch();
   },
 
-  connecté: function() {
-    var sessionID = Session.get("userID");
-    var contacts = Inscription.find({
-      etat: true,
-    }).fetch();
-    var ids = _.pluck(contacts, '_id');
-    ids.push(sessionID);
-    return Contact.find({
-      contact: {
-        $in: ids,
-      },
-      userIdNow: sessionID,
-    }).fetch();
-  },
-
-  inscriptionFind: function() {
+  // return les inscriptions trouvés avec le mot de recherche
+  findInscription: function() {
     var infoRecherche = Session.get("infoRecherche");
     var sessionID = Session.get("userID");
-    var inscriptionFind = Inscription.find({
+    var findInscription = Inscription.find({
       $or: [{
         prenom: infoRecherche,
       }, {
@@ -111,16 +49,17 @@ Template.accueil.helpers({
       }],
     }).fetch();
 
-    if (inscriptionFind) {
-      return inscriptionFind;
+    if (findInscription) {
+      return findInscription;
     }
-    return Session.get("inscriptionFind");
+    return Session.get("findInscription");
   },
 
-  messageFind: function() {
+  // return les messsage trouvés avec le mot de recherche
+  findMessage: function() {
     var infoRecherche = Session.get("infoRecherche");
     var sessionID = Session.get("userID");
-    var messageFind = Message.find({
+    var findMessage = Message.find({
       $or: [{
         idClient1: sessionID,
       }, {
@@ -131,13 +70,30 @@ Template.accueil.helpers({
       },
     }).fetch();
 
-    if (messageFind) {
-      return messageFind;
+    if (findMessage) {
+      return findMessage;
     } else {
-      return Session.get("messageFind");
+      return Session.get("findMessage");
     }
   },
 
+  // Les amis qui sont en ligne
+  friendsOnline: function() {
+    var sessionID = Session.get("userID");
+    var contacts = Connexion.find({
+      etatSession: true,
+    }).fetch();
+    var ids = _.pluck(contacts, 'userIdNow');
+    ids.push(sessionID);
+    return Contact.find({
+      contact: {
+        $in: ids,
+      },
+      userIdNow: sessionID,
+    }).fetch();
+  },
+
+  // Affiche le mot Recherche dans la page
   Motrecherche: function() {
     var rech = Session.get("rech");
     if (rech == "rech") {
@@ -145,22 +101,20 @@ Template.accueil.helpers({
     }
   },
 
-  infoNom: function() {
+  // Prénom de la presnne connecté
+  prenomAccueil: function() {
     var sessionID = Session.get("userID");
-    var id = Message.findOne({
-      _id: this._id,
+    var find = Inscription.findOne({
+      _id: sessionID,
     });
-    if (id) {
-      var info = Inscription.findOne({
-        _id: id.idClient1,
-      });
-      if (sessionID == id.idClient2) {
-        return info.nom;
-      }
+
+    if (find) {
+      return find.prenom;
     }
   },
 
-  infoPrenom: function() {
+  // Affiche l'auteur du message lors de la recherche
+  rechercheMessageAuthor: function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
       _id: this._id,
@@ -179,7 +133,7 @@ Template.accueil.helpers({
         _id: id.idClient1,
       });
       if (sessionID != id.idClient1) {
-        return info.prenom + " à Moi";
+        return info.nom + " " + info.prenom + " à Moi";
       } else {
         info = Inscription.findOne({
           _id: id.idClient2,
@@ -189,7 +143,8 @@ Template.accueil.helpers({
     }
   },
 
-  infoHeure: function() {
+  // Affiche l'heure du message trouvé dans la recherche
+  rechercheMessageHours: function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
       _id: this._id,
@@ -197,18 +152,23 @@ Template.accueil.helpers({
     if (id) {
       var time = id.hours;
       var date = new Date(time);
-      if (date.getMinutes() <= 9) {
-        var date0 = "0" + date.getMinutes();
-        return +date.getHours() + ":" + date0 + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-      } else {
-        return +date.getHours() + ":" + date.getMinutes() + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+      var minutes = date.getMinutes();
+      var hours = date.getHours();
+      if (minutes < 10) {
+        minutes = "0" + minutes;
       }
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      return hours + ":" + minutes + " " + date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
     }
   },
 
 });
 
 Template.accueil.events({
+
+  // Clique pour ajouter un nouveau contact
   'click .goAjouter': function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -218,10 +178,11 @@ Template.accueil.events({
     var id = identifiant._id;
     if (id) {
       Session.set("newContactID", id);
-      Router.go('/newContact');
+      $('#modalNewContact').modal('show');
     }
   },
 
+  // clique pour ajouter un nouveau contact depuis la recherche
   'click .goInscription': function() {
     var sessionID = Session.get("userID");
     var inscription = Inscription.findOne({
@@ -245,7 +206,6 @@ Template.accueil.events({
     }
   },
 
-
   'click .goMessage': function() {
     var sessionID = Session.get("userID");
     var id = Message.findOne({
@@ -255,19 +215,21 @@ Template.accueil.events({
       if (sessionID == id.idClient1) {
         Session.set("contactID", id.idClient2);
         Router.go('/message');
-      }else{
+      } else {
         Session.set("contactID", id.idClient1);
         Router.go('/message');
       }
     }
   },
 
-  'click #goRecherche': function(event) {
+  // Allez à la discussion depuis un message lors d'une recherche
+  'click #goRecherche': function() {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
+    var infoRecherche = $("#defaultRecherche").val();
+    console.log(infoRecherche);
     var sessionID = Session.get("userID");
-    var inscriptionFind = Inscription.find({
+    var findInscription = Inscription.find({
       $or: [{
         prenom: infoRecherche,
       }, {
@@ -283,7 +245,7 @@ Template.accueil.events({
       }],
     }).fetch();
 
-    var messageFind = Message.find({
+    var findMessage = Message.find({
       $or: [{
         idClient1: sessionID,
       }, {
@@ -294,18 +256,19 @@ Template.accueil.events({
       },
     }).fetch();
 
-    if (messageFind || inscriptionFind) {
+    if (findMessage || findInscription) {
       Session.set('rech', "rech");
     }
 
-    Session.setPersistent('inscriptionFind', inscriptionFind);
-    Session.setPersistent('messageFind', messageFind);
-    $("#recherche").val('');
+    Session.setPersistent('findInscription', findInscription);
+    Session.setPersistent('findMessage', findMessage);
+    $("#defaultRecherche").val('');
   },
 
+  // Remet à 0 les variable de recherche quand on change de page depuis la navbar
   'click ul': function() {
-    Session.set("inscriptionFind", null);
-    Session.set("messageFind", null);
+    Session.set("findInscription", null);
+    Session.set("findMessage", null);
     Session.set("rech", null);
     Session.set("infoRecherche", null);
   },

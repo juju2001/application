@@ -1,7 +1,39 @@
-#form-titre{
-  text-align: center;
- }
+.html {
+  background: url("lac.jpg");
+}
 
- p{
-   color:#223966;
- }
+.inscriptionButton {
+  font-size: 17px;
+  color: white;
+  background: transparent;
+  border: none
+}
+
+#inscriptionDiv {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inscriptionLinkConnexion {
+  float : right;
+  font-size : 17px;
+  color : white;
+  margin-top: 30px
+}
+
+p {
+  color: #223966;
+}
+
+#showPassword1 {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
+}
+
+#showPassword2 {
+  border: transparent;
+  background: transparent;
+  font-size: 12px;
+}
