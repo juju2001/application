@@ -6769,7 +6769,7 @@ button.close {
 .discussionEach {
   height: 50px;
   border-bottom: #dedede 1px solid;
-  font-size: 16px;  
+  font-size: 16px;
 }
 
 .discussion-max-height {
@@ -7126,7 +7126,7 @@ p {
 
 .rechercheaccueilDiv {
   overflow: auto;
-  max-height: 625px;  
+  max-height: 625px;
 }
 
 .accueilRechercheMessage {
@@ -7196,7 +7196,7 @@ p {
   height: 807px;
 }
 
-.connexionLinkInscription {  
+.connexionLinkInscription {
   font-size: 17px;
   margin-top: 40px;
   color: white;
@@ -7292,9 +7292,6 @@ body {
   width: 98%;
 }
 
-.defaultNav {
-  border-bottom: 1px solid #00AED1;
-}
 
 html {
   height: 100%;

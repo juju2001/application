@@ -193,7 +193,7 @@ Template.discussion.events({
       var idContact = id._id;
       if (idContact) {
         Session.set("newContactID", idContact);
-        Router.go('newContact');
+        $('#modalNewContact').modal('show');         
       };
 
     }

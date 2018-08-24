@@ -22,7 +22,7 @@ Template.messageDroite.rendered = function() {
       x.scrollTop = x.scrollHeight;
       var recherche = document.getElementById("rechercheContact");
       recherche.addEventListener("change", function() {
-        var recherche2 = $('#rechercheContact').val();
+        var recherche2 = $('#defaultRechercheContact').val();
         Session.set("recherche", recherche2);
       });
     }, 300);

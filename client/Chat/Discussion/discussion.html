@@ -15,7 +15,7 @@
                   {{#each noFriend}}
                   <!-- Affiche un message reçu de quelqu'un avec qui on est pas ami -->
                   <tr class="discussionNoFriend">
-                    <td><a href='message' class="goNewDiscu discussionColor223966" id="{{_id}}">{{nom}} {{prenom}}</a></td>
+                    <td><a href='message' class="goNewDiscu discussionColor223966" id="{{_id}}"  data-toggle="modal" data-target="#modalNewContact">{{nom}} {{prenom}}</a></td>
                     <td>Nouvelle discussion</td>
                     <td></td>
                     <td class="discussionDevDelete"><a class="discussionRed" id="suppNoFriend" href="">Supprimer</a></td>
@@ -41,4 +41,5 @@
        </div>
     </div>
   </div>
+  {{> modalNewContact}}
 </template>

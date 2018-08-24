@@ -579,7 +579,7 @@ Template.messageDroite.rendered = function () {
       x.scrollTop = x.scrollHeight;
       var recherche = document.getElementById("rechercheContact");
       recherche.addEventListener("change", function () {
-        var recherche2 = $('#rechercheContact').val();
+        var recherche2 = $('#defaultRechercheContact').val();
         Session.set("recherche", recherche2);
       });
     }, 300);
@@ -1771,7 +1771,7 @@ Template.accueil.events({
   'click #goRecherche': function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
+    var infoRecherche = $("#defaultRecherche").val();
     var sessionID = Session.get("userID");
     var findInscription = Inscription.find({
       $or: [{
@@ -1805,7 +1805,7 @@ Template.accueil.events({
 
     Session.setPersistent('findInscription', findInscription);
     Session.setPersistent('findMessage', findMessage);
-    $("#recherche").val('');
+    $("#defaultRecherche").val('');
   },
   // Remet à 0 les variable de recherche quand on change de page depuis la navbar
   'click ul': function () {
@@ -2132,9 +2132,9 @@ Template.default.events({
   'click #goRecherche': function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
+    var infoRecherche = $("#defaultRecherche").val();
     Session.set('infoRecherche', infoRecherche);
-    $("#recherche").val('');
+    $("#defaultRecherche").val('');
     Session.set('rech', "rech");
     Router.go('/accueil');
   }

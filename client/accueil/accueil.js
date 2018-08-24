@@ -1,15 +1,11 @@
 Template.accueil.rendered = function() {
   document.title = "Accueil";
 
-  if (Session.get("userID") == null) {
-    Router.go('/connexion');
-  }
-
   var sessionID = Session.get("userID");
   var find = Connexion.findOne({
     userIdNow: sessionID,
   });
-  if (!sessionID && sessionID != find.userIdNow) {
+  if (!sessionID && sessionID != find.userIdNow || sessionID == null) {
     Router.go('/connexion');
   }
 };
@@ -182,7 +178,7 @@ Template.accueil.events({
     var id = identifiant._id;
     if (id) {
       Session.set("newContactID", id);
-      $('#modalNewContact').modal('show');      
+      $('#modalNewContact').modal('show');
     }
   },
 
@@ -227,10 +223,11 @@ Template.accueil.events({
   },
 
   // Allez à la discussion depuis un message lors d'une recherche
-  'click #goRecherche': function(event) {
+  'click #goRecherche': function() {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
+    var infoRecherche = $("#defaultRecherche").val();
+    console.log(infoRecherche);
     var sessionID = Session.get("userID");
     var findInscription = Inscription.find({
       $or: [{
@@ -265,7 +262,7 @@ Template.accueil.events({
 
     Session.setPersistent('findInscription', findInscription);
     Session.setPersistent('findMessage', findMessage);
-    $("#recherche").val('');
+    $("#defaultRecherche").val('');
   },
 
   // Remet à 0 les variable de recherche quand on change de page depuis la navbar

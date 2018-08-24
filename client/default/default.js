@@ -42,9 +42,9 @@ Template.default.events({
   'click #goRecherche': function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var infoRecherche = $("#recherche").val();
+    var infoRecherche = $("#defaultRecherche").val();
     Session.set('infoRecherche', infoRecherche);
-    $("#recherche").val('');
+    $("#defaultRecherche").val('');
     Session.set('rech', "rech");
     Router.go('/accueil');
   },
