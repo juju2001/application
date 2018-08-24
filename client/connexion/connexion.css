@@ -12,11 +12,16 @@
 }
 
 .connexionDivSize {
-  width: 60%;
   height: 807px;
 }
 
-.connexionLinkInscription {  
+.connexionFormSize {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.connexionLinkInscription {
   font-size: 17px;
   margin-top: 40px;
   color: white;

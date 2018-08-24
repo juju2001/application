@@ -259,3 +259,7 @@ li {
   position: absolute;
   right: 3px;
 }
+
+.text-white {
+  color: white;
+}
